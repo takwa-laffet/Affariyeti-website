@@ -8,15 +8,35 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Controller extends AbstractController
 {
-    #[Route('/', name: 'app_')]
+    #[Route('/', name: 'home')]
     public function index(): Response
     {
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Controller',
         ]);
     }
- #[Route('/login', name:"login" )]
+ #[Route('/login', name: 'login' )]
  public  function login() :Response {
     return $this -> render('Login/Login.html.twig');
+ }
+ #[Route('/prod', name:'prod' )]
+ public  function prod() :Response {
+    return $this -> render('/product2.html.twig');
+ }
+ #[Route('/cart', name:'cart' )]
+ public  function cart() :Response {
+    return $this -> render('/cart.html.twig');
+ }
+ #[Route('/product', name:'product' )]
+ public  function product() :Response {
+    return $this -> render('/product.html.twig');
+ }
+ #[Route('/checkout', name:'checkout' )]
+ public  function checkout() :Response {
+    return $this -> render('/addresspage.html.twig');
+ }
+ #[Route('/prodetail', name:'prodetail' )]
+ public  function prodetail() :Response {
+    return $this -> render('/productdetails.html.twig');
  }
 }

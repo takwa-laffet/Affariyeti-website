@@ -356,11 +356,11 @@ function displayProducts() {
     document.querySelector("#furData").append(div);
 
     image.addEventListener("click", function() {
-      window.location.href = "productdetails.html?id=" + elem.id;
+      window.location.href = "prodetail?id=" + elem.id;
     });
     
     name.addEventListener("click", function() {
-      window.location.href = "productdetails.html?id=" + elem.id;
+      window.location.href = "prodetail?id=" + elem.id;
     });
   });
 }
@@ -369,7 +369,7 @@ var productproductdetaisobjectdetaisobject = localStorage.getItem("productdetais
 function addToCart(elem) {
   var productdetaisobject = elem;
   console.log(productdetaisobject); 
-  window.location.href = "productdetails.html";
+  window.location.href = "prodetail";
 }
 
 var cartArr = JSON.parse(localStorage.getItem("cartArr")) || [];

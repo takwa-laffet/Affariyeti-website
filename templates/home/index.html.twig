@@ -30,9 +30,7 @@
                     stroke="inherit" fill="none" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
                     stroke-linejoin="round"></path>
             </svg>
-            <br>
-            <!-- <img id="widthLogo" src="C:\Users\intel\Downloads\overstock\images\accountlogo.png"/> -->
-            <a href="account.html">Account</a>
+            <br> <a href="{{ path('login') }}">Account</a>
         </div>
         <div>
             <svg class="iconsvg" width="22" height="22" viewBox="0 0 24 24" stroke="#2F3337"
@@ -55,15 +53,16 @@
             </svg>
             
             <br>
-            <a href="cart.html"> Cart </a>
+            <a href="{{ path('cart') }}"> Cart </a>
         </div>
     </div>
+    
     <div id="navbaritems">
         <ul>
-          <li><a href="account.html">Home</a></li>
+          <li><a href="{{ path('home') }}">Home</a></li>
 
           <li>
-            <a href="product.html" >Category</a>
+            <a href="{{ path('product') }}" >Category</a>
             <ul>
               <li><a href="">Living Room Furniture</a></li>
               <li><a href="">Patio Furniture</a></li>
@@ -73,45 +72,9 @@
                 <li><a href="">Patio Furniture</a></li>
                 <li><a href=""> Bedroom Furniture</a></li>
                 <li><a href=""> Office Furniture</a></li>
-
-                <li><a href="">Living Room Furniture</a></li>
-              <li><a href="">Patio Furniture</a></li>
-              <li><a href=""> Bedroom Furniture</a></li>
-              <li><a href=""> Office Furniture</a></li>
-              <li><a href="">Living Room Furniture</a></li>
-                <li><a href="">Patio Furniture</a></li>
-                <li><a href=""> Bedroom Furniture</a></li>
-                <li><a href=""> Office Furniture</a></li>
-
-                <li><a href="">Living Room Furniture</a></li>
-              <li><a href="">Patio Furniture</a></li>
-              <li><a href=""> Bedroom Furniture</a></li>
-              <li><a href=""> Office Furniture</a></li>
-              <li><a href="">Living Room Furniture</a></li>
-                <li><a href="">Patio Furniture</a></li>
-                <li><a href=""> Bedroom Furniture</a></li>
-                <li><a href=""> Office Furniture</a></li>
-
-                <li><a href="">Living Room Furniture</a></li>
-              <li><a href="">Patio Furniture</a></li>
-              <li><a href=""> Bedroom Furniture</a></li>
-              <li><a href=""> Office Furniture</a></li>
-              <li><a href="">Living Room Furniture</a></li>
-                <li><a href="">Patio Furniture</a></li>
-                <li><a href=""> Bedroom Furniture</a></li>
-                <li><a href=""> Office Furniture</a></li>
-
-                <li><a href="">Living Room Furniture</a></li>
-              <li><a href="">Patio Furniture</a></li>
-              <li><a href=""> Bedroom Furniture</a></li>
-              <li><a href=""> Office Furniture</a></li>
-              <li><a href="">Living Room Furniture</a></li>
-                <li><a href="">Patio Furniture</a></li>
-                <li><a href=""> Bedroom Furniture</a></li>
-                <li><a href=""> Office Furniture</a></li>
             </ul>
           </li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="#">About</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li>
             <a href="">Auction</a>
