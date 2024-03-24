@@ -15,66 +15,7 @@
     margin: 0px 20px 0px 20px;
 }
 
-.row {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-}
 
-.row {
-    align-items: flex-start;
-}
-
-.row-2 {
-    justify-content: space-between;
-    margin: 10rem auto 5rem;
-}
-
-@media screen and (max-width: 600px) {
-    .row {
-        text-align: center;
-    }
-}
-
-.timeless {
-    font-size: 5rem;
-    color: #f42153;
-    font-family: "TheGwatmey";
-    font-weight: normal;
-}
-#logoclick{
-    
-}
-.hero {
-    background-color: #f2f0f1;
-}
-
-.hero-info {
-    flex-basis: 50%;
-    align-self: flex-start;
-    padding: 12rem 0;
-    min-width: 30rem;
-}
-
-.hero-image {
-    min-width: 30rem;
-}
-
-.col-2 img,
-.hero-image img {
-    max-width: 100%;
-    text-align: center;
-}
-
-
-.hero p,
-.offer p {
-    font-size: 1.9rem;
-    color: #4c4c43;
-    margin: 2rem 0;
-    line-height: 1.5;
-}
 #topheadImg img{
     margin-top: 130px;
     width: 100%;
