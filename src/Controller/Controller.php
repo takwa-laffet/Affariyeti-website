@@ -15,5 +15,8 @@ class Controller extends AbstractController
             'controller_name' => 'Controller',
         ]);
     }
-    
+ #[Route('/login', name:"login" )]
+ public  function login() :Response {
+    return $this -> render('Login/Login.html.twig');
+ }
 }
