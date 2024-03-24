@@ -25,7 +25,7 @@ class Controller extends AbstractController
  }
  #[Route('/cart', name:'cart' )]
  public  function cart() :Response {
-    return $this -> render('/cart.html.twig');
+    return $this -> render('cart/cart.html.twig');
  }
  #[Route('/product', name:'product' )]
  public  function product() :Response {

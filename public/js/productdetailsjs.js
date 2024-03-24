@@ -519,5 +519,5 @@ nameos = 1;
 
 
 function addtocartproduct(){
-  window.location.href = "cart.html";
+  window.location.href = "cart";
 }

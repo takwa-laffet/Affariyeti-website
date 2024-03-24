@@ -196,7 +196,7 @@ document.getElementById("cartCount").textContent = totalIC;
 
 document.getElementById("paymentC").addEventListener("click", paymentfun);
 function paymentfun() {
-  window.location.href = "addresspage.html";
+  window.location.href = "checkout";
 }
   
 

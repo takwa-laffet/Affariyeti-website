@@ -43,7 +43,7 @@ loginForm.addEventListener('submit', function(event) {
     const user = parsedUsers.find(u => u.email === email && u.password === password);
     if (user) {
       // alert('Login successful!');
-      window.location.href = 'addresspage.html'
+      window.location.href = 'checkout'
     } else {
       alert('Incorrect email or password. Please try again.');
     }

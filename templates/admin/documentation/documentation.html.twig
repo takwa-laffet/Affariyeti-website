@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>PolluxUI Admin Dashboard</title>
   <!-- base:css -->
-  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="{{ asset('../../vendors/typicons/typicons.css') }}">
+  <link rel="stylesheet" href="{{ asset('../../vendors/css/vendor.bundle.base.css') }}">
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="{{ asset('../../css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <link rel="shortcut icon" href="{{ asset('../../images/favicon.png') }}" />
 </head>
 
 <body>
@@ -27,7 +27,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-12 pt-5">
-                    <a class="btn btn-primary" href="../../index.html"><i class="typcn typcn-home-outline mr-2"></i>Back to home</a>
+                    <a class="btn btn-primary" href="{{ path('app_admin') }}"><i class="typcn typcn-home-outline mr-2"></i>Back to home</a>
                   </div>
                 </div>
                 <div class="row pt-5 mt-5">
@@ -41,7 +41,7 @@
                     </h3>
                     <h4 class="mt-4 font-weight-light text-primary">
                       In case you want to refer the documentation file, it is available at 
-                      <span class="text-danger">/docs/documentation.html</span> 
+                      <span class="text-danger">{{ path('doc') }}</span> 
                       in the downloaded folder
                     </h4>
                   </div>
@@ -64,14 +64,14 @@
         </div>
       </div>
 <!-- base:js -->
-<script src="../../vendors/js/vendor.bundle.base.js"></script>
+<script src="{{ asset('../../vendors/js/vendor.bundle.base.js') }}"></script>
 <!-- endinject -->
 <!-- inject:js -->
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
+<script src="{{ asset('../../js/off-canvas.js') }}"></script>
+<script src="{{ asset('../../js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('../../js/template.js') }}"></script>
+<script src="{{ asset('../../js/settings.js') }}"></script>
+<script src="{{ asset('../../js/todolist.js') }}"></script>
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
