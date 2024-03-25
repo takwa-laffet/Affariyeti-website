@@ -33,7 +33,7 @@ class AdminController extends AbstractController
     #[Route('/admin/icon', name: 'icon')]
     public function icon() : Response
     {
-        return $this->render('admin/icons/mdi.html.twig');
+        return $this->render('admin/icons/mdi.html..twig');
     }
     #[Route('/admin/eror404', name: 'eror404')]
     public function eror404() : Response
