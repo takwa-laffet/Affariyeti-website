@@ -2,7 +2,7 @@ document.getElementById("logoclick").addEventListener("click",gothrough);
 
 function gothrough(){
   // console.log("Hiiii");
-  window.location.href = "index.html";
+  window.location.href = "/";
 }
 
 var loginarr = JSON.parse(localStorage.getItem("users")) || "";

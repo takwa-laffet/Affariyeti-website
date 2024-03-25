@@ -20,5 +20,5 @@ function data(){
     }
     AddressArray.push(object);
     localStorage.setItem("AddressPageArr",JSON.stringify(AddressArray));
-    window.location.href = "payment.html";
+    window.location.href = "{{ path('home') }}payment.html";
 }

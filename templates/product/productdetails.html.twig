@@ -43,7 +43,7 @@
                   stroke-linejoin="round"></path>
           </svg>
         <br>
-          <a href="index.html">List</a>
+          <a href="{{ path('home') }}">List</a>
       </div>
       <div>
         <div id="cartCount"></div>
@@ -61,10 +61,10 @@
   <div id="navbaritems">
       <ul>
         <li>
-          <a href="product.html" >Furniture</a>
+          <a href="{{ path('product') }}" >Furniture</a>
           <ul>
-            <li><a href="product.html">Living Room Furniture</a></li>
-            <li><a href="product.html">Patio Furniture</a></li>
+            <li><a href={{ path('product') }}">Living Room Furniture</a></li>
+            <li><a href="{{ path('product') }}">Patio Furniture</a></li>
             <li><a href="product2.html"> Bedroom Furniture</a></li>
             <li><a href=""> Office Furniture</a></li>
             <li><a href="">Living Room Furniture</a></li>
