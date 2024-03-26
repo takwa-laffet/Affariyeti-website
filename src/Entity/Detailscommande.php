@@ -5,10 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Detailscommande
- *
- * @ORM\Table(name="detailscommande", indexes={@ORM\Index(name="id_com", columns={"id_com"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=DetailscommandeRepository::class)
  */
 class Detailscommande
 {
@@ -24,16 +21,16 @@ class Detailscommande
     /**
      * @var int
      *
-     * @ORM\Column(name="num_article", type="integer", nullable=false)
+     * @ORM\Column(name="num_Detailscommande", type="integer", nullable=false)
      */
-    private $numArticle;
+    private $numDetailscommande;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_article", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nom_Detailscommande", type="string", length=255, nullable=false)
      */
-    private $nomArticle;
+    private $nomDetailscommande;
 
     /**
      * @var int
@@ -71,26 +68,26 @@ class Detailscommande
         return $this->id;
     }
 
-    public function getNumArticle(): ?int
+    public function getNumDetailscommande(): ?int
     {
-        return $this->numArticle;
+        return $this->numDetailscommande;
     }
 
-    public function setNumArticle(int $numArticle): static
+    public function setNumDetailscommande(int $numDetailscommande): static
     {
-        $this->numArticle = $numArticle;
+        $this->numDetailscommande = $numDetailscommande;
 
         return $this;
     }
 
-    public function getNomArticle(): ?string
+    public function getNomDetailscommande(): ?string
     {
-        return $this->nomArticle;
+        return $this->nomDetailscommande;
     }
 
-    public function setNomArticle(string $nomArticle): static
+    public function setNomDetailscommande(string $nomDetailscommande): static
     {
-        $this->nomArticle = $nomArticle;
+        $this->nomDetailscommande = $nomDetailscommande;
 
         return $this;
     }

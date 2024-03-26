@@ -6,10 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Livraison
- *
- * @ORM\Table(name="livraison", indexes={@ORM\Index(name="fk_depot", columns={"iddepot"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=LivraisonRepository::class)
  */
 class Livraison
 {

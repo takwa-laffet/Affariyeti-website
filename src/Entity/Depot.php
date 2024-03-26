@@ -5,10 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Depot
- *
- * @ORM\Table(name="depot")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=DepotRepository::class)
  */
 class Depot
 {

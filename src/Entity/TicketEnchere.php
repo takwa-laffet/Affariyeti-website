@@ -6,10 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TicketEnchere
- *
- * @ORM\Table(name="ticket_enchere")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=TicketEnchereRepository::class)
  */
 class TicketEnchere
 {

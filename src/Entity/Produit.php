@@ -5,10 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Produit
- *
- * @ORM\Table(name="produit", indexes={@ORM\Index(name="id_client", columns={"id_client"}), @ORM\Index(name="id_c", columns={"id_c"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ProduitRepository::class)
  */
 class Produit
 {
