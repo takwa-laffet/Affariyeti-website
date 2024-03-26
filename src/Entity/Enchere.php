@@ -5,10 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Enchere
- *
- * @ORM\Table(name="enchere")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=EnchereRepository::class)
  */
 class Enchere
 {

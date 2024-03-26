@@ -5,10 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Ticketp
- *
- * @ORM\Table(name="ticketp")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=TicketpRepository::class)
  */
 class Ticketp
 {

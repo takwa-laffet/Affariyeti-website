@@ -5,10 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Grosmots
- *
- * @ORM\Table(name="grosmots")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=GrosmotsRepository::class)
  */
 class Grosmots
 {

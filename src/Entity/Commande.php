@@ -6,10 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Commande
- *
- * @ORM\Table(name="commande")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=CommandeRepository::class)
  */
 class Commande
 {

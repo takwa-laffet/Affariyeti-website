@@ -6,10 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Discount
- *
- * @ORM\Table(name="discount")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=DiscountRepository::class)
  */
 class Discount
 {

@@ -5,10 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Categoriecodepromo
- *
- * @ORM\Table(name="categoriecodepromo")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=CategoriecodepromoRepository::class)
  */
 class Categoriecodepromo
 {
