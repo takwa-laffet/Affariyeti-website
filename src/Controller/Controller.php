@@ -21,7 +21,7 @@ class Controller extends AbstractController
  }
  #[Route('/prod', name:'prod' )]
  public  function prod() :Response {
-    return $this -> render('/product2.html.twig');
+    return $this -> render('product/product2.html.twig');
  }
  #[Route('/cart', name:'cart' )]
  public  function cart() :Response {
@@ -29,14 +29,14 @@ class Controller extends AbstractController
  }
  #[Route('/product', name:'product' )]
  public  function product() :Response {
-    return $this -> render('/product.html.twig');
+    return $this -> render('product/product.html.twig');
  }
  #[Route('/checkout', name:'checkout' )]
  public  function checkout() :Response {
-    return $this -> render('/addresspage.html.twig');
+    return $this -> render('checkout/addresspage.html.twig');
  }
  #[Route('/prodetail', name:'prodetail' )]
  public  function prodetail() :Response {
-    return $this -> render('/productdetails.html.twig');
+    return $this -> render('product/productdetails.html.twig');
  }
 }
