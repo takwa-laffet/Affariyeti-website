@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categoriecodepromo
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idCcp", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idccp;
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idccp = null;
+    
 
     /**
      * @var string

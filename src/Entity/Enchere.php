@@ -9,14 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Enchere
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="enchere_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $enchereId;
+    
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $enchereId = null;
+    
 
     /**
      * @var string

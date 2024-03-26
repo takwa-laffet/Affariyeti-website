@@ -9,14 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categorie
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_c", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idC;
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idC = null;
 
     /**
      * @var string

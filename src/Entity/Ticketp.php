@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Ticketp
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ticketp_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $ticketpId;
+ 
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $ticketpId = null;
 
     /**
      * @var int|null
@@ -44,7 +44,7 @@ class Ticketp
         return $this->ticketpId;
     }
 
-    public function getTicketId(): ?int
+    public function getTicketId(): ?TicketEnchere
     {
         return $this->ticketId;
     }
@@ -56,7 +56,7 @@ class Ticketp
         return $this;
     }
 
-    public function getClientId(): ?int
+    public function getClientId(): ?User
     {
         return $this->clientId;
     }
@@ -68,7 +68,7 @@ class Ticketp
         return $this;
     }
 
-    public function getEnchereId(): ?int
+    public function getEnchereId(): ?Enchere
     {
         return $this->enchereId;
     }

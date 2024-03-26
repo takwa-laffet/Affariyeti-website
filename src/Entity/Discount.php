@@ -10,14 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Discount
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idD", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idd;
+    
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idd = null;
 
     /**
      * @var int

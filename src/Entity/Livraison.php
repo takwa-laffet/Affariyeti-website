@@ -10,14 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Livraison
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $id = null; 
 
     /**
      * @var string
@@ -62,7 +61,7 @@ class Livraison
     private $longitude;
 
     /**
-     * @var \Depot
+     * @var \App\Entity\Depot
      *
      * @ORM\ManyToOne(targetEntity="Depot")
      * @ORM\JoinColumns({

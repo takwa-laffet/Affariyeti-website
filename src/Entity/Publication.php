@@ -10,15 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Publication
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_pub", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idPub;
 
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idPub = null;
     /**
      * @var string
      *
@@ -55,7 +54,7 @@ class Publication
     private $photo;
 
     /**
-     * @var \User
+     * @var \App\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({

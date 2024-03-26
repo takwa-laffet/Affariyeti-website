@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Grosmots
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_GM", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idGm;
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idGm = null;
+    
 
     /**
      * @var string

@@ -8,15 +8,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=DepotRepository::class)
  */
 class Depot
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="iddepot", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $iddepot;
+{    
+
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $iddepot = null;
+    
 
     /**
      * @var string

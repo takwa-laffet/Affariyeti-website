@@ -10,14 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TicketEnchere
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ticket_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $ticketId;
+    
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $ticketId = null;
 
     /**
      * @var int|null
@@ -33,17 +33,17 @@ class TicketEnchere
      */
     private $prix;
 
-    public function getTicketId(): ?int
+    public function getTicketId(): ?int 
     {
         return $this->ticketId;
     }
 
-    public function getEnchereId(): ?int
+    public function getEnchereId(): ?Enchere
     {
         return $this->enchereId;
     }
 
-    public function setEnchereId(?int $enchereId): static
+    public function setEnchereId(?Enchere $enchereId): static
     {
         $this->enchereId = $enchereId;
 

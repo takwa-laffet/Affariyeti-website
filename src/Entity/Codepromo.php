@@ -9,15 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Codepromo
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idCode", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idcode;
+ 
+    #[ORM\Id]
 
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idcode= null;
+    
     /**
      * @var int
      *

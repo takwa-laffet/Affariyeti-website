@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
+use App\Entity\Publication;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,15 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Commentaire
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_com", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idCom;
 
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idCom = null;
     /**
      * @var string
      *
@@ -34,7 +35,7 @@ class Commentaire
     private $dateCom = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var \Publication
+     * @var \App\Entity\Publication
      *
      * @ORM\ManyToOne(targetEntity="Publication")
      * @ORM\JoinColumns({
@@ -44,7 +45,7 @@ class Commentaire
     private $idPub;
 
     /**
-     * @var \User
+     * @var \App\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({

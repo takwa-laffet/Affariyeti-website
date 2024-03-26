@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Produit
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_p", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idP;
+   
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idP = null;
 
     /**
      * @var string
@@ -47,7 +47,7 @@ class Produit
     private $imageP;
 
     /**
-     * @var \User
+     * @var \App\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
@@ -57,7 +57,7 @@ class Produit
     private $idClient;
 
     /**
-     * @var \Categorie
+        * @var \App\Entity\Categorie
      *
      * @ORM\ManyToOne(targetEntity="Categorie")
      * @ORM\JoinColumns({

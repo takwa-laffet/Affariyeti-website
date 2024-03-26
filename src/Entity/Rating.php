@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Rating
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rating_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $ratingId;
+    #[ORM\Id]
+
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $ratingId = null;
+    
 
     /**
      * @var int|null
@@ -26,7 +26,7 @@ class Rating
     private $ratingValue;
 
     /**
-     * @var \Produit
+     * @var \App\Entity\Produit
      *
      * @ORM\ManyToOne(targetEntity="Produit")
      * @ORM\JoinColumns({
@@ -36,7 +36,7 @@ class Rating
     private $product;
 
     /**
-     * @var \User
+     * @var \App\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
