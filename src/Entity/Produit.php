@@ -17,54 +17,13 @@ class Produit
     #[ORM\Column]
     
     private ?int $idP = null;
+    #[ORM\Column (length: 255) ] private ?string $nomP = null;   
+    #[ORM\Column (length: 255) ] private ?string $descriptionP = null;   
+    #[ORM\Column (length: 255) ] private ?float $prixP = null;   
+    #[ORM\Column (length: 255) ] private ?string $imageP = null;   
+    #[ORM\ManyToOne(inversedBy: 'User')] private ?User $idClient = null;
+    #[ORM\ManyToOne(inversedBy: 'Categorie')] private ?Categorie $idC = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_p", type="string", length=300, nullable=false)
-     */
-    private $nomP;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_p", type="string", length=300, nullable=false)
-     */
-    private $descriptionP;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prix_p", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $prixP;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image_p", type="string", length=255, nullable=false)
-     */
-    private $imageP;
-
-    /**
-     * @var \App\Entity\User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_client", referencedColumnName="id")
-     * })
-     */
-    private $idClient;
-
-    /**
-        * @var \App\Entity\Categorie
-     *
-     * @ORM\ManyToOne(targetEntity="Categorie")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_c", referencedColumnName="id_c")
-     * })
-     */
-    private $idC;
 
     public function getIdP(): ?int
     {

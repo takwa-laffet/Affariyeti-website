@@ -17,27 +17,9 @@ class Ticketp
     #[ORM\Column]
     
     private ?int $ticketpId = null;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="ticket_id", type="integer", nullable=true)
-     */
-    private $ticketId;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="client_id", type="integer", nullable=true)
-     */
-    private $clientId;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="enchere_id", type="integer", nullable=true)
-     */
-    private $enchereId;
+    #[ORM\Column  ] private ?int $ticketId = null;   
+    #[ORM\Column  ] private ?int $clientId = null;   
+    #[ORM\Column  ] private ?int $enchereId = null;   
 
     public function getTicketpId(): ?int
     {

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use finfo;
 
 /**
  * @ORM\Entity(repositoryClass=LivraisonRepository::class)
@@ -17,58 +18,15 @@ class Livraison
     #[ORM\Column]
     
     private ?int $id = null; 
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresselivraison", type="string", length=255, nullable=false)
-     */
-    private $adresselivraison;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="datecommande", type="datetime", nullable=false)
-     */
-    private $datecommande;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="datelivraison", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $datelivraison = 'CURRENT_TIMESTAMP';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="statuslivraison", type="string", length=255, nullable=false)
-     */
-    private $statuslivraison;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="latitude", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $latitude;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="longitude", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $longitude;
-
-    /**
-     * @var \App\Entity\Depot
-     *
-     * @ORM\ManyToOne(targetEntity="Depot")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="iddepot", referencedColumnName="iddepot")
-     * })
-     */
-    private $iddepot;
+    #[ORM\Column (length: 255) ] private ?string $adresselivraison = null;   
+    #[ORM\Column(type:"datetime")]
+    private ?\DateTimeInterface $datecommande = null;
+    #[ORM\Column(type:"datetime")]
+    private ?\DateTimeInterface $datelivraison = null;
+    #[ORM\Column (length: 255) ] private ?string $statuslivraison = null;   
+    #[ORM\Column ] private ?float $latitude = null;   
+    #[ORM\Column ] private ?float $longitude = null;   
+    #[ORM\ManyToOne(inversedBy: 'Depot')] private ?Depot $iddepot = null;
 
     public function getId(): ?int
     {

@@ -17,33 +17,10 @@ class Rating
     
     private ?int $ratingId = null;
     
+    #[ORM\Column  ] private ?int $ratingValue = null;   
+    #[ORM\ManyToOne(inversedBy: 'Produit')] private ?Produit $product = null;
+    #[ORM\ManyToOne(inversedBy: 'User')] private ?User $user = null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="rating_value", type="integer", nullable=true)
-     */
-    private $ratingValue;
-
-    /**
-     * @var \App\Entity\Produit
-     *
-     * @ORM\ManyToOne(targetEntity="Produit")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="product_id", referencedColumnName="id_p")
-     * })
-     */
-    private $product;
-
-    /**
-     * @var \App\Entity\User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
-     */
-    private $user;
 
     public function getRatingId(): ?int
     {

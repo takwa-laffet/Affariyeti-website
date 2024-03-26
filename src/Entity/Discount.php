@@ -19,26 +19,16 @@ class Discount
     
     private ?int $idd = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="userId", type="integer", nullable=false)
-     */
-    private $userid;
+    #[ORM\Column ] private ?int $userid = null;   
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="codePromoId", type="integer", nullable=false)
-     */
-    private $codepromoid;
+    #[ORM\Column ] private ?int $codepromoid = null;   
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="date", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $date = 'CURRENT_TIMESTAMP';
+
+
+#[ORM\Column(type:"datetime")]
+    private ?\DateTimeInterface $date = null;
+
+
 
     public function getIdd(): ?int
     {

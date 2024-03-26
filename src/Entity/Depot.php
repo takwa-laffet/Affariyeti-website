@@ -18,20 +18,9 @@ class Depot
     
     private ?int $iddepot = null;
     
+    #[ORM\Column (length: 255)] private ?string $nomdepot = null;   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomdepot", type="string", length=255, nullable=false)
-     */
-    private $nomdepot;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
-     */
-    private $adresse;
+    #[ORM\Column (length: 255)] private ?string $adresse = null;   
 
     public function getIddepot(): ?int
     {

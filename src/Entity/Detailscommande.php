@@ -17,50 +17,18 @@ class Detailscommande
     #[ORM\Column]
     
     private ?int $id = null;
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="num_Detailscommande", type="integer", nullable=false)
-     */
-    private $numDetailscommande;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_Detailscommande", type="string", length=255, nullable=false)
-     */
-    private $nomDetailscommande;
+    #[ORM\Column ] private ?int $numDetailscommande = null;   
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="quantite", type="integer", nullable=false)
-     */
-    private $quantite;
+    #[ORM\Column (length: 255)] private ?string $nomDetailscommande= null;   
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prix_unitaire", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $prixUnitaire;
+    #[ORM\Column ] private ?int $quantite = null;   
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="sous_total", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $sousTotal;
+    #[ORM\Column ] private ?float $prixUnitaire = null;   
 
-    /**
-     * @var \App\Entity\Commande
-     *
-     * @ORM\ManyToOne(targetEntity="Commande")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_com", referencedColumnName="id")
-     * })
-     */
-    private $idCom;
+    #[ORM\Column ] private ?float $sousTotal = null;   
+
+    #[ORM\ManyToOne(inversedBy: 'Commande')] private ?Commande $idCom = null;
 
     public function getId(): ?int
     {

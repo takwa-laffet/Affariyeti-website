@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\DecimalType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,20 +19,9 @@ class TicketEnchere
     #[ORM\Column]
     
     private ?int $ticketId = null;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="enchere_id", type="integer", nullable=true)
-     */
-    private $enchereId;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="prix", type="decimal", precision=10, scale=2, nullable=true)
-     */
-    private $prix;
+    
+    #[ORM\Column  ] private ?int $enchereId = null;   
+    #[ORM\Column(type: "decimal")  ] private ?string $prix = null;   
 
     public function getTicketId(): ?int 
     {

@@ -18,26 +18,14 @@ class Commande
     
     private ?int $id = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="etat", type="string", length=255, nullable=false)
-     */
-    private $etat;
+    #[ORM\Column ] private ?int $etat = null;
+    
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="cmd_client", type="integer", nullable=false)
-     */
-    private $cmdClient;
+    #[ORM\Column ] private ?int $cmdClient = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="cmd_date", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $cmdDate = 'CURRENT_TIMESTAMP';
+    #[ORM\Column(type:"datetime")]
+    private ?\DateTimeInterface $cmdDate = null;
+
 
     public function getId(): ?int
     {

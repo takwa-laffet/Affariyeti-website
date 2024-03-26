@@ -16,13 +16,7 @@ class Categorie
     #[ORM\Column]
     
     private ?int $idC = null;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_c", type="string", length=255, nullable=false)
-     */
-    private $nomC;
+    #[ORM\Column (length: 255)] private ?string $nomC = null;   
 
     public function getIdC(): ?int
     {

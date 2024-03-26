@@ -17,13 +17,8 @@ class Grosmots
     
     private ?int $idGm = null;
     
+    #[ORM\Column (length: 255) ] private ?string $grosmots = null;   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="GrosMots", type="string", length=1000, nullable=false)
-     */
-    private $grosmots;
 
     public function getIdGm(): ?int
     {

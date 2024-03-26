@@ -18,19 +18,9 @@ class Codepromo
     
     private ?int $idcode= null;
     
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="userId", type="integer", nullable=false)
-     */
-    private $userid;
+    #[ORM\Column (length: 255)] private ?int $userid = null;
+    #[ORM\Column (length: 255)] private ?int $idcategoriecode = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idCategorieCode", type="integer", nullable=false)
-     */
-    private $idcategoriecode;
 
     public function getIdcode(): ?int
     {

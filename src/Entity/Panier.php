@@ -17,20 +17,9 @@ class Panier
     #[ORM\Column]
     
     private ?int $id = null;
+    #[ORM\Column (length: 255) ] private ?string $nomArticle = null;   
+    #[ORM\Column] private ?float $prix = null;   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_article", type="string", length=255, nullable=false)
-     */
-    private $nomArticle;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $prix;
 
     public function getId(): ?int
     {

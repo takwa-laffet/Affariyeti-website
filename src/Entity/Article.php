@@ -17,20 +17,13 @@ class Article
     #[ORM\Column]
     
     private ?int $id = null;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nom;
+   
+    #[ORM\Column (length: 255)] private ?string $nom = null;   
+   
+    #[ORM\Column (length: 255)] private ?string $categorie = null;   
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $categorie;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $prix;
+    #[ORM\Column ] private ?float $prix = null;   
+    
 
     public function getId(): ?int
     {

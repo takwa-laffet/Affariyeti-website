@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @ORM\Entity(repositoryClass=CategoriecodepromoRepository::class)
@@ -17,27 +18,10 @@ class Categoriecodepromo
     
     private ?int $idccp = null;
     
+    #[ORM\Column (length: 255)] private ?string $code = null;   
+    #[ORM\Column (length: 255)] private ?int $valeur = null;
+    #[ORM\Column (length: 255)] private ?int $limite = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=255, nullable=false)
-     */
-    private $code;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="valeur", type="integer", nullable=false)
-     */
-    private $valeur;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="limite", type="integer", nullable=false)
-     */
-    private $limite;
 
     public function getIdccp(): ?int
     {
