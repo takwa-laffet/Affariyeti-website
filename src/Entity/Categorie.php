@@ -4,9 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CategorieRepository::class)
- */
+use App\Repository\CategorieRepository;
+#[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
 {
     #[ORM\Id]

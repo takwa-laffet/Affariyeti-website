@@ -4,12 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CodepromoRepository::class)
- */
+use App\Repository\CodepromoRepository;
+#[ORM\Entity(repositoryClass: CodepromoRepository::class)]
 class Codepromo
 {
- 
+    
     #[ORM\Id]
 
     #[ORM\GeneratedValue]

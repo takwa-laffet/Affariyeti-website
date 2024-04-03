@@ -21,26 +21,28 @@ class CategoriecodepromoRepository extends ServiceEntityRepository
         parent::__construct($registry, Categoriecodepromo::class);
     }
 
-    /**
-     * @return Categoriecodepromo[] Returns an array of Categoriecodepromo objects
-     */
-   // public function findByExampleField($value): array
-    //{
-       // return $this->createQueryBuilder('p')
-         //   ->andWhere('p.exampleField = :val')
-         //   ->setParameter('val', $value)
-         //   ->orderBy('p.id', 'ASC')
-          //  ->setMaxResults(10)
-          //  ->getQuery()
-          //  ->getResult();
-   // }
+//    /**
+//     * @return Categoriecodepromo[] Returns an array of Categoriecodepromo objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('c.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
-   // public function findOneBySomeField($value): ?Categoriecodepromo
-    //{
-       // return $this->createQueryBuilder('p')
-    //        ->andWhere('p.exampleField = :val')
-     //       ->setParameter('val', $value)
-      //      ->getQuery()
-          //  ->getOneOrNullResult();
-  // }
+//    public function findOneBySomeField($value): ?Categoriecodepromo
+//    {
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }

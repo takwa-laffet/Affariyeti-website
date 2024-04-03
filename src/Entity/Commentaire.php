@@ -7,12 +7,11 @@ use App\Entity\Publication;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CommentaireRepository::class)
- */
+use App\Repository\CommentaireRepository;
+#[ORM\Entity(repositoryClass: CommentaireRepository::class)]
 class Commentaire
 {
-
+    
     #[ORM\Id]
 
     #[ORM\GeneratedValue]

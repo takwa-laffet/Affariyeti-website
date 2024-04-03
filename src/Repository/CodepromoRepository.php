@@ -21,26 +21,28 @@ class CodepromoRepository extends ServiceEntityRepository
         parent::__construct($registry, Codepromo::class);
     }
 
-    /**
-     * @return Codepromo[] Returns an array of Codepromo objects
-     */
-   // public function findByExampleField($value): array
-    //{
-       // return $this->createQueryBuilder('p')
-         //   ->andWhere('p.exampleField = :val')
-         //   ->setParameter('val', $value)
-         //   ->orderBy('p.id', 'ASC')
-          //  ->setMaxResults(10)
-          //  ->getQuery()
-          //  ->getResult();
-   // }
+//    /**
+//     * @return Codepromo[] Returns an array of Codepromo objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('c.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
-   // public function findOneBySomeField($value): ?Codepromo
-    //{
-       // return $this->createQueryBuilder('p')
-    //        ->andWhere('p.exampleField = :val')
-     //       ->setParameter('val', $value)
-      //      ->getQuery()
-          //  ->getOneOrNullResult();
-  // }
+//    public function findOneBySomeField($value): ?Codepromo
+//    {
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }

@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=TicketpRepository::class)
- */
+use App\Repository\TicketpRepository;
+
+#[ORM\Entity(repositoryClass: TicketpRepository::class)]
 class Ticketp
 {
  
