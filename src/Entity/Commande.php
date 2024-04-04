@@ -5,40 +5,26 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CommandeRepository::class)
- */
+use App\Repository\CommandeRepository;
+#[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="etat", type="string", length=255, nullable=false)
-     */
-    private $etat;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $id = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="cmd_client", type="integer", nullable=false)
-     */
-    private $cmdClient;
+    #[ORM\Column ] private ?int $etat = null;
+    
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="cmd_date", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $cmdDate = 'CURRENT_TIMESTAMP';
+    #[ORM\Column ] private ?int $cmdClient = null;
+
+    #[ORM\Column(type:"datetime")]
+    private ?\DateTimeInterface $cmdDate = null;
+
 
     public function getId(): ?int
     {

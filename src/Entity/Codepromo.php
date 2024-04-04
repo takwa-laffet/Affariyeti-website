@@ -4,33 +4,22 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CodepromoRepository::class)
- */
+use App\Repository\CodepromoRepository;
+#[ORM\Entity(repositoryClass: CodepromoRepository::class)]
 class Codepromo
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idCode", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idcode;
+    
+    #[ORM\Id]
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="userId", type="integer", nullable=false)
-     */
-    private $userid;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idcode= null;
+    
+    #[ORM\Column (length: 255)] private ?int $userid = null;
+    #[ORM\Column (length: 255)] private ?int $idcategoriecode = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idCategorieCode", type="integer", nullable=false)
-     */
-    private $idcategoriecode;
 
     public function getIdcode(): ?int
     {

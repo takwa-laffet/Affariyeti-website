@@ -5,40 +5,29 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=DiscountRepository::class)
- */
+use App\Repository\DiscountRepository;
+#[ORM\Entity(repositoryClass: DiscountRepository::class)]
 class Discount
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idD", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idd;
+    
+    #[ORM\Id]
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="userId", type="integer", nullable=false)
-     */
-    private $userid;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idd = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="codePromoId", type="integer", nullable=false)
-     */
-    private $codepromoid;
+    #[ORM\Column ] private ?int $userid = null;   
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="date", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $date = 'CURRENT_TIMESTAMP';
+    #[ORM\Column ] private ?int $codepromoid = null;   
+
+
+
+#[ORM\Column(type:"datetime")]
+    private ?\DateTimeInterface $date = null;
+
+
 
     public function getIdd(): ?int
     {

@@ -4,26 +4,18 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CategorieRepository::class)
- */
+use App\Repository\CategorieRepository;
+#[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_c", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idC;
+    #[ORM\Id]
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_c", type="string", length=255, nullable=false)
-     */
-    private $nomC;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idC = null;
+    #[ORM\Column (length: 255)] private ?string $nomC = null;   
 
     public function getIdC(): ?int
     {

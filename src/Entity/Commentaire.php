@@ -3,55 +3,30 @@
 namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
+use App\Entity\Publication;
+
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CommentaireRepository::class)
- */
+use App\Repository\CommentaireRepository;
+#[ORM\Entity(repositoryClass: CommentaireRepository::class)]
 class Commentaire
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_com", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idCom;
+    
+    #[ORM\Id]
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="contenu", type="string", length=5000, nullable=false)
-     */
-    private $contenu;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idCom = null;
+    
+    #[ORM\Column (length: 255)] private ?string $contenu = null;   
+    #[ORM\Column(type:"datetime")]
+    private ?\DateTimeInterface $dateCom = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_com", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $dateCom = 'CURRENT_TIMESTAMP';
+    #[ORM\ManyToOne(inversedBy: 'Publication')] private ?Publication $idPub = null;
+    #[ORM\ManyToOne(inversedBy: 'User')] private ?User $idClient = null;
 
-    /**
-     * @var \Publication
-     *
-     * @ORM\ManyToOne(targetEntity="Publication")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_pub", referencedColumnName="id_pub")
-     * })
-     */
-    private $idPub;
-
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_client", referencedColumnName="id")
-     * })
-     */
-    private $idClient;
 
     public function getIdCom(): ?int
     {

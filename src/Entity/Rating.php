@@ -4,46 +4,23 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=RatingRepository::class)
- */
+use App\Repository\RatingRepository;
+
+#[ORM\Entity(repositoryClass: RatingRepository::class)]
 class Rating
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rating_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $ratingId;
+    #[ORM\Id]
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="rating_value", type="integer", nullable=true)
-     */
-    private $ratingValue;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $ratingId = null;
+    
+    #[ORM\Column  ] private ?int $ratingValue = null;   
+    #[ORM\ManyToOne(inversedBy: 'Produit')] private ?Produit $product = null;
+    #[ORM\ManyToOne(inversedBy: 'User')] private ?User $user = null;
 
-    /**
-     * @var \Produit
-     *
-     * @ORM\ManyToOne(targetEntity="Produit")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="product_id", referencedColumnName="id_p")
-     * })
-     */
-    private $product;
-
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
-     */
-    private $user;
 
     public function getRatingId(): ?int
     {

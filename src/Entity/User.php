@@ -3,69 +3,33 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- */
+use App\Repository\UserRepository;
+
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+ 
+    #[ORM\Id]
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     */
-    private $email;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $id = null; 
+    #[ORM\Column (length:255)  ] private ?string $email = null;   
+    #[ORM\Column (length:255)  ] private ?string $nom = null;   
+    #[ORM\Column (length:255)  ] private ?string $prenom = null;   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mdp", type="string", length=255, nullable=false)
-     */
-    private $mdp;
+    #[ORM\Column (length:255)  ] private ?string $mdp = null; 
 
-    /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="status", type="boolean", nullable=true)
-     */
-    private $status;
+    #[ORM\Column (length:255)  ] private ?string $verificationcode = null;   
+    #[ORM\Column (length:255)  ] private ?string $role = null;   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=25, nullable=false)
-     */
-    private $nom;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=30, nullable=false)
-     */
-    private $prenom;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="verificationCode", type="string", length=300, nullable=false)
-     */
-    private $verificationcode;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=300, nullable=false)
-     */
-    private $role;
+    #[ORM\Column (type:"boolean", nullable:true)  ] private ?bool $status = null;   
 
     public function getId(): ?int
     {

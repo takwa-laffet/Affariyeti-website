@@ -4,47 +4,29 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=TicketpRepository::class)
- */
+use App\Repository\TicketpRepository;
+
+#[ORM\Entity(repositoryClass: TicketpRepository::class)]
 class Ticketp
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ticketp_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $ticketpId;
+ 
+    #[ORM\Id]
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="ticket_id", type="integer", nullable=true)
-     */
-    private $ticketId;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="client_id", type="integer", nullable=true)
-     */
-    private $clientId;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="enchere_id", type="integer", nullable=true)
-     */
-    private $enchereId;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $ticketpId = null;
+    #[ORM\Column  ] private ?int $ticketId = null;   
+    #[ORM\Column  ] private ?int $clientId = null;   
+    #[ORM\Column  ] private ?int $enchereId = null;   
 
     public function getTicketpId(): ?int
     {
         return $this->ticketpId;
     }
 
-    public function getTicketId(): ?int
+    public function getTicketId(): ?TicketEnchere
     {
         return $this->ticketId;
     }
@@ -56,7 +38,7 @@ class Ticketp
         return $this;
     }
 
-    public function getClientId(): ?int
+    public function getClientId(): ?User
     {
         return $this->clientId;
     }
@@ -68,7 +50,7 @@ class Ticketp
         return $this;
     }
 
-    public function getEnchereId(): ?int
+    public function getEnchereId(): ?Enchere
     {
         return $this->enchereId;
     }

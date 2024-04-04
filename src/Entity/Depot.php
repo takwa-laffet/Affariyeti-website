@@ -4,33 +4,22 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=DepotRepository::class)
- */
+use App\Repository\DepotRepository;
+#[ORM\Entity(repositoryClass: DepotRepository::class)]
 class Depot
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="iddepot", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $iddepot;
+    
+    #[ORM\Id]
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomdepot", type="string", length=255, nullable=false)
-     */
-    private $nomdepot;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $iddepot = null;
+    
+    #[ORM\Column (length: 255)] private ?string $nomdepot = null;   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
-     */
-    private $adresse;
+    #[ORM\Column (length: 255)] private ?string $adresse = null;   
 
     public function getIddepot(): ?int
     {

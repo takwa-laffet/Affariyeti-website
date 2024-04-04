@@ -2,48 +2,38 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\DecimalType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=TicketEnchereRepository::class)
- */
+use App\Repository\TicketEnchereRepository;
+
+#[ORM\Entity(repositoryClass: TicketEnchereRepository::class)]
 class TicketEnchere
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ticket_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $ticketId;
+    
+    #[ORM\Id]
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="enchere_id", type="integer", nullable=true)
-     */
-    private $enchereId;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $ticketId = null;
+    
+    #[ORM\Column  ] private ?int $enchereId = null;   
+    #[ORM\Column(type: "decimal")  ] private ?string $prix = null;   
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="prix", type="decimal", precision=10, scale=2, nullable=true)
-     */
-    private $prix;
-
-    public function getTicketId(): ?int
+    public function getTicketId(): ?int 
     {
         return $this->ticketId;
     }
 
-    public function getEnchereId(): ?int
+    public function getEnchereId(): ?Enchere
     {
         return $this->enchereId;
     }
 
-    public function setEnchereId(?int $enchereId): static
+    public function setEnchereId(?Enchere $enchereId): static
     {
         $this->enchereId = $enchereId;
 

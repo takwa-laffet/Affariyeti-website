@@ -5,64 +5,30 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=PublicationRepository::class)
- */
+use App\Repository\PublicationRepository;
+
+#[ORM\Entity(repositoryClass: PublicationRepository::class)]
+
 class Publication
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_pub", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idPub;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="contenu", type="string", length=1000, nullable=false)
-     */
-    private $contenu;
+    #[ORM\Id]
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_likes", type="integer", nullable=false)
-     */
-    private $nbLikes;
+    #[ORM\GeneratedValue]
+    
+    #[ORM\Column]
+    
+    private ?int $idPub = null;
+    #[ORM\Column (length: 255) ] private ?string $contenu = null;   
+    #[ORM\Column (length: 255) ] private ?string $photo = null;   
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_dislike", type="integer", nullable=false)
-     */
-    private $nbDislike;
+    #[ORM\Column  ] private ?int $nbLikes = null;  
+    #[ORM\Column  ] private ?int $nbDislike = null;   
+    
+    #[ORM\Column(type:"datetime")]
+    private ?\DateTimeInterface $datePub = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_pub", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-     */
-    private $datePub = 'CURRENT_TIMESTAMP';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="photo", type="string", length=1000, nullable=false)
-     */
-    private $photo;
-
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_client", referencedColumnName="id")
-     * })
-     */
-    private $idClient;
+    #[ORM\ManyToOne(inversedBy: 'User')] private ?User $idClient = null;
 
     public function getIdPub(): ?int
     {
