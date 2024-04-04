@@ -2,110 +2,66 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Repository\PublicationRepository;
-
-#[ORM\Entity(repositoryClass: PublicationRepository::class)]
-
+/**
+ * Publication
+ *
+ * @ORM\Table(name="publication", indexes={@ORM\Index(name="fk_publication_user", columns={"id_client"})})
+ * @ORM\Entity
+ */
 class Publication
 {
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_pub", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idPub;
 
-    #[ORM\Id]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_client", type="integer", nullable=false)
+     */
+    private $idClient;
 
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
-    private ?int $idPub = null;
-    #[ORM\Column (length: 255) ] private ?string $contenu = null;   
-    #[ORM\Column (length: 255) ] private ?string $photo = null;   
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contenu", type="string", length=1000, nullable=false)
+     */
+    private $contenu;
 
-    #[ORM\Column  ] private ?int $nbLikes = null;  
-    #[ORM\Column  ] private ?int $nbDislike = null;   
-    
-    #[ORM\Column(type:"datetime")]
-    private ?\DateTimeInterface $datePub = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_likes", type="integer", nullable=false)
+     */
+    private $nbLikes;
 
-    #[ORM\ManyToOne(inversedBy: 'User')] private ?User $idClient = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_dislike", type="integer", nullable=false)
+     */
+    private $nbDislike;
 
-    public function getIdPub(): ?int
-    {
-        return $this->idPub;
-    }
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_pub", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $datePub = 'CURRENT_TIMESTAMP';
 
-    public function getContenu(): ?string
-    {
-        return $this->contenu;
-    }
-
-    public function setContenu(string $contenu): static
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    public function getNbLikes(): ?int
-    {
-        return $this->nbLikes;
-    }
-
-    public function setNbLikes(int $nbLikes): static
-    {
-        $this->nbLikes = $nbLikes;
-
-        return $this;
-    }
-
-    public function getNbDislike(): ?int
-    {
-        return $this->nbDislike;
-    }
-
-    public function setNbDislike(int $nbDislike): static
-    {
-        $this->nbDislike = $nbDislike;
-
-        return $this;
-    }
-
-    public function getDatePub(): ?\DateTimeInterface
-    {
-        return $this->datePub;
-    }
-
-    public function setDatePub(\DateTimeInterface $datePub): static
-    {
-        $this->datePub = $datePub;
-
-        return $this;
-    }
-
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): static
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    public function getIdClient(): ?User
-    {
-        return $this->idClient;
-    }
-
-    public function setIdClient(?User $idClient): static
-    {
-        $this->idClient = $idClient;
-
-        return $this;
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=1000, nullable=false)
+     */
+    private $photo;
 
 
 }

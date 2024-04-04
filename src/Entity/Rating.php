@@ -4,64 +4,43 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Repository\RatingRepository;
-
-#[ORM\Entity(repositoryClass: RatingRepository::class)]
+/**
+ * Rating
+ *
+ * @ORM\Table(name="rating", indexes={@ORM\Index(name="user_id", columns={"user_id"}), @ORM\Index(name="product_id", columns={"product_id"})})
+ * @ORM\Entity
+ */
 class Rating
 {
-    #[ORM\Id]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rating_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ratingId;
 
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
-    private ?int $ratingId = null;
-    
-    #[ORM\Column  ] private ?int $ratingValue = null;   
-    #[ORM\ManyToOne(inversedBy: 'Produit')] private ?Produit $product = null;
-    #[ORM\ManyToOne(inversedBy: 'User')] private ?User $user = null;
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=true)
+     */
+    private $userId;
 
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="product_id", type="integer", nullable=true)
+     */
+    private $productId;
 
-    public function getRatingId(): ?int
-    {
-        return $this->ratingId;
-    }
-
-    public function getRatingValue(): ?int
-    {
-        return $this->ratingValue;
-    }
-
-    public function setRatingValue(?int $ratingValue): static
-    {
-        $this->ratingValue = $ratingValue;
-
-        return $this;
-    }
-
-    public function getProduct(): ?Produit
-    {
-        return $this->product;
-    }
-
-    public function setProduct(?Produit $product): static
-    {
-        $this->product = $product;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="rating_value", type="integer", nullable=true)
+     */
+    private $ratingValue;
 
 
 }

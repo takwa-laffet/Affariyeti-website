@@ -2,29 +2,82 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use finfo;
-use App\Repository\LivraisonRepository;
-#[ORM\Entity(repositoryClass: LivraisonRepository::class)]
+
+/**
+ * @ORM\Table(name="livraison", indexes={@ORM\Index(name="fk_depot", columns={"iddepott"}), @ORM\Index(name="fk_user", columns={"idclient"})})
+ * @ORM\Entity
+ */
 class Livraison
 {
-    #[ORM\Id]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
-    private ?int $id = null; 
-    #[ORM\Column (length: 255) ] private ?string $adresselivraison = null;   
-    #[ORM\Column(type:"datetime")]
-    private ?\DateTimeInterface $datecommande = null;
-    #[ORM\Column(type:"datetime")]
-    private ?\DateTimeInterface $datelivraison = null;
-    #[ORM\Column (length: 255) ] private ?string $statuslivraison = null;   
-    #[ORM\Column ] private ?float $latitude = null;   
-    #[ORM\Column ] private ?float $longitude = null;   
-    #[ORM\ManyToOne(inversedBy: 'Depot')] private ?Depot $iddepot = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresselivraison", type="string", length=255, nullable=false)
+     */
+    private $adresselivraison;
+
+    /**
+     * @var \DateTimeInterface
+     *
+     * @ORM\Column(name="datecommande", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $datecommande;
+
+    /**
+     * @var \DateTimeInterface
+     *
+     * @ORM\Column(name="datelivraison", type="datetime", nullable=false)
+     */
+    private $datelivraison;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="statuslivraison", type="string", length=255, nullable=false)
+     */
+    private $statuslivraison;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float", nullable=false)
+     */
+    private $latitude;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float", nullable=false)
+     */
+    private $longitude;
+
+    /**
+     * @var User|null
+     *
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(name="idclient", referencedColumnName="id")
+     */
+    private $idclient;
+
+    /**
+     * @var Depot|null
+     *
+     * @ORM\ManyToOne(targetEntity=Depot::class)
+     * @ORM\JoinColumn(name="iddepott", referencedColumnName="iddepot")
+     */
+    private $iddepot;
+
+    // Getters and setters...
 
     public function getId(): ?int
     {
@@ -36,7 +89,7 @@ class Livraison
         return $this->adresselivraison;
     }
 
-    public function setAdresselivraison(string $adresselivraison): static
+    public function setAdresselivraison(string $adresselivraison): self
     {
         $this->adresselivraison = $adresselivraison;
 
@@ -48,7 +101,7 @@ class Livraison
         return $this->datecommande;
     }
 
-    public function setDatecommande(\DateTimeInterface $datecommande): static
+    public function setDatecommande(\DateTimeInterface $datecommande): self
     {
         $this->datecommande = $datecommande;
 
@@ -60,7 +113,7 @@ class Livraison
         return $this->datelivraison;
     }
 
-    public function setDatelivraison(\DateTimeInterface $datelivraison): static
+    public function setDatelivraison(\DateTimeInterface $datelivraison): self
     {
         $this->datelivraison = $datelivraison;
 
@@ -69,10 +122,10 @@ class Livraison
 
     public function getStatuslivraison(): ?string
     {
-        return $this->statuslivraison;
+        return $this->statuslivraison= "en cours";
     }
 
-    public function setStatuslivraison(string $statuslivraison): static
+    public function setStatuslivraison(string $statuslivraison): self
     {
         $this->statuslivraison = $statuslivraison;
 
@@ -84,7 +137,7 @@ class Livraison
         return $this->latitude;
     }
 
-    public function setLatitude(float $latitude): static
+    public function setLatitude(float $latitude): self
     {
         $this->latitude = $latitude;
 
@@ -96,9 +149,21 @@ class Livraison
         return $this->longitude;
     }
 
-    public function setLongitude(float $longitude): static
+    public function setLongitude(float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getIdclient(): ?User
+    {
+        return $this->idclient;
+    }
+
+    public function setIdclient(?User $idclient): self
+    {
+        $this->idclient = $idclient;
 
         return $this;
     }
@@ -108,12 +173,10 @@ class Livraison
         return $this->iddepot;
     }
 
-    public function setIddepot(?Depot $iddepot): static
+    public function setIddepot(?Depot $iddepot): self
     {
         $this->iddepot = $iddepot;
 
         return $this;
     }
-
-
 }

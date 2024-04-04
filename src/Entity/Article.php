@@ -2,28 +2,47 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-
-#[ORM\Entity(repositoryClass: ArticleRepository::class)]
-
+/**
+ * Article
+ *
+ * @ORM\Table(name="article")
+ * @ORM\Entity
+ */
 class Article
 {
-    #[ORM\Id]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
-    private ?int $id = null;
-   
-    #[ORM\Column (length: 255)] private ?string $nom = null;   
-   
-    #[ORM\Column (length: 255)] private ?string $categorie = null;   
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     */
+    private $nom;
 
-    #[ORM\Column ] private ?float $prix = null;   
-    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="categorie", type="string", length=255, nullable=false)
+     */
+    private $categorie;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $prix;
+
+    // Getters and setters...
 
     public function getId(): ?int
     {

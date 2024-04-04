@@ -4,37 +4,29 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Repositor\GrosmotsRepository;
-#[ORM\Entity(repositoryClass: GrosmotsRepository::class)]
+/**
+ * Grosmots
+ *
+ * @ORM\Table(name="grosmots")
+ * @ORM\Entity
+ */
 class Grosmots
 {
-    #[ORM\Id]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_GM", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idGm;
 
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
-    private ?int $idGm = null;
-    
-    #[ORM\Column (length: 255) ] private ?string $grosmots = null;   
-
-
-    public function getIdGm(): ?int
-    {
-        return $this->idGm;
-    }
-
-    public function getGrosmots(): ?string
-    {
-        return $this->grosmots;
-    }
-
-    public function setGrosmots(string $grosmots): static
-    {
-        $this->grosmots = $grosmots;
-
-        return $this;
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="GrosMots", type="string", length=1000, nullable=false)
+     */
+    private $grosmots;
 
 
 }

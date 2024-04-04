@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 26 mars 2024 à 02:47
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.1.17
+-- Généré le : jeu. 04 avr. 2024 à 02:06
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -76,16 +76,6 @@ CREATE TABLE `categoriecodepromo` (
   `limite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `categoriecodepromo`
---
-
-INSERT INTO `categoriecodepromo` (`idCcp`, `code`, `valeur`, `limite`) VALUES
-(9, '12', 14, 45),
-(10, '100', 10, 10),
-(11, '15', 101, 111),
-(12, '12', 14, 123);
-
 -- --------------------------------------------------------
 
 --
@@ -150,7 +140,7 @@ INSERT INTO `commentaire` (`id_com`, `id_pub`, `id_client`, `contenu`, `date_com
 --
 
 CREATE TABLE `depot` (
-  `iddepot` int(255) NOT NULL,
+  `iddepot` int(11) NOT NULL,
   `nomdepot` varchar(255) NOT NULL,
   `adresse` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -160,8 +150,7 @@ CREATE TABLE `depot` (
 --
 
 INSERT INTO `depot` (`iddepot`, `nomdepot`, `adresse`) VALUES
-(1, 'DepotAlpha', 'tunis'),
-(3, 'magasinlocal', 'Touza');
+(1, 'aaaaaaa', 'Mestir');
 
 -- --------------------------------------------------------
 
@@ -203,6 +192,26 @@ CREATE TABLE `discount` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `doctrine_migration_versions`
+--
+
+CREATE TABLE `doctrine_migration_versions` (
+  `version` varchar(191) NOT NULL,
+  `executed_at` datetime DEFAULT NULL,
+  `execution_time` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `doctrine_migration_versions`
+--
+
+INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+('DoctrineMigrations\\Version20240403004953', '2024-04-03 02:53:27', 3),
+('DoctrineMigrations\\Version20240403015040', '2024-04-03 03:52:40', 5);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `enchere`
 --
 
@@ -219,6 +228,15 @@ CREATE TABLE `enchere` (
   `image` varchar(255) NOT NULL,
   `idclenchere` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `enchere`
+--
+
+INSERT INTO `enchere` (`enchere_id`, `idclcreree`, `date_debut`, `heured`, `date_fin`, `heuref`, `montant_initial`, `nom_enchere`, `montant_final`, `image`, `idclenchere`) VALUES
+(963, '', '2024-02-24', '0', '2024-02-24', '', '2000', 'tablau', NULL, 'file:/C:/Users/takwa/Downloads/téléchargé.jpg', 0),
+(964, '', '2024-02-25', '0', '2024-02-26', '', '45000', 'table', NULL, 'file:/C:/Users/takwa/Downloads/104bff52225d12c56b269a515aaae6a10fed0de9.jpg', 0),
+(965, '111', '2024-02-28', '12:05', '2024-02-28', '12:30', '1400', 'serbise', NULL, 'file:/C:/Users/takwa/Downloads/serbise.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,7 +257,8 @@ CREATE TABLE `grosmots` (
 
 CREATE TABLE `livraison` (
   `id` int(30) NOT NULL,
-  `iddepot` int(255) DEFAULT NULL,
+  `iddepott` int(60) DEFAULT NULL,
+  `idclient` int(11) DEFAULT NULL,
   `adresselivraison` varchar(255) NOT NULL,
   `datecommande` datetime NOT NULL,
   `datelivraison` datetime NOT NULL DEFAULT current_timestamp(),
@@ -252,16 +271,27 @@ CREATE TABLE `livraison` (
 -- Déchargement des données de la table `livraison`
 --
 
-INSERT INTO `livraison` (`id`, `iddepot`, `adresselivraison`, `datecommande`, `datelivraison`, `statuslivraison`, `latitude`, `longitude`) VALUES
-(260, NULL, 'monastir', '2024-02-29 11:37:27', '2024-02-29 00:00:00', 'En cours', 0, 0),
-(261, 1, 'tunis', '2024-02-29 11:37:40', '2024-02-29 00:00:00', 'En cours', 0, 0),
-(267, 3, 'ariana', '2024-03-04 15:48:06', '2024-03-04 00:00:00', 'En cours', 77777, 888888),
-(271, 3, 'monastir', '2024-03-05 02:22:22', '2025-02-01 00:00:00', 'En attente', 7777780000, 7777),
-(273, 1, 'tunis', '2024-03-05 02:26:25', '2024-03-07 00:00:00', 'En attente', 45278, 10000000),
-(274, 1, 'ariana', '2024-03-05 02:31:56', '2024-03-05 00:00:00', 'En cours', 52413, 785214),
-(275, 1, 'cheraa ghana', '2024-03-05 23:38:13', '2024-04-07 00:00:00', 'En cours', 0, 7),
-(276, 1, 'ariana', '2024-03-07 09:58:31', '2024-03-08 00:00:00', 'En cours', 36.9165, 10.0718),
-(277, 1, 'ariana', '2024-03-07 12:58:25', '2024-03-08 00:00:00', 'En attente', 36.9175, 10.0818);
+INSERT INTO `livraison` (`id`, `iddepott`, `idclient`, `adresselivraison`, `datecommande`, `datelivraison`, `statuslivraison`, `latitude`, `longitude`) VALUES
+(283, NULL, 111, 'Tounes', '2028-10-01 00:00:00', '2027-07-01 00:00:00', 'qQq', 77, 777),
+(286, 1, 114, 'Mestir', '2024-04-03 02:08:17', '2028-01-01 07:07:00', 'asba', 77, 444),
+(288, 1, 118, 'Tounes', '2024-04-03 03:36:36', '2024-05-01 00:00:00', 'ARRET', 888, 999),
+(289, 1, 109, 'Tounes', '2024-04-03 03:40:50', '2019-01-01 00:00:00', 'aaaa', 33, 33);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `messenger_messages`
+--
+
+CREATE TABLE `messenger_messages` (
+  `id` bigint(20) NOT NULL,
+  `body` longtext NOT NULL,
+  `headers` longtext NOT NULL,
+  `queue_name` varchar(190) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `available_at` datetime NOT NULL,
+  `delivered_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -363,31 +393,6 @@ INSERT INTO `rating` (`rating_id`, `user_id`, `product_id`, `rating_value`) VALU
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ticketp`
---
-
-CREATE TABLE `ticketp` (
-  `ticketp_id` int(11) NOT NULL,
-  `ticket_id` int(11) DEFAULT NULL,
-  `client_id` int(11) DEFAULT NULL,
-  `enchere_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `ticket_enchere`
---
-
-CREATE TABLE `ticket_enchere` (
-  `ticket_id` int(11) NOT NULL,
-  `enchere_id` int(11) DEFAULT NULL,
-  `prix` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `user`
 --
 
@@ -478,6 +483,12 @@ ALTER TABLE `discount`
   ADD PRIMARY KEY (`idD`);
 
 --
+-- Index pour la table `doctrine_migration_versions`
+--
+ALTER TABLE `doctrine_migration_versions`
+  ADD PRIMARY KEY (`version`);
+
+--
 -- Index pour la table `enchere`
 --
 ALTER TABLE `enchere`
@@ -494,7 +505,17 @@ ALTER TABLE `grosmots`
 --
 ALTER TABLE `livraison`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_depot` (`iddepot`);
+  ADD KEY `fk_user` (`idclient`),
+  ADD KEY `fk_depot` (`iddepott`);
+
+--
+-- Index pour la table `messenger_messages`
+--
+ALTER TABLE `messenger_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
+  ADD KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
+  ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
 
 --
 -- Index pour la table `panier`
@@ -526,18 +547,6 @@ ALTER TABLE `rating`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Index pour la table `ticketp`
---
-ALTER TABLE `ticketp`
-  ADD PRIMARY KEY (`ticketp_id`);
-
---
--- Index pour la table `ticket_enchere`
---
-ALTER TABLE `ticket_enchere`
-  ADD PRIMARY KEY (`ticket_id`);
-
---
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
@@ -563,7 +572,7 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT pour la table `categoriecodepromo`
 --
 ALTER TABLE `categoriecodepromo`
-  MODIFY `idCcp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCcp` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `codepromo`
@@ -587,7 +596,7 @@ ALTER TABLE `commentaire`
 -- AUTO_INCREMENT pour la table `depot`
 --
 ALTER TABLE `depot`
-  MODIFY `iddepot` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `iddepot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `detailscommande`
@@ -605,7 +614,7 @@ ALTER TABLE `discount`
 -- AUTO_INCREMENT pour la table `enchere`
 --
 ALTER TABLE `enchere`
-  MODIFY `enchere_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `enchere_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=966;
 
 --
 -- AUTO_INCREMENT pour la table `grosmots`
@@ -617,7 +626,13 @@ ALTER TABLE `grosmots`
 -- AUTO_INCREMENT pour la table `livraison`
 --
 ALTER TABLE `livraison`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
+
+--
+-- AUTO_INCREMENT pour la table `messenger_messages`
+--
+ALTER TABLE `messenger_messages`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `panier`
@@ -644,18 +659,6 @@ ALTER TABLE `rating`
   MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT pour la table `ticketp`
---
-ALTER TABLE `ticketp`
-  MODIFY `ticketp_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `ticket_enchere`
---
-ALTER TABLE `ticket_enchere`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
@@ -666,43 +669,11 @@ ALTER TABLE `user`
 --
 
 --
--- Contraintes pour la table `commentaire`
---
-ALTER TABLE `commentaire`
-  ADD CONSTRAINT `fk_commentaire_id_pub` FOREIGN KEY (`id_pub`) REFERENCES `publication` (`id_pub`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_commentaire_user` FOREIGN KEY (`id_client`) REFERENCES `user` (`id`) ON DELETE CASCADE;
-
---
--- Contraintes pour la table `detailscommande`
---
-ALTER TABLE `detailscommande`
-  ADD CONSTRAINT `detailscommande_ibfk_1` FOREIGN KEY (`id_com`) REFERENCES `commande` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Contraintes pour la table `livraison`
 --
 ALTER TABLE `livraison`
-  ADD CONSTRAINT `fk_depot` FOREIGN KEY (`iddepot`) REFERENCES `depot` (`iddepot`);
-
---
--- Contraintes pour la table `produit`
---
-ALTER TABLE `produit`
-  ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`id_c`) REFERENCES `categorie` (`id_c`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `produit_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `user` (`id`);
-
---
--- Contraintes pour la table `publication`
---
-ALTER TABLE `publication`
-  ADD CONSTRAINT `fk_publication_user` FOREIGN KEY (`id_client`) REFERENCES `user` (`id`) ON DELETE CASCADE;
-
---
--- Contraintes pour la table `rating`
---
-ALTER TABLE `rating`
-  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `produit` (`id_p`);
+  ADD CONSTRAINT `fk_depot` FOREIGN KEY (`iddepott`) REFERENCES `depot` (`iddepot`),
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`idclient`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -13,11 +13,11 @@ class LivraisonType extends AbstractType
     {
         $builder
             ->add('adresselivraison')
-            ->add('datecommande')
             ->add('datelivraison')
             ->add('statuslivraison')
             ->add('latitude')
             ->add('longitude')
+            ->add('idclient')
             ->add('iddepot')
         ;
     }

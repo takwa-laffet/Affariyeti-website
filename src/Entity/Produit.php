@@ -4,102 +4,64 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Repository\ProduitRepository;
-#[ORM\Entity(repositoryClass: ProduitRepository::class)]
+/**
+ * Produit
+ *
+ * @ORM\Table(name="produit", indexes={@ORM\Index(name="id_c", columns={"id_c"}), @ORM\Index(name="id_client", columns={"id_client"})})
+ * @ORM\Entity
+ */
 class Produit
 {
-    
-    #[ORM\Id]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_p", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idP;
 
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
-    private ?int $idP = null;
-    #[ORM\Column (length: 255) ] private ?string $nomP = null;   
-    #[ORM\Column (length: 255) ] private ?string $descriptionP = null;   
-    #[ORM\Column (length: 255) ] private ?float $prixP = null;   
-    #[ORM\Column (length: 255) ] private ?string $imageP = null;   
-    #[ORM\ManyToOne(inversedBy: 'User')] private ?User $idClient = null;
-    #[ORM\ManyToOne(inversedBy: 'Categorie')] private ?Categorie $idC = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_c", type="integer", nullable=false)
+     */
+    private $idC;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_client", type="integer", nullable=false)
+     */
+    private $idClient;
 
-    public function getIdP(): ?int
-    {
-        return $this->idP;
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_p", type="string", length=300, nullable=false)
+     */
+    private $nomP;
 
-    public function getNomP(): ?string
-    {
-        return $this->nomP;
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description_p", type="string", length=300, nullable=false)
+     */
+    private $descriptionP;
 
-    public function setNomP(string $nomP): static
-    {
-        $this->nomP = $nomP;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix_p", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $prixP;
 
-        return $this;
-    }
-
-    public function getDescriptionP(): ?string
-    {
-        return $this->descriptionP;
-    }
-
-    public function setDescriptionP(string $descriptionP): static
-    {
-        $this->descriptionP = $descriptionP;
-
-        return $this;
-    }
-
-    public function getPrixP(): ?float
-    {
-        return $this->prixP;
-    }
-
-    public function setPrixP(float $prixP): static
-    {
-        $this->prixP = $prixP;
-
-        return $this;
-    }
-
-    public function getImageP(): ?string
-    {
-        return $this->imageP;
-    }
-
-    public function setImageP(string $imageP): static
-    {
-        $this->imageP = $imageP;
-
-        return $this;
-    }
-
-    public function getIdClient(): ?User
-    {
-        return $this->idClient;
-    }
-
-    public function setIdClient(?User $idClient): static
-    {
-        $this->idClient = $idClient;
-
-        return $this;
-    }
-
-    public function getIdC(): ?Categorie
-    {
-        return $this->idC;
-    }
-
-    public function setIdC(?Categorie $idC): static
-    {
-        $this->idC = $idC;
-
-        return $this;
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_p", type="string", length=255, nullable=false)
+     */
+    private $imageP;
 
 
 }

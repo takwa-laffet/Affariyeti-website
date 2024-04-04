@@ -2,44 +2,110 @@
 
 {% block title %}Livraison index{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Custom styles for the table */
+        .table-container {
+            margin: 20px auto;
+            width: 80%;
+            border-collapse: collapse;
+        }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-container th,
+        .table-container td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .table-container th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .table-container tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table-container tr:hover {
+            background-color: #ddd;
+        }
+
+        .table-container .actions a {
+            margin-right: 5px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .table-container .actions a:hover {
+            color: #0056b3;
+        }
+
+        .table-container .actions a.edit {
+            color: #ffc107;
+        }
+
+        .table-container .actions a.edit:hover {
+            color: #d39e00;
+        }
+
+        .table-container .actions a.delete {
+            color: #dc3545;
+        }
+
+        .table-container .actions a.delete:hover {
+            color: #bd2130;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1>Livraison index</h1>
+    <div class="table-container">
+        <h1>Livraison index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Adresselivraison</th>
-                <th>Datecommande</th>
-                <th>Datelivraison</th>
-                <th>Statuslivraison</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for livraison in livraisons %}
-            <tr>
-                <td>{{ livraison.id }}</td>
-                <td>{{ livraison.adresselivraison }}</td>
-                <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livraison.statuslivraison }}</td>
-                <td>{{ livraison.latitude }}</td>
-                <td>{{ livraison.longitude }}</td>
-                <td>
-                    <a href="{{ path('app_livraison_show', {'id': livraison.id}) }}">show</a>
-                    <a href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Adresse Livraison</th>
+                    <th>Date Commande</th>
+                    <th>Date Livraison</th>
+                    <th>Status Livraison</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for livraison in livraisons %}
+                <tr>
+                    <td>{{ livraison.id }}</td>
+                    <td>{{ livraison.adresselivraison }}</td>
+                    <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ livraison.statuslivraison }}</td>
+                    <td>{{ livraison.latitude }}</td>
+                    <td>{{ livraison.longitude }}</td>
+                    <td class="actions">
+                        <a class="show" href="{{ path('app_livraison_show', {'id': livraison.id}) }}">Show</a>
+                        <a class="edit" href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_livraison_new') }}">Create new</a>
+        <a href="{{ path('app_livraison_new') }}">Create New</a>
+    </div>
 {% endblock %}
