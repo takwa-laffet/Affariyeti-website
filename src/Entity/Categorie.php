@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use App\Repository\CategorieRepository;
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
+
 class Categorie
 {
     #[ORM\Id]
