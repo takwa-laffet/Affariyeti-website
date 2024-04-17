@@ -5,7 +5,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>PolluxUI Admin</title>
+
+    <title>  {% block titel %} PolluxUI Admi  {% endblock %}</title>
   <!-- base:css -->
   <link rel="stylesheet" href="{{ asset('vendors/typicons/typicons.css') }}">
   <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
@@ -449,13 +450,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="typcn typcn-user-add-outline menu-icon"></i>
-              <span class="menu-title">User Pages</span>
+              <span class="menu-title">Users</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ path('login') }}"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ path('login') }}"> Register </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ path('app_back_user') }}"> Users List </a></li>
               </ul>
             </div>
           </li>
@@ -481,6 +481,7 @@
         </ul>
       </nav>
       <!-- partial -->
+        {% block body %}
       <div class="main-panel">
         <div class="content-wrapper">
 
@@ -901,6 +902,7 @@
         </footer>
         <!-- partial -->
       </div>
+       {% endblock %}
       <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->

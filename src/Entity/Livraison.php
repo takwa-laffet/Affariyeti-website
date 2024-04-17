@@ -6,9 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use finfo;
 
-/**
- * @ORM\Entity(repositoryClass=LivraisonRepository::class)
- */
+
 class Livraison
 {
     #[ORM\Id]

@@ -1,0 +1,51 @@
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Signup Form</title>
+
+    <link rel="stylesheet" href="{{ asset('./styles/home.css') }}">
+    
+    <link rel="stylesheet" href="{{ asset('./styles/Account_style.css') }}" />
+  </head>
+
+
+ <body>
+    <section class="wrapper">
+      <div class="form signup">
+<form method="post">
+   {% for flashError in app.flashes('error') %}
+      <div class="alert alert-danger" id = "error-flash-message" >{{ flashError }}
+         <script>
+        // Add a timeout to hide the success flash message after 3 seconds
+        setTimeout(function() {
+            var successFlashMessage = document.getElementById('error-flash-message');
+            if (successFlashMessage) {
+                successFlashMessage.remove();
+            }
+        }, 1500);
+    </script>
+        </div>
+    {% endfor %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <input type="email" placeholder="Email address" name="email" id="inputEmail"   />
+                  <input type="password" placeholder="Password"  name="password" id="inputPassword"   />
+                  <a href="#">Forgot password?</a>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form>
+

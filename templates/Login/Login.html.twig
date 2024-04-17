@@ -8,18 +8,18 @@
 
     <link rel="stylesheet" href="{{ asset('./styles/home.css') }}">
     
-    <link rel="stylesheet" href="{{ asset('./styles/Account_style.css') }}"" />
+    <link rel="stylesheet" href="{{ asset('./styles/Account_style.css') }}" />
   </head>
   <body>
     <section class="wrapper">
       <div class="form signup">
         <header>Signup</header>
         <form action="#">
-                <input type="text" name="name" id="name" placeholder="Full name" required/>
-                <input type="email" name="email" id="email" placeholder="Email address" required/>
-                <input type="password" name="password" id="password" placeholder="Password" required/>
+                <input type="text" name="name" id="name" placeholder="Full name" />
+                <input type="email" name="email" id="email" placeholder="Email address" />
+                <input type="password" name="password" id="password" placeholder="Password" />
                 <div class="checkbox">
-                    <input type="checkbox" id="signupCheck" required/>
+                    <input type="checkbox" id="signupCheck" />
                     <label for="signupCheck">I accept all terms & conditions</label>
                   </div>
                   <input type="submit" id="submit" value="Signup" />
@@ -28,9 +28,9 @@
 
               <div class="form login">
                 <header>Login</header>
-                <form action="#">
-                  <input type="email" placeholder="Email address" id="login_email" required />
-                  <input type="password" placeholder="Password" id="login_password" required />
+                <form method="post">
+                  <input type="email" placeholder="Email address" id="login_email"  />
+                  <input type="password" placeholder="Password" id="login_password"  />
                   <a href="#">Forgot password?</a>
                   <input type="submit" value="Login" id="login_submit" />
                 </form>

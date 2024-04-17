@@ -15,10 +15,7 @@ class Controller extends AbstractController
             'controller_name' => 'Controller',
         ]);
     }
- #[Route('/login', name: 'login' )]
- public  function login() :Response {
-    return $this -> render('Login/Login.html.twig');
- }
+
  #[Route('/prod', name:'prod' )]
  public  function prod() :Response {
     return $this -> render('product/product2.html.twig');

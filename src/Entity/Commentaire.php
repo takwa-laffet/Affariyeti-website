@@ -7,9 +7,6 @@ use App\Entity\Publication;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CommentaireRepository::class)
- */
 class Commentaire
 {
 
