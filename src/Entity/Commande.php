@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CommandeRepository;
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
@@ -17,15 +17,22 @@ class Commande
     
     private ?int $id = null;
 
-    #[ORM\Column ] private ?int $etat = null;
+    #[ORM\Column ]
+    #[Assert\NotBlank]
+    
+    private ?string $etat = null;
     
 
-    #[ORM\Column ] private ?int $cmdClient = null;
+    #[ORM\Column ]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
+     private ?int $cmdClient = null;
 
-    #[ORM\Column(type:"datetime")]
-    private ?\DateTimeInterface $cmdDate = null;
+     #[ORM\Column(type:"datetime")]
+    
+     private ?\DateTimeInterface $cmdDate = null ;
 
-
+    
     public function getId(): ?int
     {
         return $this->id;

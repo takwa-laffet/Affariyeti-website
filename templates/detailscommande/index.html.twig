@@ -1,43 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Detailscommande index{% endblock %}
+{% block title %}Details commande index{% endblock %}
 
 {% block body %}
-    <h1>Detailscommande index</h1>
+<h1>Table Details commande </h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NumArticle</th>
-                <th>NomArticle</th>
-                <th>Quantite</th>
-                <th>PrixUnitaire</th>
-                <th>SousTotal</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>NumArticle</th>
+            <th>NomArticle</th>
+            <th>Quantite</th>
+            <th>PrixUnitaire</th>
+            <th>SousTotal</th>
+            <th>Id commande</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for detailscommande in detailscommandes %}
-            <tr>
-                <td>{{ detailscommande.id }}</td>
-                <td>{{ detailscommande.numArticle }}</td>
-                <td>{{ detailscommande.nomArticle }}</td>
-                <td>{{ detailscommande.quantite }}</td>
-                <td>{{ detailscommande.prixUnitaire }}</td>
-                <td>{{ detailscommande.sousTotal }}</td>
-                <td>
-                    <a href="{{ path('app_detailscommande_show', {'id': detailscommande.id}) }}">show</a>
-                    <a href="{{ path('app_detailscommande_edit', {'id': detailscommande.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <tr>
+            <td>{{ detailscommande.id }}</td>
+            <td>{{ detailscommande.numArticle }}</td>
+            <td>{{ detailscommande.nomArticle }}</td>
+            <td>{{ detailscommande.quantite }}</td>
+            <td>{{ detailscommande.prixUnitaire }}</td>
+            <td>{{ detailscommande.sousTotal }}</td>
+            <td>{{ detailscommande.commande.id }}</td>
+            <td>
 
-    <a href="{{ path('app_detailscommande_new') }}">Create new</a>
+                <button type="button" class="btn btn-info">
+                    <a href="{{ path('app_detailscommande_show', {'id': detailscommande.id}) }}"
+                        style="color: white; text-decoration: none;">Show</a>
+                </button>
+
+                <button type="button" class="btn btn-success">
+                    <a href="{{ path('app_detailscommande_edit', {'id': detailscommande.id}) }}"
+                        style="color: white; text-decoration: none;">Edit</a>
+                </button>
+
+                <button type="button" class="btn btn-danger">
+                    <a href="{{ path('app_detailscommande_delete', {'id': detailscommande.id}) }}"
+                        style="color: white; text-decoration: none;">Delete</a>
+                </button>
+
+
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-info"><a href="{{ path('app_detailscommande_new') }}"
+        style="color: white; text-decoration: none;">Create new</a></button>
+
 {% endblock %}

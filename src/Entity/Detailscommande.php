@@ -1,59 +1,89 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 use App\Repository\DetailscommandeRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: DetailscommandeRepository::class)]
 class Detailscommande
 {
-    
     #[ORM\Id]
-
     #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column ] private ?int $numDetailscommande = null;   
+    #[ORM\Column(type: 'integer')]
+    private ?int $idCom = null;
 
-    #[ORM\Column (length: 255)] private ?string $nomDetailscommande= null;   
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
+    private ?int $numArticle = null;
 
-    #[ORM\Column ] private ?int $quantite = null;   
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    private ?string $nomArticle = null;
 
-    #[ORM\Column ] private ?float $prixUnitaire = null;   
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
+    private ?int $quantite = null;
 
-    #[ORM\Column ] private ?float $sousTotal = null;   
+    #[ORM\Column(type: 'float')]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
+    private ?float $prixUnitaire = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Commande')] private ?Commande $idCom = null;
+    #[ORM\Column(type: 'float')]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
+    private ?float $sousTotal = null;
+
+    #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: "detailsCommande")]
+    #[ORM\JoinColumn(name: "id_com", referencedColumnName: "id", onDelete: "CASCADE")]
+    #[Assert\NotBlank]
+  
+    private ?Commande $commande;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNumDetailscommande(): ?int
+    public function getIdCom(): ?int
     {
-        return $this->numDetailscommande;
+        return $this->idCom;
     }
 
-    public function setNumDetailscommande(int $numDetailscommande): static
+    public function setIdCom(?int $idCom): self
     {
-        $this->numDetailscommande = $numDetailscommande;
+        $this->idCom = $idCom;
 
         return $this;
     }
 
-    public function getNomDetailscommande(): ?string
+    public function getNumArticle(): ?int
     {
-        return $this->nomDetailscommande;
+        return $this->numArticle;
     }
 
-    public function setNomDetailscommande(string $nomDetailscommande): static
+    public function setNumArticle(int $numArticle): self
     {
-        $this->nomDetailscommande = $nomDetailscommande;
+        $this->numArticle = $numArticle;
+
+        return $this;
+    }
+
+    public function getNomArticle(): ?string
+    {
+        return $this->nomArticle;
+    }
+
+    public function setNomArticle(string $nom_article): self
+    {
+        $this->nomArticle = $nom_article;
 
         return $this;
     }
@@ -63,7 +93,7 @@ class Detailscommande
         return $this->quantite;
     }
 
-    public function setQuantite(int $quantite): static
+    public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
 
@@ -75,7 +105,7 @@ class Detailscommande
         return $this->prixUnitaire;
     }
 
-    public function setPrixUnitaire(float $prixUnitaire): static
+    public function setPrixUnitaire(float $prixUnitaire): self
     {
         $this->prixUnitaire = $prixUnitaire;
 
@@ -87,24 +117,27 @@ class Detailscommande
         return $this->sousTotal;
     }
 
-    public function setSousTotal(float $sousTotal): static
+    public function setSousTotal(float $sous_Total): self
     {
-        $this->sousTotal = $sousTotal;
+        $this->sousTotal = $sous_Total;
 
         return $this;
     }
 
-    public function getIdCom(): ?Commande
+    public function getCommande(): ?Commande
     {
-        return $this->idCom;
+        return $this->commande;
     }
 
-    public function setIdCom(?Commande $idCom): static
+    public function setCommande(?Commande $commande): self
     {
-        $this->idCom = $idCom;
+        $this->commande = $commande;
 
         return $this;
     }
 
-
+    public function __toString(): string
+    {
+        return $this->numArticle . ' - ' . $this->nomArticle;
+    }
 }

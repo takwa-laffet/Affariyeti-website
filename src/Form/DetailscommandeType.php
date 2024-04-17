@@ -2,8 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Commande;
 use App\Entity\Detailscommande;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +20,14 @@ class DetailscommandeType extends AbstractType
             ->add('quantite')
             ->add('prixUnitaire')
             ->add('sousTotal')
-            ->add('idCom')
+            ->add('commande', EntityType::class,[
+                'class'=>Commande::class,
+                'choice_label'=>'id',
+                'multiple'=>false,
+                'expanded'=>false,
+                'placeholder'=>'choisir un commande'
+            ]
+            )
         ;
     }
 

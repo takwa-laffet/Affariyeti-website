@@ -8,28 +8,38 @@
     <table class="table">
         <thead>
             <tr>
-                <th>IdC</th>
-                <th>NomC</th>
-                <th>actions</th>
+            
+                <th>Nom Catégorie</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for categorie in categories %}
             <tr>
-                <td>{{ categorie.idC }}</td>
+            
                 <td>{{ categorie.nomC }}</td>
                 <td>
-                    <a href="{{ path('app_categorie_show', {'idC': categorie.idC}) }}">show</a>
-                    <a href="{{ path('app_categorie_edit', {'idC': categorie.idC}) }}">edit</a>
+                    <!-- Bouton pour afficher la catégorie -->
+                    <a href="{{ path('app_categorie_show', {'idC': categorie.idC}) }}" class="btn btn-info">Afficher</a>
+                    
+                    <!-- Bouton pour éditer la catégorie -->
+                    <a href="{{ path('app_categorie_edit', {'idC': categorie.idC}) }}" class="btn btn-warning">Éditer</a>
+                    
+                    <!-- Formulaire pour supprimer la catégorie -->
+                    <form method="post" action="{{ path('app_categorie_delete', {'idC': categorie.idC}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette catégorie?');" style="display: inline;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.idC) }}">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_categorie_new') }}">Create new</a>
+    <!-- Bouton pour créer une nouvelle catégorie -->
+    <a href="{{ path('app_categorie_new') }}" class="btn btn-success">Créer un nouveau</a>
 {% endblock %}

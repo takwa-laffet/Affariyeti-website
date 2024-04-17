@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Panier;
+use App\Entity\Produit;
 use App\Form\PanierType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,12 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/panier')]
 class PanierController extends AbstractController
 {
+    public   $produits = array(
+        array('id' => 1, 'picture' =>'/images/victor-hugo.jpg', 'username' => 'Victor Hugo', 'email' =>'victor.hugo@gmail.com ', 'nb_books' => 100),
+        array('id' => 2, 'picture' =>'/images/william-shakespeare.jpg', 'username' => ' William Shakespeare', 'email' =>' william.shakespeare@gmail.com', 'nb_books' => 200),
+        array('id' => 3, 'picture' =>'/images/Taha_Hussein.jpg', 'username' => 'Taha Hussein', 'email' =>'taha.hussein@gmail.com', 'nb_books' => 300),
+    );
+   
+
     #[Route('/', name: 'app_panier_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $paniers = $entityManager
-            ->getRepository(Panier::class)
-            ->findAll();
+        $this->getUser()->getPanier()->getProduit();
 
         return $this->render('panier/index.html.twig', [
             'paniers' => $paniers,

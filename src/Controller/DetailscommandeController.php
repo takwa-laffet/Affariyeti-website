@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Detailscommande;
+use App\Entity\Commande;
 use App\Form\DetailscommandeType;
+use App\Repository\DetailscommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,8 +33,9 @@ class DetailscommandeController extends AbstractController
         $detailscommande = new Detailscommande();
         $form = $this->createForm(DetailscommandeType::class, $detailscommande);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $detailscommande->setIdCom($detailscommande->getCommande()->getId());
             $entityManager->persist($detailscommande);
             $entityManager->flush();
 
@@ -52,6 +55,20 @@ class DetailscommandeController extends AbstractController
             'detailscommande' => $detailscommande,
         ]);
     }
+    #[Route('/detail_commande/{id}', name: 'app_detailscommande_show_by_commande', methods: ['GET'])]
+    public function showByCommande($id,EntityManagerInterface $em): Response
+    {
+        
+        $commande= $em->getRepository(Commande::class)->find($id);
+        
+        
+        $detailscommande=$em->getRepository(Detailscommande::class)->findBy(["commande"=>$commande]);
+        
+        
+        return $this->render('detailscommande/show.html.twig', [
+            'detailscommande' => $detailscommande[0],
+        ]);
+    }
 
     #[Route('/{id}/edit', name: 'app_detailscommande_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Detailscommande $detailscommande, EntityManagerInterface $entityManager): Response
@@ -60,6 +77,7 @@ class DetailscommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($detailscommande);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_detailscommande_index', [], Response::HTTP_SEE_OTHER);
@@ -71,14 +89,14 @@ class DetailscommandeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_detailscommande_delete', methods: ['POST'])]
-    public function delete(Request $request, Detailscommande $detailscommande, EntityManagerInterface $entityManager): Response
+    #[Route('/delete/{id}', name: 'app_detailscommande_delete')]
+    public function delete($id,DetailscommandeRepository $repo, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$detailscommande->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($detailscommande);
-            $entityManager->flush();
-        }
+        $detailscommande=$repo->find($id);
+        $entityManager->remove($detailscommande);
+        $entityManager->flush();
+        
 
-        return $this->redirectToRoute('app_detailscommande_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_detailscommande_index');
     }
 }

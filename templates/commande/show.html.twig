@@ -26,9 +26,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_commande_index') }}">back to list</a>
+ <button type="submit" class="btn btn-info"><a href="{{ path('app_commande_index') }}" style="color: aliceblue;text-decoration: none;">back to list</a></button>
 
-    <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
 
-    {{ include('commande/_delete_form.html.twig') }}
+   
 {% endblock %}

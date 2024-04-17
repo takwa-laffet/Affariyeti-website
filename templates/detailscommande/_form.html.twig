@@ -1,4 +1,68 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<div class="form-group">
+    {{ form_label(form.commande, 'Id Commande :') }}
+    {% if form_errors(form.commande) %}
+    {{ form_widget(form.commande, {'attr': {'class': 'form-control is-invalid'}}) }}
+    {% else %}
+    {{ form_widget(form.commande, {'attr': {'class': 'form-control'}}) }}
+    {% endif %}
+    <a style="color:red">{{ form_errors(form.commande) }}</a>
+</div>
+<div class="form-group">
+    {{ form_label(form.numArticle, 'Numéro d\'article :') }}
+    {% if form_errors(form.numArticle) %}
+    {{ form_widget(form.numArticle, {'attr': {'class': 'form-control is-invalid'}}) }}
+    {% else %}
+    {{ form_widget(form.numArticle, {'attr': {'class': 'form-control'}}) }}
+    {% endif %}
+    <a style="color:red">{{ form_errors(form.numArticle) }}</a>
+</div>
+
+<div class="form-group">
+    {{ form_label(form.nomArticle, 'Nom de l\'article :') }}
+    {% if form_errors(form.nomArticle) %}
+    {{ form_widget(form.nomArticle, {'attr': {'class': 'form-control is-invalid'}}) }}
+    {% else %}
+    {{ form_widget(form.nomArticle, {'attr': {'class': 'form-control'}}) }}
+    {% endif %}
+    <a style="color:red">{{ form_errors(form.nomArticle) }}</a>
+</div>
+
+<div class="form-group">
+    {{ form_label(form.quantite, 'Quantité :') }}
+    {% if form_errors(form.quantite) %}
+    {{ form_widget(form.quantite, {'attr': {'class': 'form-control is-invalid'}}) }}
+    {% else %}
+    {{ form_widget(form.quantite, {'attr': {'class': 'form-control'}}) }}
+    {% endif %}
+    <a style="color:red">{{ form_errors(form.quantite) }}</a>
+</div>
+
+<div class="form-group">
+    {{ form_label(form.prixUnitaire, 'Prix unitaire :') }}
+    {% if form_errors(form.prixUnitaire) %}
+    {{ form_widget(form.prixUnitaire, {'attr': {'class': 'form-control is-invalid'}}) }}
+    {% else %}
+    {{ form_widget(form.prixUnitaire, {'attr': {'class': 'form-control'}}) }}
+    {% endif %}
+    <a style="color:red">{{ form_errors(form.prixUnitaire) }}</a>
+</div>
+
+<div class="form-group">
+    {{ form_label(form.sousTotal, 'Sous-total :') }}
+    {% if form_errors(form.sousTotal) %}
+    {{ form_widget(form.sousTotal, {'attr': {'class': 'form-control is-invalid'}}) }}
+    {% else %}
+    {{ form_widget(form.sousTotal, {'attr': {'class': 'form-control'}}) }}
+    {% endif %}
+    <a style="color:red">{{ form_errors(form.sousTotal) }}</a>
+</div>
+
+<!-- Add more fields with the same error handling and styling logic here -->
+
+<button type="submit" class="btn btn-info" style="color: white; text-decoration: none;">{{ button_label|default('Save')
+    }}</button>
+<button type="submit" class="btn btn-secondary" style="color: white; text-decoration: none;">
+    <a href="{{ path('app_detailscommande_index') }}" style="color: aliceblue; text-decoration: none;">Retour à la liste</a></button>
+
 {{ form_end(form) }}
