@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Publication{% endblock %}
+{% block title %}Create Publication{% endblock %}
 
 {% block body %}
-    <h1>Create new Publication</h1>
+    {% block content %}
+        <h1>Create Publication</h1>
 
-    {{ include('publication/_form.html.twig') }}
+        {{ include('publication/_form.html.twig', {'button_label': 'Create'}) }}
 
-    <a href="{{ path('app_publication_index') }}">back to list</a>
+        <a href="{{ path('app_publication_index') }}">back to list</a>
+    {% endblock %}
 {% endblock %}
+

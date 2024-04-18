@@ -12,24 +12,30 @@ class User
 {
  
     #[ORM\Id]
-
     #[ORM\GeneratedValue]
-    
     #[ORM\Column]
-    
     private ?int $id = null; 
-    #[ORM\Column (length:255)  ] private ?string $email = null;   
-    #[ORM\Column (length:255)  ] private ?string $nom = null;   
-    #[ORM\Column (length:255)  ] private ?string $prenom = null;   
+    
+    #[ORM\Column (length:255)]
+    private ?string $email = null;   
+    
+    #[ORM\Column (length:255)]
+    private ?string $nom = null;   
+    
+    #[ORM\Column (length:255)]
+    private ?string $prenom = null;   
 
-    #[ORM\Column (length:255)  ] private ?string $mdp = null; 
+    #[ORM\Column (length:255)]
+    private ?string $mdp = null; 
 
-    #[ORM\Column (length:255)  ] private ?string $verificationcode = null;   
-    #[ORM\Column (length:255)  ] private ?string $role = null;   
+    #[ORM\Column (length:255)]
+    private ?string $verificationcode = null;   
+    
+    #[ORM\Column (length:255)]
+    private ?string $role = null;   
 
-
-
-    #[ORM\Column (type:"boolean", nullable:true)  ] private ?bool $status = null;   
+    #[ORM\Column (type:"boolean", nullable:true)]
+    private ?bool $status = null;   
 
     public function getId(): ?int
     {
@@ -120,5 +126,8 @@ class User
         return $this;
     }
 
-
+    public function __toString(): string
+    {
+        return $this->nom . ' ' . $this->prenom;
+    }
 }

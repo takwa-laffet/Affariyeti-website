@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Publication;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,10 +14,10 @@ class PublicationType extends AbstractType
     {
         $builder
             ->add('contenu')
-            ->add('nbLikes')
-            ->add('nbDislike')
-            ->add('datePub')
-            ->add('photo')
+            ->add('photoFile', FileType::class, [
+                'label' => 'Photo', // Libellé du champ de téléchargement de fichier
+                'required' => false, // Définir sur false si la photo est facultative
+            ])
             ->add('idClient')
         ;
     }

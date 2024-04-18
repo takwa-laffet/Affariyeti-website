@@ -1,0 +1,105 @@
+{% extends 'ClientBase.html.twig' %}
+
+{% block body %}
+<div id="navbaritems">
+        <ul>
+          <li>
+            <a href="product.html" >Store</a>
+            <ul>
+              
+
+            </ul>
+          </li>
+          <li >
+            <a href="">Gestion 2</a>
+            <ul>
+              <li><a href="">Patio Furniture</a></li>
+              <li><a href="">Garden </a></li>
+              <li><a href=""> Outdoor Decor </a></li>
+              <li><a href=""> Grills and Outdoor Cooking </a></li>
+              <li><a href=""> Outdoor Shades and Structures </a></li>
+                <li><a href="">Sport and Outdoor </a></li>
+                <li><a href=""> Bedroom Furniture</a></li>
+                <li><a href=""> Office Furniture</a></li>
+         </ul>
+          </li>
+          <li >
+            <a href="">Gestion 3</a>
+            <ul>
+              <li><a href="">Area Rugs By Size </a></li>
+              <li><a href="">Trending Rugs</a></li>
+              <li><a href=""> Area Rugs by Color </a></li>
+              <li><a href=""> Area Rugs by Style </a></li>
+              <li><a href=""> Rugs By Types </a></li>
+            </ul>
+          </li>
+          <li >
+            <a href="">Gestion 4</a>
+            <ul>
+            <li><a href="">Mirrros </a></li>
+            <li><a href="">Faux Plants and Flowers </a></li>
+            <li><a href=""> Decorative Accessories  </a></li>
+            <li><a href=""> Window Treatments </a></li>
+            <li><a href=""> Arts </a></li>
+              <li><a href="">Throw Pillow </a></li>
+            </ul>
+          </li>
+          <li >
+            <a href="">Gestion 5</a>
+            <ul>
+              <li><a href="">Bedding Sets</a></li>
+              <li><a href="">Bedding Essentials </a></li>
+              <li><a href="">Bed Sheets and Pollowcases</a></li>
+              <li><a href=""> Window Treatments </a></li>
+              <li><a href=""> Mattress Pads and Toppers </a></li>
+                <li><a href="">Mattress</a></li>
+                <li><a href="">Blankets</a></li>
+              </ul>
+          </li>
+        </ul>
+    </div>
+    </div>
+   
+      <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  <br>
+    <div id="OverstockBrand">
+      
+         <br>
+
+        {% for publication in publications %}
+         <br>
+            <div>
+            <p><b>{{ publication.idPub }}</p></b>
+                    <p><b>{{ publication.contenu }}</p></b>
+                    <p><b>{{ publication.nbLikes }}</p></b>
+                    <p><b>{{ publication.nbDislike }}</p></b>
+                    <p><b>{{ publication.datePub ? publication.datePub|date('Y-m-d H:i:s') : '' }}</p></b>
+                   
+                        {% if publication.photo %}
+                            <img src="{{ asset(publication.photo) }}" alt="Photo" style="width: 100px; height: 95px; height: auto; border-radius: 0;">
+                        {% else %}
+                            Aucune photo
+                        {% endif %}
+                <a href="#">Shop</a>
+            </div>
+            <br>
+            <br>
+    
+
+
+        {% else %}
+            <p>no records found</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}
