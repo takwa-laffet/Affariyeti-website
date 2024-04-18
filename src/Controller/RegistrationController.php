@@ -31,12 +31,11 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setVerificationcode("123456");
+            $user->setVerificationcode(rand(100000, 999999));
             $user->setRole('USER');
             $user->setStatus(1);
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
             return $userAuthenticator->authenticateUser(
                 $user,
