@@ -8,21 +8,26 @@
     <table class="table">
         <thead>
             <tr>
-                <th>IdCom</th>
+          
                 <th>Contenu</th>
-                <th>DateCom</th>
+                  <th>User</th>
+                <th>Date</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for commentaire in commentaires %}
             <tr>
-                <td>{{ commentaire.idCom }}</td>
+              
                 <td>{{ commentaire.contenu }}</td>
+                <td>{{ commentaire.idClient.nom }} {{ commentaire.idClient.prenom }}</td>
+
                 <td>{{ commentaire.dateCom ? commentaire.dateCom|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_commentaire_show', {'idCom': commentaire.idCom}) }}">show</a>
-                    <a href="{{ path('app_commentaire_edit', {'idCom': commentaire.idCom}) }}">edit</a>
+                    <a href="{{ path('app_commentaire_show', {'idCom': commentaire.idCom}) }}"style="color: blue;">afficher🔎</a> 
+                    <a href="{{ path('app_commentaire_edit', {'idCom': commentaire.idCom}) }}"style="color: green;">éditer🖊</a>
+                        {{ include('commentaire/_delete_form.html.twig') }}
+
                 </td>
             </tr>
         {% else %}
@@ -33,5 +38,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_commentaire_new') }}">Create new</a>
+    <a href="{{ path('app_commentaire_new') }}">👉Ajouter un commentaire👈 </a>
 {% endblock %}

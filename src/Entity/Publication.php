@@ -20,6 +20,7 @@ class Publication
     private ?string $contenu = null; 
 
     #[ORM\Column(name: 'photo', length: 255)]
+    #[Assert\NotNull(message: "Il faut ajouter une photo.")]
     private ?string $photo = null;
 
     #[ORM\Column(name: 'nb_likes')]
