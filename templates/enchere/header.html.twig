@@ -1,10 +1,5 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Enchere index{% endblock %}
-
-{% block body %}
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('styles/footer.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>affariyeti.com | The Best Deals </title>
-</head>
+  </head>
 
   <body>
     <div id="nav-placeholder">
@@ -94,68 +89,35 @@
            <li>
             <a href="">More</a>
             <ul> 
-              <li><a href="{{path('app_enchere_new')}}">chatboot</a></li>
+              <li><a href="">chatboot</a></li>
               
             </ul>
           </li>
           <li >
             <a href="" >Ideas</a>
-            </li>
+                      </li>
           <li >
             <a href="" style="color: red;">Sales & Deals</a>
           </li>
         </ul>
     </div>
     </div>
-<div>
-</div>
+    <!-- HomePageStart -->
+  <div id="homePage">
+    <div id="topheadImg">
+    </div>
+     <br>
+<br>
+    </div>
+    <div>
+  </div>
+    <div>
+     
+    <br>
+    <!-- ! big image -->
+      </div>
+      <br></br>
 
-    <h1>Enchere index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>EnchereId</th>
-                <th>Idclcreree</th>
-                <th>DateDebut</th>
-                <th>Heured</th>
-                <th>DateFin</th>
-                <th>Heuref</th>
-                <th>MontantInitial</th>
-                <th>NomEnchere</th>
-                <th>MontantFinal</th>
-                <th>Image</th>
-                <th>Idclenchere</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for enchere in encheres %}
-            <tr>
-                <td>{{ enchere.enchereId }}</td>
-                <td>{{ enchere.idclcreree }}</td>
-                <td>{{ enchere.dateDebut }}</td>
-                <td>{{ enchere.heured }}</td>
-                <td>{{ enchere.dateFin }}</td>
-                <td>{{ enchere.heuref }}</td>
-                <td>{{ enchere.montantInitial }}</td>
-                <td>{{ enchere.nomEnchere }}</td>
-                <td>{{ enchere.montantFinal }}</td>
-                <td>{{ enchere.image }}</td>
-                <td>{{ enchere.idclenchere }}</td>
-                <td>
-                    <a href="{{ path('app_enchere_show', {'enchereId': enchere.enchereId}) }}">show</a>
-                    <a href="{{ path('app_enchere_edit', {'enchereId': enchere.enchereId}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="12">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_enchere_new') }}">Create new</a>
-{% endblock %}
- 
+    </div>
+  </div>
+  <br></br>
