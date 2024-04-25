@@ -33,9 +33,12 @@ class ProfileController extends AbstractController
         $informationPersonneleId = $request->request->get('id');
 
         $user = $entityManager->getRepository(User::class)->find($this->getUser());
-        if( $request->request->get('nom') && $request->request->get('prenom')){
+        if( $request->request->get('nom') && $request->request->get('prenom')&& $request->request->get('age') && $request->request->get('sexe')  && $request->request->get('phone')){
         $user->setNom($request->request->get('nom'));
         $user->setPrenom($request->request->get('prenom'));
+        $user->setAge($request->request->get('age'));
+        $user->setSexe($request->request->get('sexe'));
+        $user->setPhone($request->request->get('phone'));
         $entityManager->persist($user);
         $entityManager->flush();
         $request->getSession()->getFlashBag()->add('success', 'Profile updated successfully');

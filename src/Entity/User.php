@@ -55,6 +55,21 @@ private ?string $verificationcode = null;
  * @ORM\Column(length=255, nullable=true)
  */
 private ?string $role = null;
+/**
+ * @ORM\Column(length=3, nullable=true)
+ */
+private ?int$age = null;
+
+/**
+ * @ORM\Column(length=10, nullable=true)
+ */
+private ?string$sexe = null;
+
+/**
+ * 
+ * @ORM\Column(length=15, nullable=true)
+ */
+private ?string$phone = null;
 
 /**
  * @ORM\Column(type="boolean", nullable=true)
@@ -164,6 +179,40 @@ private ?bool $status = null;
     {
         return [$this->role];
     }
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): static
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): static
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): static
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+    
 
     public function getSalt(): ?string
     {

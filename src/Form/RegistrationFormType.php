@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -54,6 +55,35 @@ class RegistrationFormType extends AbstractType
             'constraints' => [
                 new NotBlank([
                     'message' => 'Please enter first name',
+                ]),
+            ],
+        ])
+        ->add('age' , null, [
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Please enter your age',
+                ]),
+            ],
+        ])
+        ->add('sexe', ChoiceType::class, [
+            'choices' => [
+                'Homme' => 'Homme',
+                'Femme' => 'Femme',
+            ],
+            'placeholder' => 'Select Type', // Optional placeholder text
+            'attr' => [
+                'class' => 'form-control' , // Add custom CSS class
+            ],
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Please select a Type',
+                ]),
+            ],
+        ])
+        ->add('phone' , null, [
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Please enter your phone number',
                 ]),
             ],
         ])
