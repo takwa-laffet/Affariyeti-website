@@ -16,7 +16,7 @@ class PublicationType extends AbstractType
             ->add('contenu')
             ->add('photoFile', FileType::class, [
                 'label' => 'Photo', // Libellé du champ de téléchargement de fichier
-                'required' => false, // Définir sur false si la photo est facultative
+                'required' => true, // Définir sur true si la photo est obligatoire
             ])
             ->add('idClient')
         ;

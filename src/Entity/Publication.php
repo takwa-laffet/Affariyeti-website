@@ -40,7 +40,6 @@ class Publication
     #[Assert\NotNull(message: "La publication doit être associée à un utilisateur.")]
     private ?User $idClient = null;
 
-    // Ajoutez cette propriété si vous utilisez Symfony 5.3+
     #[Assert\Image(maxSize: '5M', mimeTypes: ['image/jpeg', 'image/png'])]
     private ?UploadedFile $photoFile = null;
 

@@ -1,105 +1,318 @@
 {% extends 'ClientBase.html.twig' %}
 
 {% block body %}
-<div id="navbaritems">
-        <ul>
-          <li>
-            <a href="product.html" >Store</a>
-            <ul>
-              
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      /* Styles pour le formulaire de publication */
+      .publication-form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
 
-            </ul>
-          </li>
-          <li >
-            <a href="">Gestion 2</a>
-            <ul>
-              <li><a href="">Patio Furniture</a></li>
-              <li><a href="">Garden </a></li>
-              <li><a href=""> Outdoor Decor </a></li>
-              <li><a href=""> Grills and Outdoor Cooking </a></li>
-              <li><a href=""> Outdoor Shades and Structures </a></li>
-                <li><a href="">Sport and Outdoor </a></li>
-                <li><a href=""> Bedroom Furniture</a></li>
-                <li><a href=""> Office Furniture</a></li>
-         </ul>
-          </li>
-          <li >
-            <a href="">Gestion 3</a>
-            <ul>
-              <li><a href="">Area Rugs By Size </a></li>
-              <li><a href="">Trending Rugs</a></li>
-              <li><a href=""> Area Rugs by Color </a></li>
-              <li><a href=""> Area Rugs by Style </a></li>
-              <li><a href=""> Rugs By Types </a></li>
-            </ul>
-          </li>
-          <li >
-            <a href="">Gestion 4</a>
-            <ul>
-            <li><a href="">Mirrros </a></li>
-            <li><a href="">Faux Plants and Flowers </a></li>
-            <li><a href=""> Decorative Accessories  </a></li>
-            <li><a href=""> Window Treatments </a></li>
-            <li><a href=""> Arts </a></li>
-              <li><a href="">Throw Pillow </a></li>
-            </ul>
-          </li>
-          <li >
-            <a href="">Gestion 5</a>
-            <ul>
-              <li><a href="">Bedding Sets</a></li>
-              <li><a href="">Bedding Essentials </a></li>
-              <li><a href="">Bed Sheets and Pollowcases</a></li>
-              <li><a href=""> Window Treatments </a></li>
-              <li><a href=""> Mattress Pads and Toppers </a></li>
-                <li><a href="">Mattress</a></li>
-                <li><a href="">Blankets</a></li>
-              </ul>
-          </li>
-        </ul>
+        .publication-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: none;
+            margin-bottom: 10px;
+        }
+
+        .publication-form input[type="file"] {
+            display: none;
+        }
+
+        .publication-form label {
+            display: inline-block;
+            background-color: #1877f2;
+            color: #fff;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .publication-form label:hover {
+            background-color: #0e5a8a;
+        }
+
+        .publication-form button[type="submit"] {
+            background-color: #1877f2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .publication-form button[type="submit"]:hover {
+            background-color: #0e5a8a;
+        }
+        /* Styles pour centrer le contenu */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alignement en haut */
+            padding-top: 50px; /* Ajouter plus d'espacement en haut */
+        }
+
+        /* Styles pour le conteneur des publications */
+        .publications-container {
+            width: 600px; /* Largeur fixe pour les publications */
+        }
+
+        /* Styles pour chaque publication */
+        .publication {
+            background-color: #ffffff; /* Couleur de fond blanche */
+            border: 1px solid #ddd; /* Ajouter une bordure */
+            margin-bottom: 20px; /* Espacement entre chaque publication */
+            padding: 20px; /* Ajouter un peu d'espacement intérieur */
+            border-radius: 8px; /* Coins arrondis */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
+        .publication img {
+            max-width: 200px; /* Largeur maximale de l'image */
+            max-height: 200px; /* Hauteur maximale de l'image */
+            border-radius: 8px; /* Coins arrondis pour l'image */
+            margin-top: 10px; /* Espacement au-dessus de l'image */
+        }
+        /* Style pour la date de la publication */
+        .publication-date {
+            margin-top: 10px; /* Espacement en haut de la date */
+            color: #666; /* Couleur du texte de la date */
+        }
+
+        /* Styles pour le texte de la publication */
+        .publication-text {
+            margin-bottom: 10px; /* Espacement en bas du texte */
+        }
+
+        /* Styles pour la barre de boutons */
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 10px; /* Espacement en haut */
+            border-top: 1px solid #ddd; /* Ajouter une bordure en haut */
+        }
+
+        .action-buttons {
+            display: flex; /* Afficher les boutons côte à côte */
+            align-items: center;
+        }
+
+        .action-button {
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s; /* Transition de couleur de fond */
+            margin-right: 10px;
+        }
+
+        .action-button i {
+            margin-right: 5px;
+        }
+
+        .action-button:hover {
+            background-color: #f0f0f0; /* Changer la couleur de fond au survol */
+        }
+
+        .action-button:active {
+            background-color: #ccc; /* Changer la couleur de fond lorsqu'un bouton est actif */
+        }
+
+        /* Styles pour la section des commentaires */
+        .comment-section {
+            margin-top: 20px; /* Espacement au-dessus de la section des commentaires */
+        }
+
+        /* Styles pour chaque commentaire */
+        .comment {
+            background-color: #f9f9f9; /* Couleur de fond des commentaires */
+            padding: 10px; /* Espacement intérieur des commentaires */
+            border-radius: 5px; /* Coins arrondis des commentaires */
+            margin-bottom: 10px; /* Espacement entre chaque commentaire */
+        }
+
+        /* Styles pour le formulaire de commentaire */
+        .comment-form {
+            margin-top: 20px; /* Espacement au-dessus du formulaire de commentaire */
+        }
+
+        .comment-input {
+            width: 100%; /* Largeur du champ de saisie du commentaire */
+            padding: 10px; /* Espacement à l'intérieur du champ de saisie */
+            border-radius: 5px; /* Coins arrondis du champ de saisie */
+            border: 1px solid #ddd; /* Bordure du champ de saisie */
+            resize: none; /* Désactiver le redimensionnement du champ de saisie */
+        }
+
+        .submit-comment {
+            margin-top: 10px; /* Espacement au-dessus du bouton de soumission */
+            padding: 10px 20px; /* Espacement à l'intérieur du bouton de soumission */
+            border-radius: 5px; /* Coins arrondis du bouton de soumission */
+            cursor: pointer; /* Curseur pointeur pour le bouton de soumission */
+            background-color: #1877f2; /* Couleur de fond du bouton de soumission */
+            color: #fff; /* Couleur du texte du bouton de soumission */
+            border: none; /* Supprimer la bordure du bouton de soumission */
+            transition: background-color 0.3s; /* Transition de couleur de fond */
+        }
+
+        .submit-comment:hover {
+            background-color: #0e5a8a; /* Changer la couleur de fond du bouton de soumission au survol */
+        }
+
+        /* Styles pour la liste déroulante des options */
+        .options {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 120px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .options a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .options a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+       <div class="center-container">
+        <div class="publications-container">
+            <!-- Formulaire pour écrire une nouvelle publication -->
+         <div class="publication-form">
+            {{ form_start(form, {'attr': {'id': 'publication-form'}}) }}
+            {{ form_widget(form.contenu, {'attr': {'placeholder': 'Écrivez votre publication ici', 'id': 'publication-content'}}) }}
+            {{ form_widget(form.idClient, {'attr': {'id': 'publication-client'}}) }}
+            <label for="publication-photo">
+                <i class="fas fa-upload"></i> Ajouter une photo
+            </label>
+            {{ form_widget(form.photoFile, {'id': 'publication-photo', 'attr': {'accept': 'image/*'}}) }}
+            <button type="submit">Publier</button>
+            {{ form_end(form) }}
+        </div>
+            {% for publication in publications %}
+                <div class="publication">
+                   <div class="publication-text"> 
+                        <i class="fas fa-user"></i> <!-- Icône utilisateur -->
+                        <b>{{ publication.idClient.nom }} {{ publication.idClient.prenom }}</b> 
+                    </div> 
+                    <div class="publication-text">
+                           <a>💬 {{ publication.contenu }}</a>
+                    </div>
+                    {% if publication.photo %}
+                        <img src="{{ asset(publication.photo) }}" alt="Photo de la publication">
+                    {% endif %}
+                    <div class="publication-date">
+                        {{ publication.datePub ? publication.datePub|date('Y-m-d H:i:s') : '' }}
+                    </div>
+                    <div class="publication-likedislike">
+                        <i class="far fa-thumbs-up"></i> ({{ publication.nbLikes }})
+                        <i class="far fa-thumbs-down"></i> ({{ publication.nbDislike }})
+                    </div>
+                    <div class="action-bar">
+                        <div class="action-buttons">
+                            <span class="action-button" onclick="likePost(this)"><i class="far fa-thumbs-up"></i> J'aime</span>
+                            <span class="action-button" onclick="dislikePost(this)"><i class="far fa-thumbs-down"></i> Je n'aime pas</span>
+                            <span class="action-button" onclick="toggleComments(this)"><i class="far fa-comment"></i> Commentaires</span>
+                            <span class="action-button" onclick="toggleOptions(this)">
+                                Options <i class="fas fa-caret-down"></i>
+                                <div class="options">
+                                    <a href="#">Éditer</a>
+                                    <a href="#">Supprimer</a>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="comment-section">
+                        <!-- Section des commentaires -->
+                        <!-- Inclure ici les commentaires -->
+                        <div class="comment">
+                            <b>John Doe:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                        <!-- Formulaire de commentaire -->
+                        <form class="comment-form">
+                            <textarea class="comment-input" placeholder="Ajouter un commentaire"></textarea>
+                            <button type="button" class="submit-comment">Publier</button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucune publication trouvée</p>
+            {% endfor %}
+        </div>
     </div>
-    </div>
-   
-      <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-  <br>
-    <div id="OverstockBrand">
-      
-         <br>
+    <script>
+      // Fonction pour afficher ou masquer les options de publication
+        function toggleOptions(element) {
+            var options = element.querySelector('.options');
+            if (options.style.display === 'block') {
+                options.style.display = 'none';
+            } else {
+                options.style.display = 'block';
+            }
+        }
 
-        {% for publication in publications %}
-         <br>
-            <div>
-            <p><b>{{ publication.idPub }}</p></b>
-                    <p><b>{{ publication.contenu }}</p></b>
-                    <p><b>{{ publication.nbLikes }}</p></b>
-                    <p><b>{{ publication.nbDislike }}</p></b>
-                    <p><b>{{ publication.datePub ? publication.datePub|date('Y-m-d H:i:s') : '' }}</p></b>
-                   
-                        {% if publication.photo %}
-                            <img src="{{ asset(publication.photo) }}" alt="Photo" style="width: 100px; height: 95px; height: auto; border-radius: 0;">
-                        {% else %}
-                            Aucune photo
-                        {% endif %}
-                <a href="#">Shop</a>
-            </div>
-            <br>
-            <br>
-    
+        // Fonction pour afficher ou masquer la section des commentaires
+        function toggleComments(button) {
+            var commentSection = button.parentNode.parentNode.nextElementSibling;
+            if (commentSection.style.display === 'none') {
+                commentSection.style.display = 'block';
+            } else {
+                commentSection.style.display = 'none';
+            }
+        }
 
+        // Fonction pour gérer le bouton J'aime
+        function likePost(button) {
+            console.log("J'aime");
+        }
 
-        {% else %}
-            <p>no records found</p>
-        {% endfor %}
-    </div>
+        // Fonction pour gérer le bouton Je n'aime pas
+        function dislikePost(button) {
+            console.log("Je n'aime pas");
+        }
+               // Action à effectuer lorsque le formulaire de publication est soumis
+       document.getElementById("publication-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Empêche le rechargement de la page
 
+            // Récupérer les données du formulaire
+            var content = document.getElementById("publication_contenu").value;
+            var photo = document.getElementById("publication-photo").files[0];
+
+            // Envoyer les données au serveur (vous devez implémenter cette partie en fonction de votre backend)
+            console.log("Contenu de la publication :", content);
+            console.log("Photo de la publication :", photo);
+            
+            // Réinitialiser le formulaire après l'envoi
+            document.getElementById("publication-form").reset();
+        });
+
+    </script>
+</body>
+</html>
 {% endblock %}

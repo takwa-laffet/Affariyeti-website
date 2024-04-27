@@ -12,8 +12,8 @@
                     
                     <th>Contenu</th>
                     <th>User</th>
-                    <th>j'aimes</th>
-                    <th>j'aimes pas</th>
+                    <th>j'aime</th>
+                    <th>j'aime pas</th>
                     <th>Date</th>
                     <th>Photo</th>
                      <th>commentaires</th>
@@ -39,8 +39,12 @@
                                 <a href="{{ path('app_publication_comments', {'idPub': publication.idPub}) }}">Voir les Commentaires👁‍🗨</a>
                     </td>
                     <td>
-                         <a href="{{ path('app_publication_show', {'idPub': publication.idPub}) }}" style="color: blue;">afficher🔎</a>
-                         <a href="{{ path('app_publication_edit', {'idPub': publication.idPub}) }}" style="color: green;">éditer🖊</a>
+                    <button type="button" class="btn btn-info">
+        <a href="{{ path('app_publication_show', {'idPub': publication.idPub}) }}" style="color: white; text-decoration: none;">afficher🔎</a>
+    </button>
+    <button type="button" class="btn btn-success">
+        <a href="{{ path('app_publication_edit', {'idPub': publication.idPub}) }}" style="color: white; text-decoration: none;">éditer🖊</a>
+    </button>
                          <span style="color: red;">
                         {{ include('publication/_delete_form.html.twig') }}
                          </span>

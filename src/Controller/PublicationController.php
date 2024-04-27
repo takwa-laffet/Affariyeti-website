@@ -24,16 +24,39 @@ class PublicationController extends AbstractController
         ]);
         
     }
-    #[Route('/front_index', name: 'app_publication_indexfront', methods: ['GET'])]
-    public function indexfront(PublicationRepository $publicationRepository): Response
+    #[Route('/front_index', name: 'app_publication_indexfront', methods: ['GET', 'POST'])]
+    public function indexfront(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $publication = new Publication();
+        $publication->setNbLikes(0);
+        $publication->setNbDislike(0);
+        $publication->setDatePub(new \DateTime());
+    
+        $form = $this->createForm(PublicationType::class, $publication);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Gérer le téléchargement de la photo
+            $photoFile = $form->get('photoFile')->getData();
+    
+            if ($photoFile) {
+                $newFilename = $this->uploadPhoto($photoFile);
+                $publication->setPhoto($newFilename);
+            }
+    
+            $entityManager->persist($publication);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('app_publication_indexfront');
+        }
+    
+        $publications = $entityManager->getRepository(Publication::class)->findAll();
+    
         return $this->render('publication/front.html.twig', [
-            'publications' => $publicationRepository->findAll(),
-            
+            'publications' => $publications,
+            'form' => $form->createView(),
         ]);
-        
     }
-
     #[Route('/new', name: 'app_publication_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -41,24 +64,31 @@ class PublicationController extends AbstractController
         $publication->setNbLikes(0);
         $publication->setNbDislike(0);
         $publication->setDatePub(new \DateTime());
+    
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            // Ajout d'une instruction var_dump pour voir les données soumises par le formulaire
+            var_dump($form->getData());
+    
             // Gérer le téléchargement de la photo
             $photoFile = $form->get('photoFile')->getData();
-
+    
+            // Ajout d'une instruction var_dump pour voir les détails du fichier téléchargé
+            var_dump($photoFile);
+    
             if ($photoFile) {
                 $newFilename = $this->uploadPhoto($photoFile);
                 $publication->setPhoto($newFilename);
             }
-
+    
             $entityManager->persist($publication);
             $entityManager->flush();
-
+    
             return $this->redirectToRoute('app_publication_index', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->renderForm('publication/new.html.twig', [
             'publication' => $publication,
             'form' => $form,
@@ -91,6 +121,12 @@ class PublicationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoFile = $form->get('photoFile')->getData();
+
+            if ($photoFile) {
+                $newFilename = $this->uploadPhoto($photoFile);
+                $publication->setPhoto($newFilename);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_publication_index', [], Response::HTTP_SEE_OTHER);
@@ -114,22 +150,27 @@ class PublicationController extends AbstractController
     }
 
     private function uploadPhoto($photoFile)
-{
-    // Définir l'emplacement de stockage des photos
-    $uploadsDirectory = $this->getParameter('kernel.project_dir').'/public/assets';
-
-    // Générer un nom de fichier unique
-    $newFilename = uniqid().'.'.$photoFile->guessExtension();
-
-    try {
-        // Déplacer le fichier téléchargé vers l'emplacement de stockage
-        $photoFile->move($uploadsDirectory, $newFilename);
-    } catch (FileException $e) {
-        // Gérer les erreurs de téléchargement de fichier
-        throw new FileException('Erreur lors du téléchargement du fichier');
+    {
+        // Définir l'emplacement de stockage des photos
+        $uploadsDirectory = $this->getParameter('kernel.project_dir') . '/public/assets';
+    
+        // Générer un nom de fichier unique
+        $newFilename = uniqid() . '.' . $photoFile->guessExtension();
+    
+        try {
+            // Ajout d'une instruction var_dump pour voir les détails du fichier téléchargé avant le déplacement
+            var_dump($photoFile);
+    
+            // Déplacer le fichier téléchargé vers l'emplacement de stockage
+            $photoFile->move($uploadsDirectory, $newFilename);
+        } catch (FileException $e) {
+            // Gérer les erreurs de téléchargement de fichier
+            throw new FileException('Erreur lors du téléchargement du fichier');
+        }
+    
+        // Retourner le chemin complet du fichier téléchargé
+        return '/assets/' . $newFilename;
     }
+    
 
-    // Retourner le chemin complet du fichier téléchargé
-    return '/assets/'.$newFilename;
-}
 }
