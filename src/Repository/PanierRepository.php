@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Panier;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -45,4 +46,37 @@ class PanierRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findByUser(int $id)
+{
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    $qb->select('p')
+        ->from(Panier::class, 'p')
+        ->where('p.user = :id')
+        ->setParameter('id', $id);
+       
+    $query = $qb->getQuery();
+    $result = $query->getOneOrNullResult();
+
+
+    return $result; // Returns an array of matching Panier entities
+}
+
+public function findPanierByNameAndPrice(string $name, float $price)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('p')
+            ->from(Panier::class, 'p')
+            ->where('p.nomArticle = :name')
+            ->andWhere('p.prix = :price')
+            ->setParameter('name', $name)
+            ->setParameter('price', $price);
+
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult();
+
+
+        return  $result;// Renvoie un tableau de produits correspondants
+    }
 }

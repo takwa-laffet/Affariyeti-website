@@ -45,4 +45,21 @@ class ProduitRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findProductByNameAndPrice(string $name, float $price)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('p')
+            ->from(Produit::class, 'p')
+            ->where('p.nomP = :name')
+            ->andWhere('p.prixP = :price')
+            ->setParameter('name', $name)
+            ->setParameter('price', $price);
+
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult();
+
+
+        return  $result;// Renvoie un tableau de produits correspondants
+    }
 }

@@ -1,0 +1,112 @@
+{% extends 'ClientBase.html.twig' %}
+
+{% block body %}
+<style>
+  /* Ajoutez cette règle CSS pour espacer la barre de menu du contenu situé en dessous */
+  #navbaritems {
+    margin-bottom: 20px;
+    /* Ajustez la valeur selon vos besoins */
+  }
+</style>
+<div id="navbaritems">
+  <ul>
+    <li>
+      <a href="product.html">Store</a>
+      <ul>
+        <li><a href="{{ path('Client_categorie_index', {'id_client': id_client}) }}">Categories</a></li>
+        <li><a href="{{ path('shop_Products_index', {'id_client': id_client}) }}">Shop</a></li>
+        <li><a href="{{ path('Client_Products_index', {'id_client': id_client}) }}">My Products</a></li>
+
+      </ul>
+    </li>
+    <li>
+      <a href="">Publication</a>
+      <ul>
+        <li><a href="">Patio Furniture</a></li>
+        <li><a href="">Garden </a></li>
+        <li><a href=""> Outdoor Decor </a></li>
+        <li><a href=""> Grills and Outdoor Cooking </a></li>
+        <li><a href=""> Outdoor Shades and Structures </a></li>
+        <li><a href="">Sport and Outdoor </a></li>
+        <li><a href=""> Bedroom Furniture</a></li>
+        <li><a href=""> Office Furniture</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="">Enchère</a>
+      <ul>
+        <li><a href="">Area Rugs By Size </a></li>
+        <li><a href="">Trending Rugs</a></li>
+        <li><a href=""> Area Rugs by Color </a></li>
+        <li><a href=""> Area Rugs by Style </a></li>
+        <li><a href=""> Rugs By Types </a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="">Commandes</a>
+      <ul>
+        <li><a href="">Mirrros </a></li>
+        <li><a href="">Faux Plants and Flowers </a></li>
+        <li><a href=""> Decorative Accessories </a></li>
+        <li><a href=""> Window Treatments </a></li>
+        <li><a href=""> Arts </a></li>
+        <li><a href="">Throw Pillow </a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="">Livraison</a>
+      <ul>
+        <li><a href="">Bedding Sets</a></li>
+        <li><a href="">Bedding Essentials </a></li>
+        <li><a href="">Bed Sheets and Pollowcases</a></li>
+        <li><a href=""> Window Treatments </a></li>
+        <li><a href=""> Mattress Pads and Toppers </a></li>
+        <li><a href="">Mattress</a></li>
+        <li><a href="">Blankets</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+<a href="{{ path('Client_categorie_index', {'id_client': id_client}) }}">Back to Categories</a>
+<br>
+<a href="{{ path('app_produit_new', {'id_client': id_client , 'idC': idC}) }}">Create new</a>
+<div id="OverstockBrand">
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+  {% for produit in produits %}
+  <br>
+
+  <div>
+    <img src="{{ asset('tn.esprit.affariety.image/' ~ produit.imageP) }}" alt="" />
+    <p><b>{{ produit.nomP }}</b></p>
+    <p>{{ produit.descriptionP }}</p>
+    <p>{{ produit.prixP }}</p>
+    <button class="btn "><a href="{{ path('app_panier_new', {'idP': produit.idP}) }}"
+        style="color: black; text-decoration: none;">Add to Cart</a></button>
+  </div>
+  <br>
+  <br>
+
+
+
+  {% else %}
+  <p>no records found</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

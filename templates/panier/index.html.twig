@@ -1,37 +1,75 @@
-{% extends 'base_user.html.twig' %}
-
+{% extends 'ClientBase.html.twig' %}
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('styles/cart.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/navbarstyle.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/footer.css') }}">
+{%endblock%}
 {% block title %}Panier index{% endblock %}
 
 {% block body %}
-    <h1>Panier index</h1>
+<h2>Shopping Cart</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NomArticle</th>
-                <th>Prix</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for panier in paniers %}
-            <tr>
-                <td>{{ panier.id }}</td>
-                <td>{{ panier.nomArticle }}</td>
-                <td>{{ panier.prix }}</td>
-                <td>
-                    <a href="{{ path('app_panier_show', {'id': panier.id}) }}">show</a>
-                    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<!-- <div id="cart-container"></div> -->
 
-    <a href="{{ path('app_panier_new') }}">Create new</a>
+
+<div id="containerC">
+    <div class="card mr-3" style="width: 100%;">
+        <div class="card-body">
+            {% set totalPrix = 0 %}
+            {% set totalItems = 0 %}
+            
+            <div id="OverstockBrand">
+                <br>
+                <br>
+                <br>
+                <br>
+              
+              
+                {% for produit in produits %}
+                {% set totalItems = totalItems + 1 %}
+                {% set totalPrix = totalPrix + produit.prixP %}
+                <br>
+              
+                <div>
+                  <img src="{{ asset('tn.esprit.affariety.image/' ~ produit.imageP) }}" alt="" />
+                  <p><b>{{ produit.nomP }}</b></p>
+                  <p>{{ produit.descriptionP }}</p>
+                  <p>{{ produit.prixP }}</p>
+                  
+                </div>
+                <br>
+                <br>
+              
+              
+              
+                {% else %}
+                <p>no records found</p>
+                {% endfor %}
+              </div>
+
+        </div>
+    </div>
+    <div id="mainPrice-cart">
+
+        <p>Total Items :<span id="total-num">{{ totalItems }}</span></p>
+        <h5>Total Price : {{ totalPrix }} DT <span id="total-price"></span></h5>
+        <div>
+            <input id="inputC" placeholder="Add a Promo Code" />
+            <button id="promoC">Apply</button>
+        </div>
+        <!-- <a style="padding: 10px 0;" id="paymentC" href="address.html">Check Out</a> -->
+        <button id="paymentC"> <a
+            href="{{ path('app_panier_passer_command') }}" style="color:white ; text-decoration: none;">Confirm</a></button>
+    </div>
+</div>
 {% endblock %}
+
+
+
+
+{% block js %}
+<script src="{{ asset('./js/cart.js') }}"> </script>
+<script src="{{ asset('./js/navbarscripting.js') }}"></script>
+<script src="{{ asset('./js/productdetailsjs.js') }}"></script>
+{%endblock%}

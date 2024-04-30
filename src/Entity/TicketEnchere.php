@@ -2,55 +2,38 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\DecimalType;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Repository\TicketEnchereRepository;
-
-#[ORM\Entity(repositoryClass: TicketEnchereRepository::class)]
+/**
+ * TicketEnchere
+ *
+ * @ORM\Table(name="ticket_enchere")
+ * @ORM\Entity
+ */
 class TicketEnchere
 {
-    
-    #[ORM\Id]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="ticket_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ticketId;
 
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
-    private ?int $ticketId = null;
-    
-    #[ORM\Column  ] private ?int $enchereId = null;   
-    #[ORM\Column(type: "decimal")  ] private ?string $prix = null;   
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="enchere_id", type="integer", nullable=true)
+     */
+    private $enchereId;
 
-    public function getTicketId(): ?int 
-    {
-        return $this->ticketId;
-    }
-
-    public function getEnchereId(): ?Enchere
-    {
-        return $this->enchereId;
-    }
-
-    public function setEnchereId(?Enchere $enchereId): static
-    {
-        $this->enchereId = $enchereId;
-
-        return $this;
-    }
-
-    public function getPrix(): ?string
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(?string $prix): static
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="prix", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $prix;
 
 
 }

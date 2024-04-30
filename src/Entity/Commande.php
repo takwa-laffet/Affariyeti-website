@@ -1,38 +1,40 @@
 <?php
-
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CommandeRepository;
+
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
     #[ORM\Id]
+    #[ORM\Column(type: "integer")]
+    #[ORM\GeneratedValue(strategy: "IDENTITY")]
+    private int $id;
 
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
-    private ?int $id = null;
+    #[ORM\Column(type: "string", length: 255)]
+    private string $etat;
 
-    #[ORM\Column ]
-    #[Assert\NotBlank]
-    
-    private ?string $etat = null;
-    
+    #[ORM\Column(type: "integer")]
+    private int $cmdClient;
 
-    #[ORM\Column ]
-    #[Assert\NotBlank]
-    #[Assert\Positive]
-     private ?int $cmdClient = null;
+    #[ORM\Column(type: "datetime", options: ["default" => "CURRENT_TIMESTAMP"])]
+    private \DateTimeInterface $cmdDate;
 
-     #[ORM\Column(type:"datetime")]
-    
-     private ?\DateTimeInterface $cmdDate = null ;
+    #[ORM\ManyToOne(targetEntity: Panier::class)]
+    #[ORM\JoinColumn(name: "panier_id", referencedColumnName: "id")]
+    private ?Panier $panier;
 
-    
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
+    private ?User $user;
+
+    public function __construct()
+    {
+        $this->cmdDate = new \DateTime();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -43,10 +45,9 @@ class Commande
         return $this->etat;
     }
 
-    public function setEtat(string $etat): static
+    public function setEtat(string $etat): self
     {
         $this->etat = $etat;
-
         return $this;
     }
 
@@ -55,10 +56,9 @@ class Commande
         return $this->cmdClient;
     }
 
-    public function setCmdClient(int $cmdClient): static
+    public function setCmdClient(int $cmdClient): self
     {
         $this->cmdClient = $cmdClient;
-
         return $this;
     }
 
@@ -67,12 +67,31 @@ class Commande
         return $this->cmdDate;
     }
 
-    public function setCmdDate(\DateTimeInterface $cmdDate): static
+    public function setCmdDate(\DateTimeInterface $cmdDate): self
     {
         $this->cmdDate = $cmdDate;
-
         return $this;
     }
 
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
 
+    public function setPanier(?Panier $panier): self
+    {
+        $this->panier = $panier;
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
 }

@@ -1,0 +1,46 @@
+{% extends 'ClientBase.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+ <div class="card">
+        <div class="card-body">
+    <h1>Table Produit</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdP</th>
+                <th>NomP</th>
+                <th>DescriptionP</th>
+                <th>PrixP</th>
+                <th>ImageP</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.idP }}</td>
+                <td>{{ produit.nomP }}</td>
+                <td>{{ produit.descriptionP }}</td>
+                <td>{{ produit.prixP }}</td>
+                <td>{{ produit.imageP }}</td>
+                <td>
+                   
+                    <button class="btn "><a href="{{ path('app_panier_new', {'idP': produit.idP}) }}" style="color: black; text-decoration: none;">Add to Cart</a></button>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+        </div>
+    </div>
+{% endblock %}

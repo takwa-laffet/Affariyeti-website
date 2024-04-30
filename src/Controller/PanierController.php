@@ -3,88 +3,125 @@
 namespace App\Controller;
 
 use App\Entity\Panier;
+use App\Entity\PanierProduit;
 use App\Entity\Produit;
 use App\Form\PanierType;
+use App\Repository\PanierProduitRepository;
+use App\Repository\PanierRepository;
+use App\Repository\ProduitRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/panier')]
 class PanierController extends AbstractController
 {
-    public   $produits = array(
-        array('id' => 1, 'picture' =>'/images/victor-hugo.jpg', 'username' => 'Victor Hugo', 'email' =>'victor.hugo@gmail.com ', 'nb_books' => 100),
-        array('id' => 2, 'picture' =>'/images/william-shakespeare.jpg', 'username' => ' William Shakespeare', 'email' =>' william.shakespeare@gmail.com', 'nb_books' => 200),
-        array('id' => 3, 'picture' =>'/images/Taha_Hussein.jpg', 'username' => 'Taha Hussein', 'email' =>'taha.hussein@gmail.com', 'nb_books' => 300),
-    );
+  
    
-
     #[Route('/', name: 'app_panier_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(PanierRepository $repo, UserRepository $userRepository, ProduitRepository $produitRepository): Response
     {
-        $this->getUser()->getPanier()->getProduit();
+        $userE=$this->getUser()->getUserIdentifier();
+        $user=$userRepository->findOneBy(['email'=>$userE]);
+        
+        $panier=$repo->findByUser($user->getId());
+    
+        $prods=$panier->getProduits();
+        
+        
 
+       /*
+       $produits=$repo->findAll();
+        $prods=array();
+        foreach ($produits as $product) {
+            $products=$produitRepository->findProductByNameAndPrice($product->getNomArticle(),$product->getPrix());
+          
+            $prods[]=$products;
+            
+        }*/
+        
         return $this->render('panier/index.html.twig', [
-            'paniers' => $paniers,
+            'produits' => $prods,
         ]);
     }
 
-    #[Route('/new', name: 'app_panier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+
+    #[Route('/new/{idP}/', name: 'app_panier_new', methods: ['GET', 'POST'])]
+    public function add($idP, PanierRepository $repo,ProduitRepository $rep , EntityManagerInterface $entityManager): RedirectResponse
     {
-        $panier = new Panier();
-        $form = $this->createForm(PanierType::class, $panier);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($panier);
-            $entityManager->flush();
+       
+        $panier=$repo->find(43);
+        $produit=$rep->find($idP);
+        $panierp = new PanierProduit(); 
+        $panierp->setPanier( $panier);
+        $panierp->setProduitId($produit->getIdP());
+        #$product->setNomArticle($produit->getNomP());
+       # $product->setPrix($produit->getPrixP());
+       # $product->addProduits($produit);
 
-            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
-        }
+        $entityManager->persist($panierp);
 
-        return $this->renderForm('panier/new.html.twig', [
-            'panier' => $panier,
-            'form' => $form,
-        ]);
+        $entityManager->flush();
+        
+
+        return $this->redirectToRoute('app_panier_index');
     }
 
-    #[Route('/{id}', name: 'app_panier_show', methods: ['GET'])]
-    public function show(Panier $panier): Response
+    #[Route('/passerCommande', name: 'app_panier_passer_command')]
+    public function deleteAll(PanierRepository $repo, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('panier/show.html.twig', [
-            'panier' => $panier,
-        ]);
-    }
 
-    #[Route('/{id}/edit', name: 'app_panier_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Panier $panier, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(PanierType::class, $panier);
-        $form->handleRequest($request);
+        $paniers=$repo->findAll();
+        //ajouter commamde
+        foreach ($paniers as $panier) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('panier/edit.html.twig', [
-            'panier' => $panier,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_panier_delete', methods: ['POST'])]
-    public function delete(Request $request, Panier $panier, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$panier->getId(), $request->request->get('_token'))) {
             $entityManager->remove($panier);
-            $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        }
+        $entityManager->flush();
+
+        
+
+        return $this->redirectToRoute('app_panier_index');
     }
+
+
+
+    #[Route('/delete/{id}', name: 'app_panier_delete')]
+    public function delete($id, PanierRepository $repo, EntityManagerInterface $entityManager): Response
+    {
+
+        $panier=$repo->find($id);
+        $entityManager->remove($panier);
+        $entityManager->flush();
+        
+
+        return $this->redirectToRoute('app_panier_index');
+    }
+
+
+
+    
+    #[Route('/deleteiio/{id}', name: 'app_pd_delete')]
+    public function deleteoo($id, ProduitRepository $repo, PanierProduitRepository $r, EntityManagerInterface $entityManager): Response
+    {
+        
+        // Assuming $id is the ID of the produit you want to delete
+        $p = $r->findOneBy(["produitId" => $id]);
+    
+        if (!$p) {
+            throw $this->createNotFoundException('Produit non trouvé.');
+        }
+    
+        $entityManager->remove($p);
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('app_panier_index');
+    }
+
 }

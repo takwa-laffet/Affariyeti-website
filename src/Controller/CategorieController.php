@@ -83,8 +83,8 @@ class CategorieController extends AbstractController
     }
 
     //////////////////////// Client functions ///////////
-    #[Route('/Client', name: 'Client_categorie_index', methods: ['GET'])]
-    public function indexClient(EntityManagerInterface $entityManager): Response
+    #[Route('/Client/{id_client}', name: 'Client_categorie_index', methods: ['GET'])]
+    public function indexClient(EntityManagerInterface $entityManager , int $id_client): Response
     {
         $categories = $entityManager
             ->getRepository(Categorie::class)
@@ -92,6 +92,8 @@ class CategorieController extends AbstractController
 
         return $this->render('categorie/ClientView/index.html.twig', [
             'categories' => $categories,
+            'id_client' => $id_client,
+
         ]);
     }
 }

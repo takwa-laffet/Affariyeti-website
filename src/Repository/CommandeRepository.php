@@ -20,6 +20,18 @@ class CommandeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Commande::class);
     }
+    public function findrepasByNom($etat)
+{
+    $queryBuilder = $this->createQueryBuilder('c');
+
+    if (!empty($etat)) {
+        // Perform a case-insensitive search by converting both the search query and the database field to lowercase
+        $queryBuilder->where('LOWER(c.etat) LIKE :etat')
+                     ->setParameter('etat', '%' . strtolower($etat) . '%');
+    }
+
+    return $queryBuilder->getQuery()->getResult();
+}
 
 //    /**
 //     * @return Commande[] Returns an array of Commande objects

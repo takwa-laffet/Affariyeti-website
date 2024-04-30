@@ -3,65 +3,40 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Repository\DetailscommandeRepository;
-use Symfony\Component\Validator\Constraints as Assert;
-
-#[ORM\Entity(repositoryClass: DetailscommandeRepository::class)]
+#[ORM\Entity]
 class Detailscommande
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
+    #[ORM\Column(type: "integer")]
+    #[ORM\GeneratedValue(strategy: "IDENTITY")]
+    private int $id;
 
-    #[ORM\Column(type: 'integer')]
-    private ?int $idCom = null;
+    #[ORM\Column(type: "integer")]
+    private int $numArticle;
 
-    #[ORM\Column(type: 'integer')]
-    #[Assert\NotBlank]
-    #[Assert\Positive]
-    private ?int $numArticle = null;
+    #[ORM\Column(type: "string", length: 255)]
+    private string $nomArticle;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    private ?string $nomArticle = null;
+    #[ORM\Column(type: "integer")]
+    private int $quantite;
 
-    #[ORM\Column(type: 'integer')]
-    #[Assert\NotBlank]
-    #[Assert\Positive]
-    private ?int $quantite = null;
+    #[ORM\Column(type: "float", precision: 10, scale: 0)]
+    private float $prixUnitaire;
 
-    #[ORM\Column(type: 'float')]
-    #[Assert\NotBlank]
-    #[Assert\Positive]
-    private ?float $prixUnitaire = null;
+    #[ORM\Column(type: "float", precision: 10, scale: 0)]
+    private float $sousTotal;
 
-    #[ORM\Column(type: 'float')]
-    #[Assert\NotBlank]
-    #[Assert\Positive]
-    private ?float $sousTotal = null;
+    #[ORM\ManyToOne(targetEntity: Commande::class)]
+    #[ORM\JoinColumn(name: "id_com", referencedColumnName: "id")]
+    private ?Commande $idCom;
 
-    #[ORM\ManyToOne(targetEntity: Commande::class, inversedBy: "detailsCommande")]
-    #[ORM\JoinColumn(name: "id_com", referencedColumnName: "id", onDelete: "CASCADE")]
-    #[Assert\NotBlank]
-  
+    #[ORM\ManyToOne(targetEntity: Commande::class)]
+    #[ORM\JoinColumn(name: "commande_id", referencedColumnName: "id")]
     private ?Commande $commande;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdCom(): ?int
-    {
-        return $this->idCom;
-    }
-
-    public function setIdCom(?int $idCom): self
-    {
-        $this->idCom = $idCom;
-
-        return $this;
     }
 
     public function getNumArticle(): ?int
@@ -72,7 +47,6 @@ class Detailscommande
     public function setNumArticle(int $numArticle): self
     {
         $this->numArticle = $numArticle;
-
         return $this;
     }
 
@@ -81,10 +55,9 @@ class Detailscommande
         return $this->nomArticle;
     }
 
-    public function setNomArticle(string $nom_article): self
+    public function setNomArticle(string $nomArticle): self
     {
-        $this->nomArticle = $nom_article;
-
+        $this->nomArticle = $nomArticle;
         return $this;
     }
 
@@ -96,7 +69,6 @@ class Detailscommande
     public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
-
         return $this;
     }
 
@@ -108,7 +80,6 @@ class Detailscommande
     public function setPrixUnitaire(float $prixUnitaire): self
     {
         $this->prixUnitaire = $prixUnitaire;
-
         return $this;
     }
 
@@ -117,10 +88,20 @@ class Detailscommande
         return $this->sousTotal;
     }
 
-    public function setSousTotal(float $sous_Total): self
+    public function setSousTotal(float $sousTotal): self
     {
-        $this->sousTotal = $sous_Total;
+        $this->sousTotal = $sousTotal;
+        return $this;
+    }
 
+    public function getIdCom(): ?Commande
+    {
+        return $this->idCom;
+    }
+
+    public function setIdCom(?Commande $idCom): self
+    {
+        $this->idCom = $idCom;
         return $this;
     }
 
@@ -132,12 +113,6 @@ class Detailscommande
     public function setCommande(?Commande $commande): self
     {
         $this->commande = $commande;
-
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->numArticle . ' - ' . $this->nomArticle;
     }
 }

@@ -30,6 +30,8 @@
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.idC) }}">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                     </form>
+                 <a href="{{ path('admin_produit_index', {'idC': categorie.idC}) }}" class="btn btn-info">Afficher Produits</a>
+
                 </td>
             </tr>
         {% else %}
