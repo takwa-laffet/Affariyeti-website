@@ -3,10 +3,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>products</title>
+    <title>Auction</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('styles/productpage.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/navbarstyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/serch.css') }}">
+
     <link rel="stylesheet" href="{{ asset('styles/footer.css') }}">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -22,7 +24,7 @@
     <form method="get" action="{{ path('app_enchere_index') }}">
 
           <input type="text" name="search" placeholder="Search...">
-          <button id="navbarSearchBtn" type="submit"><i  class="fa fa-search" action="{{ path('app_enchere_index') }}"></i></button>
+          <button id="SearchBtn" type="submit" ><i  class="fa fa-search"></i></button>
      </form>
         </div>
       <div>
@@ -81,13 +83,23 @@
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
           <li>
-            <a href="">Auction</a>
+            <a href="{{path('app_enchere_index')}}">Auction</a>
+            <ul>
+              <li><a href="{{path('app_enchere_new')}}">Add new Action</a></li>
+              <li><a href="{{path('app_enchere_index')}}">My Actions List</a></li>
+              <li><a href="{{path('app_enchere_index')}}">Action List vlaible </a></li>
+             
+            </ul>
+
           </li>
            <li>
             <a href="">More</a>
-            
+            <ul> 
+              <li><a href="">chatboot</a></li>
+              
+            </ul>
           </li>
-          <li >
+         <li >
             <a href="" >Ideas</a>
                       </li>
           <li >
@@ -106,24 +118,24 @@
         </div>
         
       </div>
-       <div id="sortdataofproductpage"> 
-        Sort By :
-        <select id="sort-data" onchange="sortdata()">
-          <option value="lth">Price Low - High</option>
-          <option value="htl">Price High - Low</option>
-        </select>
-      </div>    <div id="furData">
 
-      </div>
+      
+      <div id="furData">
+
+      
       {% for enchere in encheres %}
-       <div id="divofproducticon">
-  {#fixer le taille de image #}
+      <div id="divofproducticon">
+ 
         <img src="{{ asset('images_auctions/' ~ enchere.image) }}" alt="{{ enchere.nomEnchere }}" style="{{"border :1px solid rgba(0, 0, 0, 0.1);"}}"  >
         <h2>{{ enchere.nomEnchere }}</h2>
+        <p>Bid start in : {{ enchere.dateDebut }}</p>
+
         <p>Initial Bid: {{ enchere.montantInitial }}</p>
       </div>
+      
       {% endfor %}
     </div>
+
     </div>
     </div>
     <br>

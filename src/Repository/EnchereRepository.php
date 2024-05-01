@@ -63,4 +63,23 @@ public function searchByName(string $name)
         ->getQuery()
         ->getResult();
 }
+public function sortData()
+    {
+        $select = $_GET['sort-data']; // Assuming you are using GET method to send the sorting option
+
+        if ($select === "lth") {
+            $furnitureData = $this->entityManager->getRepository(Enchere::class)->findBy([], ['montantInitial' => 'ASC']);
+        } elseif ($select === "htl") {
+            $furnitureData = $this->entityManager->getRepository(Enchere::class)->findBy([], ['montantInitial' => 'DESC']);
+        } elseif ($select === "reset") {
+            // Redirect to the same page to reset sorting
+            return $this->redirectToRoute('app_enchere_index');
+        }
+
+        // Now you have $furnitureData sorted based on montantInitial, you can pass it to Twig template for rendering
+        return $this->render('enchere/index.html.twig', [
+            'furnitureData' => $furnitureData,
+        ]);
+    }
+
 }

@@ -1,0 +1,10 @@
+#SearchBtn {
+    position: absolute;
+    width: 35px;
+    height: 30px;
+    background-color: red;
+    border: none;
+    margin-left: 0px;
+    border-top-right-radius: 4px;
+    border-end-end-radius: 4px;
+  }
