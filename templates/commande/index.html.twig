@@ -11,15 +11,22 @@
 </h4>
 
 <div class="table-responsive">
-   <a href="{{ path('triespc') }}"><i class="btn btn-danger" data-feather="arrow-down"></i>Nom Ascendant</a>
-    <a href="{{ path('triespcDESC') }}"><i class="btn btn-danger" data-feather="arrow-down"></i>Nom Desendent</a>
+  
     <table class="table table-hover" id="dataTable">
         <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Etat</th>
-                <th scope="col">CmdClient</th>
-                <th scope="col">CmdDate</th>
+                
+                <th scope="col">{% if app.request.attributes.get('_route') == 'triespcDESC' %}
+                    <a href="{{ path('triespc') }}">Client</a>
+                {% else %}
+                    <a href="{{ path('triespcDESC') }}">Client</a>
+                {% endif %}</th>
+                <th scope="col">{% if app.request.attributes.get('_route') == 'trieDateAsc' %}
+                    <a href="{{ path('trieDateDesc') }}">CmdDate</a>{% else %}
+                    <a href="{{ path('trieDateAsc') }}">CmdDate</a>
+                    {% endif %}</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -28,7 +35,7 @@
             <tr>
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.etat }}</td>
-                <td>{{ commande.cmdClient }}</td>
+                <td>{{ commande.user.nom }} {{ commande.user.prenom }}</td>
                 <td>{{ commande.cmdDate ? commande.cmdDate|date('Y-m-d H:i:s') : '' }}</td>
 
                 <td>
@@ -45,7 +52,7 @@
     </button>
 
     <button type="button" class="btn btn-secondary">
-        <a href="{{ path('app_detailscommande_show_by_commande', {'id': commande.id}) }}" style="color: white; text-decoration: none;">Details</a>
+        <a href="{{ path('app_commande_edit_status_termine', {'id': commande.id}) }}" style="color: white; text-decoration: none;">Done</a>
     </button>
 </td>
 

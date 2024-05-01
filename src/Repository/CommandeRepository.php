@@ -57,4 +57,35 @@ class CommandeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findByUserNomAsc()
+{
+    return $this->createQueryBuilder('c')
+        ->leftJoin('c.user', 'u') // Assuming 'user' is the property that links to the User entity
+        ->orderBy('u.nom', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
+public function findByUserNomDesc()
+{
+    return $this->createQueryBuilder('c')
+        ->leftJoin('c.user', 'u') // Assuming 'user' is the property that links to the User entity
+        ->orderBy('u.nom', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
+public function findByDateAsc()
+{
+    return $this->createQueryBuilder('c')
+        ->orderBy('c.cmdDate', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
+
+public function findByDateDesc()
+{
+    return $this->createQueryBuilder('c')
+        ->orderBy('c.cmdDate', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
 }

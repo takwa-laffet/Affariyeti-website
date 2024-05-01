@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Commande;
 use App\Form\CommandeType;
+use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,5 +85,19 @@ class CommandeController extends AbstractController
         
 
         return $this->redirectToRoute('app_commande_index');
+    }
+
+    #[Route('/{id}/terminee', name: 'app_commande_edit_status_termine', methods: ['GET', 'POST'])]
+    public function statusFinal($id, Request $request,  CommandeRepository $repo, EntityManagerInterface $entityManager): Response
+    {
+       
+
+        $commande=$repo->find($id);
+        $commande->setEtat("Termine");
+        $entityManager->persist($commande);
+        $entityManager->flush();
+
+            return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
+      
     }
 }

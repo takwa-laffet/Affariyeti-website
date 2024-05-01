@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
+use App\Entity\Detailscommande;
 use App\Entity\Panier;
 use App\Entity\PanierProduit;
 use App\Repository\PanierProduitRepository;
@@ -95,23 +97,53 @@ class PanierController extends AbstractController
         $panier=$panierRepository->findByUser($user->getId());
         $paniers=$panierProduitRepository->findBy(['panier'=>$panier]);
         $products=[];
+        $prixTotal = $panier->getPrix();
         foreach ($paniers as $product) {
             $product=$produitRepository->find($product->getProduitId());
             
             $products[]=$product;   
         }
         //ajouter commamde
+        $dateSysteme = new \DateTime();
+        $commande= new Commande();
+        $commande->setUser($user);
+        $commande->setEtat("en cours");
+        $commande->setPanier($panier);
+        $commande->setCmdClient(0);
+        $entityManager->persist($commande);
+       
+       
+      /////////////////////////////////////////////////////////////////////
+        
+        
+        $entityManager->flush();
+
+        ///////////////////////////////////////////////////////////////
+        $detailsCommande= new Detailscommande();
+        $detailsCommande->setCommande($commande);
+        $detailsCommande->setIdCom($commande);
+        $detailsCommande->setNomArticle("");
+       // dd( $detailsCommande->getNomArticle());
+    
+        $detailsCommande->setQuantite(count($products));
+        $detailsCommande->setSousTotal($panier->getPrix());
+        $detailsCommande->setNumArticle(0);
+        $detailsCommande->setPrixUnitaire(0);
+        $entityManager->persist($detailsCommande);
+
+
+
+
         foreach ($paniers as $produit) {
             $entityManager->remove($produit);
         }
         $panier->setPrix(0);
         $entityManager->persist($panier);
-
         $entityManager->flush();
         $email = (new Email())
         ->from('karat6657@gmail.com')
         ->to($user->getEmail())
-        //->cc('cc@example.com')
+        //->cc('Affariety')
         //->bcc('bcc@example.com')
         //->replyTo('fabien@example.com')
         //->priority(Email::PRIORITY_HIGH)
@@ -119,7 +151,7 @@ class PanierController extends AbstractController
         ->text('Cher Client(e)
             Votre commande a ete validee avec succes ')
         ->html( $this->renderView('panier/pdf_Facture.html.twig', [
-            'products' => $products,'totalPrix'=>$panier->getPrix(),    
+            'products' => $products,'totalPrix' => $prixTotal,'user'=>$user,'dateSysteme' => $dateSysteme,  
         ]));
 
         $mailer->send($email);

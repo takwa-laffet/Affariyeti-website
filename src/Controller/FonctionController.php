@@ -60,23 +60,10 @@ class FonctionController extends AbstractController
      /**
      * @Route("/TrierspcASC", name="triespc",methods={"GET"})
      */
-    public function trierSpecialite(Request $request, commandeRepository $commandeRepository): Response
+    public function trierParNameAsc(Request $request, CommandeRepository $commandeRepository): Response
     {
         // Utilisez directement la méthode trie() du repository
-        $arb = $commandeRepository->trie();
-
-        return $this->render('repas/index.html.twig', [
-            'repas' => $arb,
-        ]);
-    }
-
- /**
-     * @Route("/TrierspcDESC", name="triespcDESC",methods={"GET"})
-     */
-    public function trierSp(Request $request, CommandeRepository $commandeRepository): Response
-    {
-        // Utilisez directement la méthode trie() du repository
-        $arb = $commandeRepository->trieDes();
+        $arb = $commandeRepository->findByUserNomAsc();
 
         return $this->render('commande/index.html.twig', [
             'commandes' => $arb,
@@ -84,18 +71,44 @@ class FonctionController extends AbstractController
     }
 
  /**
-     * @Route("/Trieprix", name="trieprix",methods={"GET"})
+     * @Route("/TrierspcDESC", name="triespcDESC",methods={"GET"})
      */
-    public function trierprode(Request $request, CommandeRepository $commandeRepository): Response
+    public function trierParNameDesc(Request $request, CommandeRepository $commandeRepository): Response
     {
         // Utilisez directement la méthode trie() du repository
-        $arb = $commandeRepository->trierepas();
+        $arb = $commandeRepository->findByUserNomDesc();
 
-        return $this->render('repas/index.html.twig', [
-            'commande' => $arb,
+        return $this->render('commande/index.html.twig', [
+            'commandes' => $arb,
         ]);
     }
 
+    /**
+     * @Route("/TrieDateDesc", name="trieDateDesc",methods={"GET"})
+     */
+    public function trierParDateDesc(CommandeRepository $commandeRepository): Response
+    {
+        // Utilisez directement la méthode trie() du repository
+        $arb = $commandeRepository->findByDateDesc();
+
+        return $this->render('commande/index.html.twig', [
+            'commandes' => $arb,
+        ]);
+    }
+    /**
+     * @Route("/TrieDateAsc", name="trieDateAsc",methods={"GET"})
+     */
+    public function trierParDateAsc(CommandeRepository $commandeRepository): Response
+    {
+        // Utilisez directement la méthode trie() du repository
+        $arb = $commandeRepository->findByDateAsc();
+
+        return $this->render('commande/index.html.twig', [
+            'commandes' => $arb,
+        ]);
+    }
+
+    
 
     // /**
     //  * @Route("/Trieprixdes", name="trieprixdes",methods={"GET"})

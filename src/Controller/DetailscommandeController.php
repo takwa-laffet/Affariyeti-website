@@ -63,11 +63,17 @@ class DetailscommandeController extends AbstractController
         
         
         $detailscommande=$em->getRepository(Detailscommande::class)->findBy(["commande"=>$commande]);
+        $commande=$detailscommande[0];
+       
+        $pdfContent=$commande->getNomArticle();
         
         
-        return $this->render('detailscommande/show.html.twig', [
+ 
+         return $$pdfContent;
+        
+        /*return $this->render('detailscommande/show.html.twig', [
             'detailscommande' => $detailscommande[0],
-        ]);
+        ]);*/
     }
 
     #[Route('/{id}/edit', name: 'app_detailscommande_edit', methods: ['GET', 'POST'])]
