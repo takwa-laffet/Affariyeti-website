@@ -25,9 +25,9 @@ class Panier
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
     private ?User $user;
 
-    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: "commande")]
+    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: "produit")]
     #[ORM\JoinColumn(name: "id", referencedColumnName: "id_p")]
-    #[ORM\JoinTable(name: "commande_produit")]
+    #[ORM\JoinTable(name: "panier_produit")]
     private Collection $produits;
 
     public function __construct()

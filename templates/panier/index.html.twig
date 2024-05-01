@@ -4,6 +4,18 @@
 <link rel="stylesheet" href="{{ asset('styles/cart.css') }}">
 <link rel="stylesheet" href="{{ asset('styles/navbarstyle.css') }}">
 <link rel="stylesheet" href="{{ asset('styles/footer.css') }}">
+<style> .mainPrice-cart22{
+    width: 100%;
+     display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 20%;
+        height: 350px;
+        text-align: center;
+        padding: 10px;
+        margin-right: 90px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }</style>
 {%endblock%}
 {% block title %}Panier index{% endblock %}
 
@@ -16,41 +28,44 @@
 <div id="containerC">
     <div class="card mr-3" style="width: 100%;">
         <div class="card-body">
-            {% set totalPrix = 0 %}
+
             {% set totalItems = 0 %}
-            
+
             <div id="OverstockBrand">
                 <br>
                 <br>
                 <br>
                 <br>
-              
-              
+
+
                 {% for produit in produits %}
                 {% set totalItems = totalItems + 1 %}
-                {% set totalPrix = totalPrix + produit.prixP %}
+
                 <br>
-              
+
                 <div>
-                  <img src="{{ asset('tn.esprit.affariety.image/' ~ produit.imageP) }}" alt="" />
-                  <p><b>{{ produit.nomP }}</b></p>
-                  <p>{{ produit.descriptionP }}</p>
-                  <p>{{ produit.prixP }}</p>
-                  
+                    <img src="{{ asset('tn.esprit.affariety.image/' ~ produit.imageP) }}" alt="" />
+                    <p><b>{{ produit.nomP }}</b></p>
+                    <p>{{ produit.descriptionP }}</p>
+                    <p>{{ produit.prixP }}</p>
+                    <button class="btn btn-info mb-3"><a
+                            href="{{path('app_panier_delete', {'id': produit.idP})}}">Delete</a></button>
+
                 </div>
                 <br>
                 <br>
-              
-              
-              
+
+
+
                 {% else %}
                 <p>no records found</p>
                 {% endfor %}
-              </div>
+            </div>
 
         </div>
     </div>
-    <div id="mainPrice-cart">
+
+    <div class="mainPrice-cart22">
 
         <p>Total Items :<span id="total-num">{{ totalItems }}</span></p>
         <h5>Total Price : {{ totalPrix }} DT <span id="total-price"></span></h5>
@@ -59,9 +74,19 @@
             <button id="promoC">Apply</button>
         </div>
         <!-- <a style="padding: 10px 0;" id="paymentC" href="address.html">Check Out</a> -->
-        <button id="paymentC"> <a
-            href="{{ path('app_panier_passer_command') }}" style="color:white ; text-decoration: none;">Confirm</a></button>
+        <button id="paymentC" class="mb-3"> <a href="{{ path('app_panier_passer_command') }}"
+                style="color:white ; text-decoration: none;">Confirm</a></button>
+
+
+                <button id="paymentC" class="mb-3"> <a href="{{ path('export_product_to_pdf') }}"
+                    style="color:white ; text-decoration: none;">Export PDF</a></button>
+            <button id="paymentC" class="mb-3" style="background-color: #11d6ef;"> <a
+                    href="http://127.0.0.1:8000/produit/Client/111/Category/52" style="color:white ; text-decoration: none;">Continuer
+                    achat</a></button>
     </div>
+    
+    
+</div>
 </div>
 {% endblock %}
 

@@ -14,12 +14,8 @@ class PanierProduit
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
     private int $id;
     
-
-    
-    
     #[ORM\Column(type: "integer")]
     #[ORM\JoinColumn(name: "panier_id", referencedColumnName: "id")]
-
     private int $produitId;
 
     #[ORM\ManyToOne(targetEntity: Panier::class)]
