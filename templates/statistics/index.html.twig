@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Address Statistics</title>
+</head>
+<body>
+    <h1>Address Statistics</h1>
+    <ul>
+        {% for stat in statistics %}
+            <li><a href="{{ path('address_delivery_statistics', {'address': stat.adresselivraison}) }}">{{ stat.adresselivraison }} ({{ stat.deliveryCount }})</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

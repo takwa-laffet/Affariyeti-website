@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Contrat Print</title>
+    <link rel="stylesheet" href="/style.css" media="all" />
+</head>
+<body>
+<header class="clearfix">
+    <h1 class="logo me-auto" style="color:green">Affariyeti</h1>
+    <h1 align="center"> Livraison Details</h1>
+    <hr></hr>
+   
+    <table class="table table-bordered" style="border-color:black;width:70%;margin-left:15%">
+        <thead>
+            <tr>
+                <th style="background-color:green;color :white">Address Livraison</th>
+                <th style="background-color:green;color :white">Date Commande</th>
+                <th style="background-color:green;color :white">Date Livraison</th>
+                <th style="background-color:green;color :white">Status Livraison</th>
+                <th style="background-color:green;color :white">Latitude</th>
+                <th style="background-color:green;color :white">Longitude</th>
+                <th style="background-color:green;color :white">ID Depot</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ livraison.adresselivraison }}</td>
+                <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livraison.statuslivraison }}</td>
+                <td>{{ livraison.latitude }}</td>
+                <td>{{ livraison.longitude }}</td>
+                <td>{{ livraison.iddepot }}</td>
+            </tr>
+        </tbody>
+    </table>
+</header>
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h3>Affariyeti</h3>
+                    <p>
+                        Ghazela, Ariana, Tunisia <br>
+                        <strong>Phone:</strong> +216 12587954<br>
+                        <strong>Email:</strong> affariyeti@esprit.tn<br>
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 footer-links">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container d-md-flex py-4">
+        <div class="me-md-auto text-center text-md-start">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Affariyeti</span></strong>. All Rights Reserved
+            </div>
+        </div>
+        <div class="social-links text-center text-md-right pt-3 pt-md-0">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+    </div>
+</footer><!-- End F -->
+</body>
+</html>

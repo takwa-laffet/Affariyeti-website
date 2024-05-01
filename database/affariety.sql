@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
+<<<<<<< Updated upstream
 -- Généré le : jeu. 04 avr. 2024 à 02:06
+=======
+-- Généré le : mer. 17 avr. 2024 à 18:01
+>>>>>>> Stashed changes
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -150,7 +154,13 @@ CREATE TABLE `depot` (
 --
 
 INSERT INTO `depot` (`iddepot`, `nomdepot`, `adresse`) VALUES
+<<<<<<< Updated upstream
 (1, 'aaaaaaa', 'Mestir');
+=======
+(1, 'aaaaaaa', 'Mestir'),
+(3, 'Avignon', 'Tunis'),
+(4, 'Avignon', 'Tunis');
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -257,11 +267,15 @@ CREATE TABLE `grosmots` (
 
 CREATE TABLE `livraison` (
   `id` int(30) NOT NULL,
+<<<<<<< Updated upstream
   `iddepott` int(60) DEFAULT NULL,
   `idclient` int(11) DEFAULT NULL,
+=======
+  `iddepot` int(60) DEFAULT NULL,
+>>>>>>> Stashed changes
   `adresselivraison` varchar(255) NOT NULL,
-  `datecommande` datetime NOT NULL,
-  `datelivraison` datetime NOT NULL DEFAULT current_timestamp(),
+  `datecommande` datetime NOT NULL DEFAULT current_timestamp(),
+  `datelivraison` datetime NOT NULL,
   `statuslivraison` varchar(255) NOT NULL,
   `latitude` float NOT NULL,
   `longitude` float NOT NULL
@@ -271,11 +285,17 @@ CREATE TABLE `livraison` (
 -- Déchargement des données de la table `livraison`
 --
 
+<<<<<<< Updated upstream
 INSERT INTO `livraison` (`id`, `iddepott`, `idclient`, `adresselivraison`, `datecommande`, `datelivraison`, `statuslivraison`, `latitude`, `longitude`) VALUES
 (283, NULL, 111, 'Tounes', '2028-10-01 00:00:00', '2027-07-01 00:00:00', 'qQq', 77, 777),
 (286, 1, 114, 'Mestir', '2024-04-03 02:08:17', '2028-01-01 07:07:00', 'asba', 77, 444),
 (288, 1, 118, 'Tounes', '2024-04-03 03:36:36', '2024-05-01 00:00:00', 'ARRET', 888, 999),
 (289, 1, 109, 'Tounes', '2024-04-03 03:40:50', '2019-01-01 00:00:00', 'aaaa', 33, 33);
+=======
+INSERT INTO `livraison` (`id`, `iddepot`, `adresselivraison`, `datecommande`, `datelivraison`, `statuslivraison`, `latitude`, `longitude`) VALUES
+(300, 1, 'sousse', '2024-04-11 17:17:08', '2024-04-13 17:17:08', 'encours', 777778000000, 78532),
+(301, 1, 'sousse', '2024-04-11 17:17:08', '2024-04-13 17:17:08', 'encours', 777778000000, 78532);
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -408,20 +428,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `user`
---
-
-INSERT INTO `user` (`id`, `email`, `mdp`, `status`, `nom`, `prenom`, `verificationCode`, `role`) VALUES
-(109, 'salimmahdi680@gmail.com', '$2a$10$7MsScNUzC3pbNxSXLkanEOsuIaXfo.lL55LFFnoqpi99GwbThTjj2', 0, 'koussay', 'riahiii', 'djcsjs', 'client'),
-(111, 'chaimatlili68@gmail.com', '$2a$10$mIMyKilns2fPKkTQBxJY..T2KCkPWwH47VNNmra78YNhuq6las1Eq', 0, 'riahi', 'chayma', 'xrasul', 'client'),
-(113, 'younesmanita975@gmail.com', '$2a$10$Lal6Gj.SITgMpr6NBNXOvuKQLCxDHuTxjk0r9jAarw3LePOlwuuoq', 1, 'manita', 'younes', 'ggccct', 'client'),
-(114, 'ghada.benmansour@esprit.tn', '$2a$10$.64y7eJTIpEK/7yBzEayVOh2Uk7XFuf4Fgylch/4wbYO0brENCqqi', 1, 'Ben Mansour', 'Ghada', 'uvlyck', 'client'),
-(115, 'maram.rezgui@esprit.tn', '$2a$10$nEp3amnuE9MNyqaJgXWFSOsnHCpD23f8o5FvuEK5J//YNbyyyuAX6', 1, 'Rezgui', 'Maram', 'kmudos', 'admin'),
-(116, 'khaled.guedria.1gmail.com', '$2a$10$JrnTOWO9brGI87wLni3yEuQg/x32BatZuP1v9PdgnSYXL0KnP.Znm', 1, 'GUEDRIA', 'KHALED', 'qynibw', 'client'),
-(117, 'khaled.guedria.1@gmail.com', '$2a$10$I03xaO1IT1ONJi6MtVwz0OskXq40nhSU6.SgDZfq28rNT.SIxhIjG', 1, 'Guedria', 'Khaled', 'qorsok', 'client'),
-(118, 'nadia.bayrem@gmail.com', '$2a$10$.CNH/7NiDXH.5uqoFmHJkOsrQAqTOn7MnYYVYg58IGEbQmzUv08Eu', 1, 'ben mansour', 'nadia', 'epdeil', 'client');
-
---
 -- Index pour les tables déchargées
 --
 
@@ -518,6 +524,15 @@ ALTER TABLE `messenger_messages`
   ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
 
 --
+-- Index pour la table `messenger_messages`
+--
+ALTER TABLE `messenger_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
+  ADD KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
+  ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
+
+--
 -- Index pour la table `panier`
 --
 ALTER TABLE `panier`
@@ -596,7 +611,11 @@ ALTER TABLE `commentaire`
 -- AUTO_INCREMENT pour la table `depot`
 --
 ALTER TABLE `depot`
+<<<<<<< Updated upstream
   MODIFY `iddepot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+=======
+  MODIFY `iddepot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT pour la table `detailscommande`
@@ -626,7 +645,11 @@ ALTER TABLE `grosmots`
 -- AUTO_INCREMENT pour la table `livraison`
 --
 ALTER TABLE `livraison`
+<<<<<<< Updated upstream
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
+=======
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
+>>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT pour la table `messenger_messages`
@@ -672,8 +695,12 @@ ALTER TABLE `user`
 -- Contraintes pour la table `livraison`
 --
 ALTER TABLE `livraison`
+<<<<<<< Updated upstream
   ADD CONSTRAINT `fk_depot` FOREIGN KEY (`iddepott`) REFERENCES `depot` (`iddepot`),
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`idclient`) REFERENCES `user` (`id`);
+=======
+  ADD CONSTRAINT `fk_depot` FOREIGN KEY (`iddepot`) REFERENCES `depot` (`iddepot`);
+>>>>>>> Stashed changes
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

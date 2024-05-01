@@ -31,10 +31,6 @@ class Controller extends AbstractController
  public  function product() :Response {
     return $this -> render('product/product.html.twig');
  }
- #[Route('/checkout', name:'checkout' )]
- public  function checkout() :Response {
-    return $this -> render('checkout/addresspage.html.twig');
- }
  #[Route('/prodetail', name:'prodetail' )]
  public  function prodetail() :Response {
     return $this -> render('product/productdetails.html.twig');

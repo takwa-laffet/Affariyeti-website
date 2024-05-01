@@ -1,0 +1,23 @@
+# routes.yaml
+app_livraison_index:
+  path: /livraison/
+  controller: App\Controller\LivraisonController::index
+  methods: [GET, POST]
+
+livraisons_statistiques:
+  path: /livraisons/statistiques
+  controller: App\Controller\LivraisonController::statistiques
+  methods: GET
+
+app_livraison_show:
+  path: /livraison/{id}
+  controller: App\Controller\LivraisonController::show
+  methods: GET
+
+livraison_show:
+  path: /livraison/{id}
+  controller: 'App\Controller\LivraisonController::show'
+address_delivery_statistics:
+  path: /statistics/address-delivery
+  controller: App\Controller\StatisticsController::showAddressDeliveryStatistics
+  methods: ["GET"]

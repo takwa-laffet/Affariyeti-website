@@ -28,6 +28,7 @@ class Categorie
      */
     private $nomC;
 
+<<<<<<< Updated upstream
     // Getters and setters...
 
     public function getIdC(): ?int
@@ -46,4 +47,7 @@ class Categorie
 
         return $this;
     }
+=======
+
+>>>>>>> Stashed changes
 }

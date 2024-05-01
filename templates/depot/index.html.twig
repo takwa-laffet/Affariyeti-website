@@ -1,37 +1,62 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Depot index{% endblock %}
+{% block content %}
+  <div class="content-wrapper">
+    {% block body %}
+        <h1>Liste de depots</h1>
+        <br></br>
+      
+        <style>
+            /* Table styles */
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            .table th, .table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            .table th {
+                background-color: #f2f2f2;
+            }
+            .table tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        </style>
 
-{% block body %}
-    <h1>Depot index</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Iddepot</th>
+                    <th>Nomdepot</th>
+                    <th>Adresse</th>
+                    
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for depot in depots %}
+                <tr>
+                    <td>{{ depot.iddepot }}</td>
+                    <td>{{ depot.nomdepot }}</td>
+                    <td>{{ depot.adresse }}</td>
+                   
+                    <td>
+                        <a href="{{ path('app_depot_show', {'iddepot': depot.iddepot}) }}">Show</a>
+                        <a href="{{ path('app_depot_edit', {'iddepot': depot.iddepot}) }}">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Iddepot</th>
-                <th>Nomdepot</th>
-                <th>Adresse</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for depot in depots %}
-            <tr>
-                <td>{{ depot.iddepot }}</td>
-                <td>{{ depot.nomdepot }}</td>
-                <td>{{ depot.adresse }}</td>
-                <td>
-                    <a href="{{ path('app_depot_show', {'iddepot': depot.iddepot}) }}">show</a>
-                    <a href="{{ path('app_depot_edit', {'iddepot': depot.iddepot}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_depot_new') }}">Create new</a>
+        <a href="{{ path('app_depot_new') }}">Create new</a>
+    {% endblock %}
+  </div>
 {% endblock %}

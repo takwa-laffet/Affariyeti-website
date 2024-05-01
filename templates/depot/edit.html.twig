@@ -1,13 +1,111 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Edit Depot{% endblock %}
+{% block content %}
+  <div class="content-wrapper">
+
+
+
+{% block stylesheets %}
+    <style>
+        /* Wrapper style */
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Utilise toute la hauteur de la vue */
+            background-color: #f0f0f0; /* Background color for the page */
+        }
+
+        /* Form container style */
+        .edit-depot-form {
+            background-color: #ffffff; /* Form background color */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow effect */
+            max-width: 600px; /* Limite la largeur maximale du formulaire */
+            width: 100%; /* Assure que le formulaire prend toute la largeur disponible */
+            margin: auto;
+        }
+
+        /* Form field label style */
+        label {
+            display: block;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* Form field style */
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        /* Form field focus style */
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            border-color: #007bff; /* Border color on focus */
+            outline: none;
+        }
+
+        /* Submit button style */
+        button[type="submit"] {
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            padding: 15px 30px; /* Button padding */
+            border: none; /* No border */
+            border-radius: 5px; /* Button border radius */
+            cursor: pointer; /* Cursor style */
+            font-size: 18px; /* Button font size */
+            transition: background-color 0.3s; /* Smooth transition */
+            width: 100%; /* Button width */
+        }
+
+        /* Submit button hover style */
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Button background color on hover */
+        }
+
+        /* Back to list link style */
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+            color: #007bff; /* Link color */
+            text-decoration: none; /* Remove underline */
+            font-size: 18px; /* Link font size */
+            transition: color 0.3s; /* Smooth color transition */
+        }
+
+        /* Back to list link hover style */
+        .back-link:hover {
+            color: #0056b3; /* Link color on hover */
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Depot</h1>
+    <div class="content-wrapper">
+        <div class="edit-depot-form">
+            <h1>Edit Depot</h1>
 
-    {{ include('depot/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('depot/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_depot_index') }}">back to list</a>
+            <a href="{{ path('app_depot_index') }}" class="back-link">Back to list</a>
 
-    {{ include('depot/_delete_form.html.twig') }}
+            {{ include('depot/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
+ </div>
+{% endblock %}
+

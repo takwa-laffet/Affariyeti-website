@@ -1,7 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Livraison index{% endblock %}
+{% block content %}
 
+<<<<<<< Updated upstream
 {% block stylesheets %}
     {{ parent() }}
     <style>
@@ -108,4 +109,100 @@
 
         <a href="{{ path('app_livraison_new') }}">Create New</a>
     </div>
+=======
+<div class="content-wrapper">
+    {% block body %}
+    <style>
+        /* Add your CSS styles here */
+    </style>
+
+    {# Render line chart for delivery statistics by address #}
+    <h2>Delivery Statistics by Address</h2>
+    <div class="chart-container">
+        <canvas id="deliveryStatisticsChart" width="800" height="400"></canvas>
+    </div>
+
+    {# JavaScript for rendering the line chart #}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('deliveryStatisticsChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [{% for stat in statistics %} '{{ stat.adresselivraison }}', {% endfor %}],
+                    datasets: [{
+                        label: 'Total Deliveries',
+                        data: [{% for stat in statistics %} {{ stat.totalDeliveries }}, {% endfor %}],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    {# Display the list of deliveries #}
+    <h2>List of Deliveries</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Address Livraison</th>
+                <th>Date Commande</th>
+                <th>Date Livraison</th>
+                <th>Status Livraison</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Depot</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for livraison in livraisons %}
+            <tr>
+                <td>{{ livraison.id }}</td>
+                <td>{{ livraison.adresselivraison }}</td>
+                <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livraison.statuslivraison }}</td>
+                <td>{{ livraison.latitude }}</td>
+                <td>{{ livraison.longitude }}</td>
+                <td>{{ livraison.iddepot}}</td>
+                <td>
+                    <a href="{{ path('app_livraison_show', {'id': livraison.id}) }}">show</a>
+                    <a href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">edit</a>
+                </td>
+            </tr>
+       <div id="qrcode_{{ livraison.id}}"></div>
+ 
+ <script>
+    var qrcode_{{ livraison.id }} = new QRCode(document.getElementById("qrcode_{{ livraison.id }}"), {
+        text: "{{ livraison.adresselivraison }}", // Utiliser le nom du cours directement
+        width: 90,
+        height: 90
+    });
+</script>
+
+            {% else %}
+            <tr>
+                <td colspan="9" class="no-records">No records found</td>
+            </tr>
+            {% endfor %}
+            {{ knp_pagination_render(livraisons) }}
+        </tbody>
+    </table>
+   
+    {% endblock %}
+</div>
+
+>>>>>>> Stashed changes
 {% endblock %}

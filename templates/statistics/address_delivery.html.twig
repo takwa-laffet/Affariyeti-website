@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ address }} Delivery Statistics</title>
+</head>
+<body>
+    <h1>{{ address }} Delivery Statistics</h1>
+    <table>
+        <tr>
+            <th>Status</th>
+            <th>Count</th>
+        </tr>
+        {% for deliveryStat in deliveryStatistics %}
+            <tr>
+                <td>{{ deliveryStat.statuslivraison }}</td>
+                <td>{{ deliveryStat.deliveryCount }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

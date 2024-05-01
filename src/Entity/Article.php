@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace  App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +34,7 @@ class Article
      * @ORM\Column(name="categorie", type="string", length=255, nullable=false)
      */
     private $categorie;
+<<<<<<< Updated upstream
 
     /**
      * @var float
@@ -43,45 +44,15 @@ class Article
     private $prix;
 
     // Getters and setters...
+=======
+>>>>>>> Stashed changes
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $prix;
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
 
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    public function getPrix(): ?float
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(float $prix): self
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
 }

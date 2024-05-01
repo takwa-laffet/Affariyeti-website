@@ -7,7 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commentaire
  *
+<<<<<<< Updated upstream
  * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="fk_commentaire_user", columns={"id_client"}), @ORM\Index(name="fk_commentaire_id_pub", columns={"id_pub"})})
+=======
+ * @ORM\Table(name="commentaire", indexes={@ORM\Index(name="fk_commentaire_id_pub", columns={"id_pub"}), @ORM\Index(name="fk_commentaire_user", columns={"id_client"})})
+>>>>>>> Stashed changes
  * @ORM\Entity
  */
 class Commentaire
