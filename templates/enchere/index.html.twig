@@ -125,12 +125,14 @@
       
       {% for enchere in encheres %}
       <div id="divofproducticon">
- 
+
+        <a href="{{ path('app_enchere_show', {'enchereId': enchere.enchereId}) }}"> 
         <img src="{{ asset('images_auctions/' ~ enchere.image) }}" alt="{{ enchere.nomEnchere }}" style="{{"border :1px solid rgba(0, 0, 0, 0.1);"}}"  >
         <h2>{{ enchere.nomEnchere }}</h2>
         <p>Bid start in : {{ enchere.dateDebut }}</p>
 
         <p>Initial Bid: {{ enchere.montantInitial }}</p>
+        </a>
       </div>
       
       {% endfor %}

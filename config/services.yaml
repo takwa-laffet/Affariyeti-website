@@ -7,7 +7,9 @@ parameters:
     public_images_auctions: '../public/images_auctions/'
 
 services:
+        
     # default configuration for services in *this* file
+    App\Controller\ChatController:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
