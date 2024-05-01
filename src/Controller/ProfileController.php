@@ -39,6 +39,22 @@ class ProfileController extends AbstractController
         $user->setAge($request->request->get('age'));
         $user->setSexe($request->request->get('sexe'));
         $user->setPhone($request->request->get('phone'));
+        if ($request->files->get('image')) {
+            $file = $request->files->get('image');
+            $filePath = $file->getPathname();
+       
+            // Generate a unique name for the file
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+       
+            // Move the file to the directory where your images are stored
+            $file->move(
+                $this->getParameter('your_images_directory'),
+                $fileName
+            );
+       
+            $user->setImage($fileName);
+           
+        }
         $entityManager->persist($user);
         $entityManager->flush();
         $request->getSession()->getFlashBag()->add('success', 'Profile updated successfully');

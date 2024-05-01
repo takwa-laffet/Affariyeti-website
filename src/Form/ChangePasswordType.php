@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 
 class ChangePasswordType extends AbstractType
 {
@@ -49,6 +50,7 @@ class ChangePasswordType extends AbstractType
                     ])
                     ]
                     ])
+                    ->add("recaptcha", ReCaptchaType::class);
 
         ;
     }

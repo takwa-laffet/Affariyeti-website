@@ -908,7 +908,9 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
+{% block js %}
   <!-- base:js -->
   <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
   <!-- endinject -->
@@ -924,6 +926,7 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
+  {% endblock %}
   <!-- End custom js for this page-->
 </body>
 

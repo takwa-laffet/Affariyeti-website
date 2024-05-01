@@ -24,6 +24,7 @@ class ResetPassType extends AbstractType
             ],
         ])
            
+       ->add("recaptcha", ReCaptchaType::class);
 
         ;
     }

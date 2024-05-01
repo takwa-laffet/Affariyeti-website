@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -87,6 +89,8 @@ class RegistrationFormType extends AbstractType
                 ]),
             ],
         ])
+        ->add("recaptcha", ReCaptchaType::class);
+
     ;
     }
 
