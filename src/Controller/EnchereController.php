@@ -9,18 +9,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use App\Repository\EnchereRepository;
+use Symfony\UX\Chartjs\Model\Chart;
+
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 #[Route('/enchere')]
 class EnchereController extends AbstractController
 {
     #[Route('/', name: 'app_enchere_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EnchereRepository $enchereRepository): Response
     {
-        $encheres = $entityManager
-            ->getRepository(Enchere::class)
-            ->findAll();
-
-        return $this->render('enchere/index.html.twig', [
+        $minAmount = $request->query->get('minAmount');
+        $search = $request->query->get('search');
+    
+        if ($minAmount !== null) {
+            $encheres = $enchereRepository->findByMinAmount($minAmount);
+        } elseif ($search !== null) {
+            $encheres = $enchereRepository->searchByName($search);
+        } else {
+            $encheres = $enchereRepository->findAll();
+        }
+            return $this->render('enchere/index.html.twig', [
             'encheres' => $encheres,
         ]);
     }
@@ -28,17 +40,37 @@ class EnchereController extends AbstractController
     #[Route('/new', name: 'app_enchere_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $enchere = new Enchere();
-        $form = $this->createForm(EnchereType::class, $enchere);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($enchere);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_enchere_index', [], Response::HTTP_SEE_OTHER);
-        }
-
+            $enchere = new Enchere();
+            $form = $this->createForm(EnchereType::class, $enchere);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                // Handle image upload
+                $imageFile = $form->get('imageFile')->getData();
+    
+                if ($imageFile) {
+                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+    
+                    try {
+                        $imageFile->move(
+                            $this->getParameter('images_directory'), // Specify the directory where images should be uploaded
+                            $safeFilename
+                        );
+                    } catch (FileException $e) {
+                    }
+    
+                    $enchere->setImage($safeFilename);
+                }
+    
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($enchere);
+                $entityManager->flush();
+    
+                return $this->redirectToRoute('app_enchere_index');
+            }
+    
+            
         return $this->renderForm('enchere/new.html.twig', [
             'enchere' => $enchere,
             'form' => $form,
@@ -70,7 +102,6 @@ class EnchereController extends AbstractController
             'form' => $form,
         ]);
     }
-
     #[Route('/{enchereId}', name: 'app_enchere_delete', methods: ['POST'])]
     public function delete(Request $request, Enchere $enchere, EntityManagerInterface $entityManager): Response
     {
@@ -81,4 +112,4 @@ class EnchereController extends AbstractController
 
         return $this->redirectToRoute('app_enchere_index', [], Response::HTTP_SEE_OTHER);
     }
-}
+    }

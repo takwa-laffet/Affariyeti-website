@@ -45,4 +45,22 @@ class EnchereRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findByMinAmount(float $minAmount)
+{
+    return $this->createQueryBuilder('e')
+        ->andWhere('e.montantInitial >= :minAmount')
+        ->setParameter('minAmount', $minAmount)
+        ->getQuery()
+        ->getResult();
+}
+
+public function searchByName(string $name)
+{
+    return $this->createQueryBuilder('e')
+        ->andWhere('e.nomEnchere LIKE :name')
+        ->setParameter('name', '%'.$name.'%')
+        ->getQuery()
+        ->getResult();
+}
 }

@@ -3,6 +3,8 @@
 {% block title %}Edit Enchere{% endblock %}
 
 {% block body %}
+{{ include('enchere/header.html.twig') }}
+
     <h1>Edit Enchere</h1>
 
     {{ include('enchere/_form.html.twig', {'button_label': 'Update'}) }}

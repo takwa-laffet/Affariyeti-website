@@ -1,10 +1,16 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Enchere;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\EnchereRepository;
+use Doctrine\ORM\EntityManagerInterface;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 
 class AdminController extends AbstractController
 {
@@ -55,11 +61,7 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/ui-features/buttons.html.twig');
     }
-    #[Route('/admin/dropdowns', name: 'dropdowns')]
-    public function dropdowns() : Response
-    {
-        return $this->render('admin/ui-features/dropdowns.html.twig');
-    }
+    
     #[Route('/admin/typography', name: 'typography')]
     public function typography() : Response
     {
