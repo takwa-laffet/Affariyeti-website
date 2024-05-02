@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+    /* Style pour les boutons Editer et Supprimer */
+/* Styles pour les actions de commentaire */
+.comment-actions {
+    display: flex;
+    justify-content: flex-end; /* Aligner les boutons à droite */
+}
+
+/* Styles pour les boutons Editer et Supprimer */
+.edit-comment-btn,
+.delete-comment-btn {
+    margin-left: 10px; /* Ajouter de la marge entre les boutons */
+    padding: 8px 10px; /* Ajuster le remplissage pour agrandir les boutons */
+    border: none;
+    border-radius: 3px;
+    font-size: 16px; /* Ajuster la taille de la police */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style pour le bouton Editer */
+.edit-comment-btn {
+    color: #000; /* Couleur initiale du texte */
+}
+
+/* Style pour le bouton Supprimer */
+.delete-comment-btn {
+    color: #000; /* Couleur initiale du texte */
+}
+
+/* Style hover pour les boutons */
+.edit-comment-btn:hover {
+    background-color: #45a049; /* Vert au survol */
+    color: #fff; /* Texte blanc au survol */
+}
+
+.delete-comment-btn:hover {
+    background-color: #f44336; /* Rouge au survol */
+    color: #fff; /* Texte blanc au survol */
+}
+
+
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.modal-content form {
+    /* Styles pour le formulaire à l'intérieur de la modal */
+}
+    #add-comment-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1877f2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#add-comment-btn:hover {
+    background-color: #0e5a8a;
+}
+        /* Styles pour le conteneur des commentaires */
+        .comments-container {
+            margin-top: 20px;
+        }
+
+        /* Styles pour chaque commentaire */
+        .comment {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Styles pour le contenu du commentaire */
+        .comment-content {
+            margin-bottom: 5px;
+        }
+
+        /* Styles pour les détails du commentaire (nom, date) */
+        .comment-details {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Style pour le lien "Ajouter un commentaire" */
+        .add-comment-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #1877f2;
+            text-decoration: none;
+        }
+        .add-comment-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Liste Des Commentaires</h1>
+
+<div class="comments-container">
+    {% for commentaire in commentaires %}
+        <div class="comment">
+            <div class="comment-content">
+          <b>  {{ commentaire.idClient.nom }} {{ commentaire.idClient.prenom }}: </b>
+                {{ commentaire.contenu }}
+            </div>
+            <div class="comment-details">
+                <span><i>{{ commentaire.dateCom ? commentaire.dateCom|date('Y-m-d H:i:s') : '' }}</i></span>
+            </div>
+            <div class="comment-actions">
+                <!-- Bouton Editer -->
+<a href="{{ path('app_commentaire_editfront', {'idCom': commentaire.idCom}) }}" class="edit-comment-btn">Editer</a>
+                
+                <!-- Bouton Supprimer -->
+                <button class="delete-comment-btn" >Supprimer</button>
+            </div>
+        </div>
+    {% else %}
+        <p>No records found</p>
+    {% endfor %}
+</div>
+
+ <a href="#" id="add-comment-btn" class="open-comment-modal" data-url="{{ path('app_commentaire_newfront') }}">Ajouter un commentaire</a>
+<div id="commentModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="commentModalContent"></div>
+    </div>
+</div>
+</div>
+
+<script>
+
+// Intercepter le clic sur le lien "Éditer"
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.matches('.edit-link')) {
+        event.preventDefault(); // Empêcher le comportement par défaut du lien
+        var editUrl = event.target.getAttribute('href'); // Récupérer l'URL de l'édition
+        if (editUrl) {
+            openEditModal(editUrl); // Ouvrir la fenêtre modale avec le formulaire d'édition
+        }
+    }
+});
+
+// Fonction pour ouvrir la fenêtre modale d'édition
+function openEditModal(editUrl) {
+    fetch(editUrl)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('editModalContent').innerHTML = html;
+            document.getElementById('editModal').style.display = 'block';
+        });
+}
+
+    // Fonction pour fermer la fenêtre modale d'édition
+    function closeEditModal() {
+        // Masquer la fenêtre modale
+        document.getElementById('editModal').style.display = 'none';
+        // Revenir à l'URL précédente
+        history.back();
+    }
+document.addEventListener('DOMContentLoaded', function() {
+    const addCommentBtn = document.getElementById('add-comment-btn');
+    addCommentBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Empêcher le comportement par défaut du lien
+        const commentUrl = this.getAttribute('data-url'); // Récupérer l'URL associée au lien
+        if (commentUrl) {
+            openCommentModal(commentUrl); // Ouvrir la fenêtre modale avec le formulaire d'ajout de commentaire
+        }
+    });
+
+    // Gestionnaire d'événements pour le clic sur le bouton "Ajouter" dans le formulaire
+    document.addEventListener('click', function(event) {
+        if (event.target && event.target.matches('#submit-comment-btn')) {
+            event.preventDefault(); // Empêcher le comportement par défaut du bouton
+            // Ajoutez ici le code pour soumettre le formulaire d'ajout de commentaire
+            // Après avoir soumis avec succès le commentaire, fermez la fenêtre modale et réinitialisez l'URL
+            closeModal();
+        }
+    });
+});
+   // Fonction pour ouvrir la fenêtre modale avec le contenu de la page FormCommentaire
+        function openCommentModal(commentUrl) {
+      // Mettre à jour l'URL dans le navigateur
+    history.pushState({}, '', commentUrl);
+
+    // Récupérer le contenu de la page FormCommentaire via une requête fetch
+    fetch(commentUrl)
+        .then(response => response.text())
+        .then(html => {
+            // Injecter le contenu dans la fenêtre modale
+            document.getElementById('commentModalContent').innerHTML = html;
+            document.getElementById('commentModal').style.display = 'block'; // Afficher la fenêtre modale
+        });
+        }
+
+        // Fonction pour fermer la fenêtre modale
+        function closeModal() {
+            // Récupérer l'élément de la fenêtre modale
+            var modal = document.getElementById('commentModal');
+
+            // Masquer la fenêtre modale
+            modal.style.display = 'none';
+
+            // Revenir à l'URL précédente
+            history.back();
+        }
+</script>
+
+</body>
+</html>

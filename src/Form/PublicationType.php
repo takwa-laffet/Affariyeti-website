@@ -7,17 +7,30 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints as Assert;
 class PublicationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('contenu')
-            ->add('photoFile', FileType::class, [
-                'label' => 'Photo', // Libellé du champ de téléchargement de fichier
-                'required' => true, // Définir sur true si la photo est obligatoire
-            ])
+        ->add('contenu', TextareaType::class, [
+            'attr' => [
+                'class' => 'form-control',
+                'rows' => 3,
+                'placeholder' => 'Écrivez votre publication ici'
+            ]
+        ])
+        ->add('photoFile', FileType::class, [
+            'label' => 'Photo',
+            'required' => true,
+            'mapped' => false,
+            'constraints' => [
+                new Assert\NotBlank([         
+                    'message' => 'Veuillez entrer une photo.',
+                ])
+            ],
+        ])
             ->add('idClient')
         ;
     }

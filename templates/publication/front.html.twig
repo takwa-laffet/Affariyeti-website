@@ -10,15 +10,15 @@
     <title>Publications</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-      /* Styles pour le formulaire de publication */
-      .publication-form {
+        /* Styles pour le formulaire de publication */
+        .publication-form {
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-bottom: 20px;
         }
-
+        
         .publication-form textarea {
             width: 100%;
             padding: 10px;
@@ -27,11 +27,11 @@
             resize: none;
             margin-bottom: 10px;
         }
-
+        
         .publication-form input[type="file"] {
             display: none;
         }
-
+        
         .publication-form label {
             display: inline-block;
             background-color: #1877f2;
@@ -43,11 +43,11 @@
             transition: background-color 0.3s;
             margin-right: 10px;
         }
-
+        
         .publication-form label:hover {
             background-color: #0e5a8a;
         }
-
+        
         .publication-form button[type="submit"] {
             background-color: #1877f2;
             color: #fff;
@@ -57,126 +57,130 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
+        
         .publication-form button[type="submit"]:hover {
             background-color: #0e5a8a;
         }
+        
         /* Styles pour centrer le contenu */
         .center-container {
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Alignement en haut */
-            padding-top: 50px; /* Ajouter plus d'espacement en haut */
+            align-items: flex-start;
+            padding-top: 50px;
         }
-
+        
+        
         /* Styles pour le conteneur des publications */
         .publications-container {
-            width: 600px; /* Largeur fixe pour les publications */
+            width: 600px;
         }
-
+        
         /* Styles pour chaque publication */
         .publication {
-            background-color: #ffffff; /* Couleur de fond blanche */
-            border: 1px solid #ddd; /* Ajouter une bordure */
-            margin-bottom: 20px; /* Espacement entre chaque publication */
-            padding: 20px; /* Ajouter un peu d'espacement intérieur */
-            border-radius: 8px; /* Coins arrondis */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
         }
-
+        
         .publication img {
-            max-width: 200px; /* Largeur maximale de l'image */
-            max-height: 200px; /* Hauteur maximale de l'image */
-            border-radius: 8px; /* Coins arrondis pour l'image */
-            margin-top: 10px; /* Espacement au-dessus de l'image */
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-top: 10px;
         }
+        
         /* Style pour la date de la publication */
         .publication-date {
-            margin-top: 10px; /* Espacement en haut de la date */
-            color: #666; /* Couleur du texte de la date */
+            margin-top: 10px;
+            color: #666;
         }
-
+        
         /* Styles pour le texte de la publication */
         .publication-text {
-            margin-bottom: 10px; /* Espacement en bas du texte */
+            margin-bottom: 10px;
         }
-
+        
         /* Styles pour la barre de boutons */
         .action-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 15px;
-            padding-top: 10px; /* Espacement en haut */
-            border-top: 1px solid #ddd; /* Ajouter une bordure en haut */
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
         }
-
+        
         .action-buttons {
-            display: flex; /* Afficher les boutons côte à côte */
+            display: flex;
             align-items: center;
         }
-
+        
         .action-button {
             cursor: pointer;
             padding: 5px 10px;
             border-radius: 5px;
-            transition: background-color 0.3s; /* Transition de couleur de fond */
+            transition: background-color 0.3s;
             margin-right: 10px;
         }
-
+        
         .action-button i {
             margin-right: 5px;
         }
-
+        
         .action-button:hover {
-            background-color: #f0f0f0; /* Changer la couleur de fond au survol */
+            background-color: #f0f0f0;
         }
-
+        
         .action-button:active {
-            background-color: #ccc; /* Changer la couleur de fond lorsqu'un bouton est actif */
+            background-color: #ccc;
         }
-
+        
         /* Styles pour la section des commentaires */
         .comment-section {
-            margin-top: 20px; /* Espacement au-dessus de la section des commentaires */
-        }
-
+    display: none; /* Masquer la section par défaut */
+    margin-top: 20px;
+}
+        
         /* Styles pour chaque commentaire */
         .comment {
-            background-color: #f9f9f9; /* Couleur de fond des commentaires */
-            padding: 10px; /* Espacement intérieur des commentaires */
-            border-radius: 5px; /* Coins arrondis des commentaires */
-            margin-bottom: 10px; /* Espacement entre chaque commentaire */
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
         }
-
+        
         /* Styles pour le formulaire de commentaire */
         .comment-form {
-            margin-top: 20px; /* Espacement au-dessus du formulaire de commentaire */
+            margin-top: 20px;
         }
-
+        
         .comment-input {
-            width: 100%; /* Largeur du champ de saisie du commentaire */
-            padding: 10px; /* Espacement à l'intérieur du champ de saisie */
-            border-radius: 5px; /* Coins arrondis du champ de saisie */
-            border: 1px solid #ddd; /* Bordure du champ de saisie */
-            resize: none; /* Désactiver le redimensionnement du champ de saisie */
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            resize: none;
         }
-
+        
         .submit-comment {
-            margin-top: 10px; /* Espacement au-dessus du bouton de soumission */
-            padding: 10px 20px; /* Espacement à l'intérieur du bouton de soumission */
-            border-radius: 5px; /* Coins arrondis du bouton de soumission */
-            cursor: pointer; /* Curseur pointeur pour le bouton de soumission */
-            background-color: #1877f2; /* Couleur de fond du bouton de soumission */
-            color: #fff; /* Couleur du texte du bouton de soumission */
-            border: none; /* Supprimer la bordure du bouton de soumission */
-            transition: background-color 0.3s; /* Transition de couleur de fond */
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #1877f2;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s;
         }
-
+        
         .submit-comment:hover {
-            background-color: #0e5a8a; /* Changer la couleur de fond du bouton de soumission au survol */
+            background-color: #0e5a8a;
         }
-
+        
         /* Styles pour la liste déroulante des options */
         .options {
             display: none;
@@ -186,133 +190,221 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
-
+        
         .options a {
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
-
+        
         .options a:hover {
             background-color: #f0f0f0;
         }
+        
+        /* Styles pour la fenêtre modale */
+        .modal {
+            display: none; /* Par défaut, la fenêtre modale est cachée */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
     </style>
 </head>
 <body>
-       <div class="center-container">
-        <div class="publications-container">
-            <!-- Formulaire pour écrire une nouvelle publication -->
-         <div class="publication-form">
-            {{ form_start(form, {'attr': {'id': 'publication-form'}}) }}
-            {{ form_widget(form.contenu, {'attr': {'placeholder': 'Écrivez votre publication ici', 'id': 'publication-content'}}) }}
-            {{ form_widget(form.idClient, {'attr': {'id': 'publication-client'}}) }}
-            <label for="publication-photo">
-                <i class="fas fa-upload"></i> Ajouter une photo
-            </label>
-            {{ form_widget(form.photoFile, {'id': 'publication-photo', 'attr': {'accept': 'image/*'}}) }}
-            <button type="submit">Publier</button>
+<div class="center-container">
+    <div class="publications-container">
+    
+        <!-- Formulaire pour écrire une nouvelle publication -->
+        <div class="publication-form">
+            {{ form_start(form, {'attr': {'id': 'publication-form', 'novalidate': 'novalidate'}}) }}
+            <div class="form-group">
+                <b class="text-danger">{{ form_errors(form.contenu) }}</b>
+                <b class="text-danger">{{ form_errors(form.photoFile) }}</b>
+                {{ form_widget(form.contenu, {'attr': {'class': 'form-control', 'id': 'publication-contenu'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.idClient, {'attr': {'id': 'publication-client'}}) }}
+                {{ form_errors(form.idClient) }}
+            </div>
+            <div class="form-group">
+                <label for="publication-photo">
+                    <i class="fas fa-upload"></i> Ajouter une photo
+                </label>
+                {{ form_widget(form.photoFile, {'id': 'publication-photo', 'attr': {'accept': 'image/*', 'onchange': 'updatePhotoPath(this)'}}) }}
+                <output id="photo-path" for="publication-photo"></output>
+                <button type="submit" class="btn btn-success">Publier</button>
+            </div>
             {{ form_end(form) }}
         </div>
-            {% for publication in publications %}
-                <div class="publication">
-                   <div class="publication-text"> 
-                        <i class="fas fa-user"></i> <!-- Icône utilisateur -->
-                        <b>{{ publication.idClient.nom }} {{ publication.idClient.prenom }}</b> 
-                    </div> 
-                    <div class="publication-text">
-                           <a>💬 {{ publication.contenu }}</a>
-                    </div>
-                    {% if publication.photo %}
-                        <img src="{{ asset(publication.photo) }}" alt="Photo de la publication">
-                    {% endif %}
-                    <div class="publication-date">
-                        {{ publication.datePub ? publication.datePub|date('Y-m-d H:i:s') : '' }}
-                    </div>
-                    <div class="publication-likedislike">
-                        <i class="far fa-thumbs-up"></i> ({{ publication.nbLikes }})
-                        <i class="far fa-thumbs-down"></i> ({{ publication.nbDislike }})
-                    </div>
-                    <div class="action-bar">
-                        <div class="action-buttons">
-                            <span class="action-button" onclick="likePost(this)"><i class="far fa-thumbs-up"></i> J'aime</span>
-                            <span class="action-button" onclick="dislikePost(this)"><i class="far fa-thumbs-down"></i> Je n'aime pas</span>
-                            <span class="action-button" onclick="toggleComments(this)"><i class="far fa-comment"></i> Commentaires</span>
-                            <span class="action-button" onclick="toggleOptions(this)">
-                                Options <i class="fas fa-caret-down"></i>
-                                <div class="options">
-                                    <a href="#">Éditer</a>
-                                    <a href="#">Supprimer</a>
-                                </div>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="comment-section">
-                        <!-- Section des commentaires -->
-                        <!-- Inclure ici les commentaires -->
-                        <div class="comment">
-                            <b>John Doe:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </div>
-                        <!-- Formulaire de commentaire -->
-                        <form class="comment-form">
-                            <textarea class="comment-input" placeholder="Ajouter un commentaire"></textarea>
-                            <button type="button" class="submit-comment">Publier</button>
+        <!-- Publications -->
+       {% for publication in publications %}
+    <div class="publication">
+        <div class="publication-text">
+            <i class="fas fa-user"></i> <!-- Icône utilisateur -->
+            <b>{{ publication.idClient.prenom }} {{ publication.idClient.nom }}</b>
+        </div>
+        <div class="publication-text">
+            <a>💬 {{ publication.contenu }}</a>
+        </div>
+        {% if publication.photo %}
+            <img src="{{ asset(publication.photo) }}" alt="Photo de la publication">
+        {% endif %}
+        <div class="publication-date">
+            <i>{{ publication.datePub ? publication.datePub|date('Y-m-d H:i:s') : '' }}</i>
+        </div>
+        <div class="publication-likedislike">
+            <i class="far fa-thumbs-up"></i> ({{ publication.nbLikes }})
+            <i class="far fa-thumbs-down"></i> ({{ publication.nbDislike }})
+        </div>
+        <div class="action-bar">
+            <div class="action-buttons">
+                <span class="action-button" onclick="likePost(this)"><i class="far fa-thumbs-up"></i> J'aime</span>
+                <span class="action-button" onclick="dislikePost(this)"><i class="far fa-thumbs-down"></i> Je n'aime pas</span>
+                <span class="action-button" onclick="toggleComments(this)"><i class="far fa-comment"></i> Commentaires</span>
+                <span class="action-button" onclick="toggleOptions(this)"> Options <i class="fas fa-caret-down"></i>
+                    <div class="options">
+                        <a href="{{ path('app_publication_editfront', {'idPub': publication.idPub}) }}" class="edit-link" data-edit-url="{{ path('app_publication_editfront', {'idPub': publication.idPub}) }}">Éditer</a>
+                        <a href="#" onclick="event.preventDefault(); if (confirm('Êtes-vous sûr(e) de vouloir supprimer cet élément ?')) { document.getElementById('form-delete-{{ publication.idPub }}').submit(); }">
+                            Supprimer
+                        </a>
+                        <form id="form-delete-{{ publication.idPub }}" action="{{ path('app_publication_supprimer', {'idPub': publication.idPub}) }}" method="post" style="display: none;">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('supprimer' ~ publication.idPub) }}">
                         </form>
                     </div>
-                </div>
+                </span>
+            </div>
+        </div>
+        <div class="comment-section">
+            {% if comments[publication.idPub] %}
+                {% for commentaire in comments[publication.idPub] %}
+                    <div class="comment">
+                        <b>{{ commentaire.idClient.prenom }} {{ commentaire.idClient.nom }}:</b> {{ commentaire.contenu }}
+                        <div class="publication-date">
+                            <i>{{ commentaire.dateCom ? commentaire.dateCom|date('Y-m-d H:i:s') : '' }}</i>
+                        </div>
+                    </div>
+                {% endfor %}
             {% else %}
-                <p>Aucune publication trouvée</p>
-            {% endfor %}
+                <p>Pas de commentaires.</p>
+            {% endif %}
+            <a href="{{ path('app_publication_commentaire', {'idPub': publication.idPub}) }}">Ajouter un commentaire </a>
         </div>
     </div>
+{% else %}
+    <p>Aucune publication trouvée</p>
+{% endfor %}
+ <div class="center-container">
+            <div class="pagination">
+                {{ knp_pagination_render(publications) }}
+            </div>
+    </div>
+</div>
 
-    <script>
-      // Fonction pour afficher ou masquer les options de publication
-        function toggleOptions(element) {
-            var options = element.querySelector('.options');
-            if (options.style.display === 'block') {
-                options.style.display = 'none';
-            } else {
-                options.style.display = 'block';
-            }
+<!-- Fenêtre modale pour l'édition -->
+<div id="editModal" class="modal" style="display: none;"> <!-- Ajoutez style="display: none;" pour que la fenêtre modale soit cachée par défaut -->
+    <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <div id="editModalContent"></div>
+    </div>
+</div>
+<script>
+    // Fonction pour afficher ou masquer les options de publication
+    function toggleOptions(element) {
+        var options = element.querySelector('.options');
+        if (options.style.display === 'block') {
+            options.style.display = 'none';
+        } else {
+            options.style.display = 'block';
         }
+    }
 
-        // Fonction pour afficher ou masquer la section des commentaires
-        function toggleComments(button) {
-            var commentSection = button.parentNode.parentNode.nextElementSibling;
-            if (commentSection.style.display === 'none') {
-                commentSection.style.display = 'block';
-            } else {
-                commentSection.style.display = 'none';
-            }
+    // Fonction pour afficher ou masquer la section des commentaires
+function toggleComments(button) {
+    var commentSection = button.parentNode.parentNode.nextElementSibling;
+    if (commentSection.style.display === 'none') {
+        commentSection.style.display = 'block'; // Afficher la section
+    } else {
+        commentSection.style.display = 'none'; // Masquer la section
+    }
+}
+
+    // Intercepter le clic sur le lien "Éditer"
+    document.addEventListener('click', function(event) {
+        if (event.target && event.target.matches('.edit-link')) {
+        event.preventDefault(); // Empêcher le comportement par défaut du lien
+        var editUrl = event.target.getAttribute('data-edit-url'); // Récupérer l'URL de l'édition
+        if (editUrl) {
+            openEditModal(editUrl); // Ouvrir la fenêtre modale avec le formulaire d'édition
         }
-
-        // Fonction pour gérer le bouton J'aime
-        function likePost(button) {
-            console.log("J'aime");
-        }
-
-        // Fonction pour gérer le bouton Je n'aime pas
-        function dislikePost(button) {
-            console.log("Je n'aime pas");
-        }
-               // Action à effectuer lorsque le formulaire de publication est soumis
-       document.getElementById("publication-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Empêche le rechargement de la page
-
-            // Récupérer les données du formulaire
-            var content = document.getElementById("publication_contenu").value;
-            var photo = document.getElementById("publication-photo").files[0];
-
-            // Envoyer les données au serveur (vous devez implémenter cette partie en fonction de votre backend)
-            console.log("Contenu de la publication :", content);
-            console.log("Photo de la publication :", photo);
-            
-            // Réinitialiser le formulaire après l'envoi
-            document.getElementById("publication-form").reset();
+         }
         });
 
-    </script>
+    // Fonction pour ouvrir la fenêtre modale d'édition
+    function openEditModal(editUrl) {
+        history.pushState({}, '', editUrl); // Mettre à jour l'URL dans le navigateur
+        fetch(editUrl)
+        .then(response => response.text())
+        .then(html => {
+             document.getElementById('editModalContent').innerHTML = html;
+             document.getElementById('editModal').style.display = 'block'; // Modifier le style pour afficher la fenêtre modale
+             });
+        }
+
+    // Fonction pour fermer la fenêtre modale d'édition
+    function closeEditModal() {
+        document.getElementById('editModal').style.display = 'none';
+            history.back(); // Revenir à l'URL précédente
+
+    }
+
+    // Fonction pour gérer le bouton J'aime
+    function likePost(button) {
+        console.log("J'aime");
+    }
+
+    // Fonction pour gérer le bouton Je n'aime pas
+    function dislikePost(button) {
+        console.log("Je n'aime pas");
+    }
+
+    function updatePhotoPath(input) {
+        const photoPath = document.getElementById('photo-path');
+        photoPath.value = input.files[0].name;
+    }
+
+
+</script>
 </body>
 </html>
 {% endblock %}

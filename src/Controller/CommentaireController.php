@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Entity\Publication;
 #[Route('/commentaire')]
 class CommentaireController extends AbstractController
 {
@@ -29,7 +29,8 @@ class CommentaireController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $commentaire = new Commentaire();
-        $commentaire->setDateCom(new \DateTime());
+        $dateTime = new \DateTime('now', new \DateTimeZone('Africa/Tunis'));
+        $commentaire->setDateCom($dateTime);
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
@@ -38,6 +39,54 @@ class CommentaireController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_commentaire_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('commentaire/new.html.twig', [
+            'commentaire' => $commentaire,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/newfront', name: 'app_commentaire_newfront', methods: ['GET', 'POST'])]
+    public function newfront(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Crée une nouvelle instance de l'entité Commentaire
+        $commentaire = new Commentaire();
+        $dateTime = new \DateTime('now', new \DateTimeZone('Africa/Tunis'));
+        $commentaire->setDateCom($dateTime);
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+    
+            // Récupérer l'IDPub à partir de la nouvelle entité Commentaire
+            $idPub = $commentaire->getIdPub(); // Assurez-vous de remplacer getIdPub() par la méthode réelle pour obtenir l'IDPub
+    
+            // Redirection vers la route app_publication_commentaire avec l'IDPub
+            return $this->redirectToRoute('app_publication_commentaire', ['idPub' => $idPub], Response::HTTP_SEE_OTHER);
+        }
+    
+        return $this->renderForm('commentaire/newfrontcomment.html.twig', [
+            'commentaire' => $commentaire,
+            'form' => $form,
+        ]);}
+    
+    
+    #[Route('/newcomment', name: 'app_comment_new', methods: ['GET', 'POST'])]
+    public function newcomment(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $commentaire = new Commentaire();
+        $commentaire->setDateCom(new \DateTime());
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_publication_commentaire', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('commentaire/new.html.twig', [
@@ -67,6 +116,23 @@ class CommentaireController extends AbstractController
         }
 
         return $this->renderForm('commentaire/edit.html.twig', [
+            'commentaire' => $commentaire,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/{idCom}/editfront', name: 'app_commentaire_editfront', methods: ['GET', 'POST'])]
+    public function editfront(Request $request, Commentaire $commentaire, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_publication_commentaire', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('commentaire/editfront.html.twig', [
             'commentaire' => $commentaire,
             'form' => $form,
         ]);

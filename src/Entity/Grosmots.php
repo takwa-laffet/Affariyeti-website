@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Repositor\GrosmotsRepository;
+use App\Repository\GrosmotsRepository;
 #[ORM\Entity(repositoryClass: GrosmotsRepository::class)]
 class Grosmots
 {
