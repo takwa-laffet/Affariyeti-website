@@ -17,6 +17,11 @@ use App\Controller\MailerController;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 
 
 #[Route('/livraison')]
@@ -78,7 +83,7 @@ class LivraisonController extends AbstractController
     
             // Call the printPdf method to generate the PDF with client information
             $this->printPdf($livraison, $mailerController);
-    
+            $this->sendEmail("Equipement Notif","Equipement Ajouter");
             return $this->redirectToRoute('app_livraison_show', ['id' => $livraison->getId()]);
         }
     
@@ -173,7 +178,23 @@ public function printPdf(Livraison $livraison, MailerController $mailerControlle
         'Content-Disposition' => 'attachment; filename="' . $filename . '"',
     ]);
 }
-
+function sendEmail($subject, $message)
+    {
+        $transport = new EsmtpTransport('smtp.gmail.com', 587);
+        $transport->setUsername("maram.njahi@esprit.tn");
+        $transport->setPassword("fayvnkyzturjntzy");
+       
+    
+        $mailer = new Mailer($transport);
+    
+        $email = (new Email())
+            ->from("pidev@gmail.com")
+            ->to("maram.njahi@esprit.tn")
+            ->subject($subject)
+            ->text($message);
+    
+        $mailer->send($email);
+    }
 }
 
 
