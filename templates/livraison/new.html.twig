@@ -270,16 +270,15 @@
         }
       </style>
 
-      <div class="livraison-form">
-       
-       
-        <h1>Create new Livraison</h1>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
-        <a href="{{ path('app_livraison_new') }}">Back to List</a>
-      </div>
-    {% endblock %}
+     
+<div class="livraison-form">
+    <h1>Create new Livraison</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <a href="{{ path('app_livraison_new') }}">Back to List</a>
+</div>
+{% endblock %}
 
   </div>
 

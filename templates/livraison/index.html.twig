@@ -2,9 +2,8 @@
 
 {% block content %}
 
-<<<<<<< Updated upstream
 {% block stylesheets %}
-    {{ parent() }}
+    {# {{ parent() }} #}
     <style>
         /* Custom styles for the table */
         .table-container {
@@ -69,54 +68,10 @@
 
 {% block body %}
     <div class="table-container">
-        <h1>Livraison index</h1>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Adresse Livraison</th>
-                    <th>Date Commande</th>
-                    <th>Date Livraison</th>
-                    <th>Status Livraison</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for livraison in livraisons %}
-                <tr>
-                    <td>{{ livraison.id }}</td>
-                    <td>{{ livraison.adresselivraison }}</td>
-                    <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ livraison.statuslivraison }}</td>
-                    <td>{{ livraison.latitude }}</td>
-                    <td>{{ livraison.longitude }}</td>
-                    <td class="actions">
-                        <a class="show" href="{{ path('app_livraison_show', {'id': livraison.id}) }}">Show</a>
-                        <a class="edit" href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">Edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="8">No records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
+      
         <a href="{{ path('app_livraison_new') }}">Create New</a>
     </div>
-=======
-<div class="content-wrapper">
-    {% block body %}
-    <style>
-        /* Add your CSS styles here */
-    </style>
-
-    {# Render line chart for delivery statistics by address #}
+     {# Render line chart for delivery statistics by address #}
     <h2>Delivery Statistics by Address</h2>
     <div class="chart-container">
         <canvas id="deliveryStatisticsChart" width="800" height="400"></canvas>
@@ -149,9 +104,7 @@
             });
         });
     </script>
-
-    {# Display the list of deliveries #}
-    <h2>List of Deliveries</h2>
+     <h2>List of Deliveries</h2>
     <table class="table">
         <thead>
             <tr>
@@ -200,9 +153,5 @@
             {{ knp_pagination_render(livraisons) }}
         </tbody>
     </table>
-   
-    {% endblock %}
-</div>
-
->>>>>>> Stashed changes
+{% endblock %}
 {% endblock %}

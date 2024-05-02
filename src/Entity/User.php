@@ -3,10 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 /**
  * User
  *
@@ -72,13 +69,6 @@ class User
      * @ORM\Column(name="role", type="string", length=300, nullable=false)
      */
     private $role;
-<<<<<<< Updated upstream
-    public function __toString(): string
-    {
-        return $this->nom . ' ' . $this->prenom; // Or any other meaningful representation
-    }
-=======
 
->>>>>>> Stashed changes
 
 }

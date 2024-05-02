@@ -5,13 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-<<<<<<< Updated upstream
- * @ORM\Table(name="livraison", indexes={@ORM\Index(name="fk_depot", columns={"iddepott"}), @ORM\Index(name="fk_user", columns={"idclient"})})
-=======
  * Livraison
  *
  * @ORM\Table(name="livraison", indexes={@ORM\Index(name="fk_depot", columns={"iddepot"})})
->>>>>>> Stashed changes
  * @ORM\Entity
  */
 class Livraison
@@ -35,11 +31,7 @@ class Livraison
     /**
      * @var \DateTimeInterface
      *
-<<<<<<< Updated upstream
-     * @ORM\Column(name="datecommande", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
-=======
      * @ORM\Column(name="datecommande", type="datetime", nullable=false)
->>>>>>> Stashed changes
      */
     private $datecommande;
 
@@ -60,51 +52,24 @@ class Livraison
     /**
      * @var float
      *
-<<<<<<< Updated upstream
-     * @ORM\Column(name="latitude", type="float", nullable=false)
-=======
      * @ORM\Column(name="latitude", type="float", precision=10, scale=0, nullable=false)
->>>>>>> Stashed changes
      */
     private $latitude;
 
     /**
      * @var float
      *
-<<<<<<< Updated upstream
-     * @ORM\Column(name="longitude", type="float", nullable=false)
-=======
      * @ORM\Column(name="longitude", type="float", precision=10, scale=0, nullable=false)
->>>>>>> Stashed changes
      */
     private $longitude;
 
     /**
-<<<<<<< Updated upstream
-     * @var User|null
-     *
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(name="idclient", referencedColumnName="id")
-     */
-    private $idclient;
-
-    /**
-     * @var Depot|null
-     *
-     * @ORM\ManyToOne(targetEntity=Depot::class)
-     * @ORM\JoinColumn(name="iddepott", referencedColumnName="iddepot")
-     */
-    private $iddepot;
-
-    // Getters and setters...
-=======
      * @var Depot
      *
      * @ORM\ManyToOne(targetEntity="Depot")
      * @ORM\JoinColumn(name="iddepot", referencedColumnName="iddepot")
      */
     private $iddepot;
->>>>>>> Stashed changes
 
     public function getId(): ?int
     {
@@ -149,7 +114,7 @@ class Livraison
 
     public function getStatuslivraison(): ?string
     {
-        return $this->statuslivraison= "en cours";
+        return $this->statuslivraison;
     }
 
     public function setStatuslivraison(string $statuslivraison): self
@@ -183,18 +148,6 @@ class Livraison
         return $this;
     }
 
-    public function getIdclient(): ?User
-    {
-        return $this->idclient;
-    }
-
-    public function setIdclient(?User $idclient): self
-    {
-        $this->idclient = $idclient;
-
-        return $this;
-    }
-
     public function getIddepot(): ?Depot
     {
         return $this->iddepot;
@@ -206,12 +159,4 @@ class Livraison
 
         return $this;
     }
-<<<<<<< Updated upstream
-=======
-    public function __toString(): string
-    {
-        return $this->adresselivraison;
-    }
-   
->>>>>>> Stashed changes
 }

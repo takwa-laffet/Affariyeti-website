@@ -28,26 +28,5 @@ class Categorie
      */
     private $nomC;
 
-<<<<<<< Updated upstream
-    // Getters and setters...
 
-    public function getIdC(): ?int
-    {
-        return $this->idC;
-    }
-
-    public function getNomC(): ?string
-    {
-        return $this->nomC;
-    }
-
-    public function setNomC(string $nomC): self
-    {
-        $this->nomC = $nomC;
-
-        return $this;
-    }
-=======
-
->>>>>>> Stashed changes
 }

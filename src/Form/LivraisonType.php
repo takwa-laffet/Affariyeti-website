@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Livraison;
+use App\Entity\Depot; // Importez la classe Depot
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,20 +18,13 @@ use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType; // Importez le type EntityType
 
 class LivraisonType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-<<<<<<< Updated upstream
-            ->add('adresselivraison')
-            ->add('datelivraison')
-            ->add('statuslivraison')
-            ->add('latitude')
-            ->add('longitude')
-            ->add('idclient')
-=======
+        $builder           
             ->add('adresselivraison', ChoiceType::class, [
                 'choices' => [
                     'Tunis' => 'Tunis',
@@ -74,8 +68,16 @@ class LivraisonType extends AbstractType
                     new NotBlank(['message' => 'Veuillez saisir la longitude.']),
                 ],
             ])
->>>>>>> Stashed changes
-            ->add('iddepot')
+            // Ajoutez le champ iddepot avec le type EntityType pour la relation
+            ->add('iddepot', EntityType::class, [
+                'class' => Depot::class, // Classe de l'entité cible
+                'choice_label' => 'nomdepot', // Choisir le champ à afficher dans le formulaire
+                'placeholder' => 'Sélectionner un dépôt',
+                'required' => true,
+                'constraints' => [
+                    new NotNull(['message' => 'Veuillez sélectionner un dépôt.']),
+                ],
+            ])
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-primary', 'onclick' => 'showSuccessAlert();']
             ]);
