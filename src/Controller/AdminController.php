@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Enchere;
+use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,27 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class AdminController extends AbstractController
 {
+    #[Route('/admin/tables', name: 'app_tables_index', methods: ['GET'])]
+   
+        public function table(EntityManagerInterface $entityManager): Response
+        {
+            $encheres = $entityManager
+                ->getRepository(Enchere::class)
+                ->findAll();
+                
+           return $this->render('admin/auction/tabels.html.twig', [
+            'encheres' => $encheres,
+        ]);
+    }
+    #[Route('admin/{enchereId}', name: 'app_auction_show', methods: ['GET'])]
+    public function show(Enchere $enchere): Response
+    {
+        return $this->render('admin/auction/show.html.twig', [
+            'enchere' => $enchere,
+        ]);
+    }
+
+
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {

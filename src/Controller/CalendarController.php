@@ -16,21 +16,12 @@ class CalendarController extends AbstractController
     #[Route('admin/auction/Calendar', name: 'Calendar')]
     public function calendar(EnchereRepository $enchereRepository): Response
     {
-        $encheres = $enchereRepository->findAll(); // Fetch all encheres
 
-        // Prepare events data
-        $events = [];
-        foreach ($encheres as $enchere) {
-            // Assuming $enchere->getDateDebut() and $enchere->getDateFin() return DateTime objects
-            $events[] = [
-                'title' => $enchere->getNomEnchere(),
-                'start' => $enchere->getDateDebut(),
-                'end' => $enchere->getDateFin(),
-            ];
-        }
+    $repository = $this->getDoctrine()->getRepository(Enchere::class);
+        $enchereEvents = $repository->findAll();
 
-        // Render the template with events
         return $this->render('admin/auction/calendar.html.twig', [
-            'events' => json_encode($events), // Convert events array to JSON
+            'enchereEvents' => $enchereEvents,
         ]);
-    }}
+    }
+}
