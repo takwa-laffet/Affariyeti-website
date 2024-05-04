@@ -17,6 +17,7 @@ use App\Repository\CommentaireRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Grosmots;
 use Symfony\Component\Form\FormError;
+use Twilio\Rest\Client;
 
 #[Route('/publication')]
 class PublicationController extends AbstractController
@@ -38,10 +39,14 @@ class PublicationController extends AbstractController
             'pagination' => $pagination,
         ]);
     }
-
     #[Route('/front_index', name: 'app_publication_indexfront', methods: ['GET', 'POST'])]
-    public function indexfront(Request $request, EntityManagerInterface $entityManager, CommentaireRepository $commentaireRepository, GrosmotsRepository $grosmotsRepository, PaginatorInterface $paginator): Response
-    {
+    public function indexfront(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        CommentaireRepository $commentaireRepository,
+        GrosmotsRepository $grosmotsRepository,
+        PaginatorInterface $paginator
+    ): Response {
         // Création d'une nouvelle instance de Publication
         $publication = new Publication();
         $publication->setNbLikes(0);
@@ -59,7 +64,8 @@ class PublicationController extends AbstractController
             $grosMotsList = $grosmotsRepository->findAll();
             foreach ($grosMotsList as $grosMots) {
                 if (stripos($content, $grosMots->getGrosMots()) !== false) {
-                    // Si un gros mot est trouvé, ajouter une erreur au formulaire
+                    // Si un gros mot est trouvé, envoyer un SMS et ajouter une erreur au formulaire
+                    $this->envoyerSms();
                     $form->addError(new FormError('Le contenu de la publication contient un gros mot.'));
                     break;
                 }
@@ -100,6 +106,20 @@ class PublicationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
+    private function envoyerSms(): void
+        {
+            // Remplacer ces valeurs par vos identifiants Twilio
+           
+    
+    
+            // Initialisez le client Twilio
+           
+    
+    
+    
+           
+        }
     #[Route('/new', name: 'app_publication_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
