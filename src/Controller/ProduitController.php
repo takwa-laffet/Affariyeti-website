@@ -27,7 +27,7 @@ use Knp\Component\Pager\PaginatorInterface;
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {  
-
+//helllo from last commit 
 
     #[Route('/Client/{id_client}/details/{idC}/{idP}', name: 'app_produit_details', methods: ['GET', 'POST'])]
     public function details(int $id_client, int $idC, int $idP, EntityManagerInterface $entityManager, Request $request): Response
