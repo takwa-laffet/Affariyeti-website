@@ -6,9 +6,13 @@ use Doctrine\DBAL\Types\DecimalType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 use App\Repository\TicketEnchereRepository;
 
 #[ORM\Entity(repositoryClass: TicketEnchereRepository::class)]
+=======
+
+>>>>>>> gestion-user
 class TicketEnchere
 {
     

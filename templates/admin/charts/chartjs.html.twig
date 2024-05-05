@@ -376,7 +376,7 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href={{ path('chartsadmin') }}">ChartJs</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ path('chartsadmin') }}">ChartJs</a></li>
               </ul>
             </div>
           </li>
@@ -412,8 +412,8 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ path('login') }}"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ path('login') }}"> Register </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ path('app_login') }}"> Login </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ path('app_login') }}"> Register </a></li>
               </ul>
             </div>
           </li>
@@ -516,20 +516,21 @@
   </div>
   <!-- container-scroller -->
   <!-- base:js -->
-  <script src="/vendors/js/vendor.bundle.base.js"></script>
+  <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
+
   <!-- endinject -->
   <!-- inject:js -->
-  <script src="{{ asset('/js/off-canvas.js') }}"></script>
-  <script src="{{ asset('/js/hoverable-collapse.js') }}"></script>
-  <script src="{{ asset('/js/template.js') }}"></script>
-  <script src="{{ asset('/js/settings.js') }}"></script>
-  <script src="{{ asset('/js/todolist.js') }}"></script>
+  <script src="{{ asset('js/off-canvas.js') }}"></script>
+  <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+  <script src="{{ asset('js/template.js') }}"></script>
+  <script src="{{ asset('js/settings.js') }}"></script>
+  <script src="{{ asset('js/todolist.js') }}"></script>
   <!-- endinject -->
   <!-- plugin js for this page -->
   <script src="{{ asset('/vendors/chart.js/Chart.min.js') }}"></script>
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
-  <script src="{{ asset('/js/chart.js') }}"></script>
+  <script src="{{ asset('js/chart.js') }}"></script>
   <!-- End custom js for this page-->
 </body>
 

@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 use App\Repository\PanierRepository;
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
+=======
+
+>>>>>>> gestion-user
 class Panier
 {
     

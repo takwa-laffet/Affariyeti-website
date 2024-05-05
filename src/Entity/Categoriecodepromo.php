@@ -5,8 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Integer;
 
+<<<<<<< HEAD
 use App\Repository\CategoriecodepromoRepository;
 #[ORM\Entity(repositoryClass: CategoriecodepromoRepository::class)]
+=======
+
+>>>>>>> gestion-user
 class Categoriecodepromo
 {
     #[ORM\Id]

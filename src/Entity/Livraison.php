@@ -5,8 +5,13 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use finfo;
+<<<<<<< HEAD
 use App\Repository\LivraisonRepository;
 #[ORM\Entity(repositoryClass: LivraisonRepository::class)]
+=======
+
+
+>>>>>>> gestion-user
 class Livraison
 {
     #[ORM\Id]

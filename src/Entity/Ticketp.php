@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 use App\Repository\TicketpRepository;
 
 #[ORM\Entity(repositoryClass: TicketpRepository::class)]
+=======
+
+>>>>>>> gestion-user
 class Ticketp
 {
  

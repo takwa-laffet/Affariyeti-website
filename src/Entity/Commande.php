@@ -5,8 +5,12 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 use App\Repository\CommandeRepository;
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
+=======
+
+>>>>>>> gestion-user
 class Commande
 {
     #[ORM\Id]

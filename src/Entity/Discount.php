@@ -5,8 +5,11 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 use App\Repository\DiscountRepository;
 #[ORM\Entity(repositoryClass: DiscountRepository::class)]
+=======
+>>>>>>> gestion-user
 class Discount
 {
     

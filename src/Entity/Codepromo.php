@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 use App\Repository\CodepromoRepository;
 #[ORM\Entity(repositoryClass: CodepromoRepository::class)]
+=======
+
+>>>>>>> gestion-user
 class Codepromo
 {
     

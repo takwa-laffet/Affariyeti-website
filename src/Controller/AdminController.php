@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,11 +10,67 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(): Response
+    public function index( UserRepository $userRepository): Response
     {
-        return $this->render('admin/admin.html.twig', [
-            'controller_name' => 'AdminController',
+        if ($this->getUser()  && in_array('ADMIN', $this->getUser()->getRoles())){
+            $userCounts = [];
+
+            $registrationDates = $userRepository->findAllRegistrationDates();
+    
+            $monthLabels = [];
+    //extrait le nom complet du mois correspondant à cette date en utilisant format('F')
+            foreach ($registrationDates as $date) {
+                if ($date['date'] !== null) {
+                // Extract month name from the registration date
+                $monthLabels[] = $date['date']->format('F');
+            }
+            }
+    
+            $monthLabels = array_unique($monthLabels);//garantit que chaque mois apparaît uniquement une fois dans le tableau $monthLabels
+            $auser =  count($userRepository->findByStatus(true));
+            $iuser= count($userRepository->findByStatus(false));
+            foreach ($monthLabels as $month) {
+                $users = $userRepository->findByRegistrationMonth($month);
+    
+                // Initialize counter for active users
+                $activeCount = 0;
+                $inactive=0;
+                // Loop through users to count active users
+                foreach ($users as $user) {
+                    if ($user->getStatus()) {
+                        $activeCount++;
+                       
+                    }else{
+                        $inactive ++;
+                       
+                    }
+                }
+    
+                $activeUser[] = $activeCount;
+            $inactiveUser[] = $inactive;
+            }
+            
+            $sessionDir = ini_get('session.save_path');
+
+            // Count session files
+            $sessionFiles = glob($sessionDir . '/*');
+            $sessionCount = count($sessionFiles);
+            
+        return $this->render('dashboard/index.html.twig', [
+            'months' => array_values($monthLabels),
+            'dataActive'=>$activeUser,
+            'dataInactive'=>$inactiveUser,
+            'session'=>$sessionCount,
+            'Actuser'=>$auser,
+            'Inuser'=>$iuser,
+            'cnumber'=>count($userRepository->findByRole("CLIENT"))
+
         ]);
+    }else{
+        return $this->redirectToRoute('app_login');
+    }
+
+       /* */
     }
     #[Route('/admin/chartsadmin', name: 'chartsadmin')]
     public function charts() : Response

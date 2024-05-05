@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 use App\Repository\DepotRepository;
 #[ORM\Entity(repositoryClass: DepotRepository::class)]
+=======
+
+>>>>>>> gestion-user
 class Depot
 {
     

@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 use App\Repository\RatingRepository;
 
 #[ORM\Entity(repositoryClass: RatingRepository::class)]
+=======
+
+>>>>>>> gestion-user
 class Rating
 {
     #[ORM\Id]
