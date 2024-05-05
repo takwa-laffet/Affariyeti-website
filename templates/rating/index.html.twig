@@ -1,0 +1,95 @@
+{% extends 'ClientBase.html.twig' %}
+
+{% block body %}
+<div id="navbaritems">
+    <ul>
+        <li>
+            <a href="product.html">Store</a>
+            <ul>
+                <li><a href="{{ path('Client_categorie_index', {'id_client': id_client}) }}">Categories</a></li>
+                <li><a href="{{ path('shop_Products_index', {'id_client': id_client}) }}">Shop</a></li>
+                <li><a href="{{ path('Client_Products_index', {'id_client': id_client}) }}">My Products</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">Gestion 2</a>
+            <ul>
+                <li><a href="">Patio Furniture</a></li>
+                <li><a href="">Garden </a></li>
+                <li><a href=""> Outdoor Decor </a></li>
+                <li><a href=""> Grills and Outdoor Cooking </a></li>
+                <li><a href=""> Outdoor Shades and Structures </a></li>
+                <li><a href="">Sport and Outdoor </a></li>
+                <li><a href=""> Bedroom Furniture</a></li>
+                <li><a href=""> Office Furniture</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">Gestion 3</a>
+            <ul>
+                <li><a href="">Area Rugs By Size </a></li>
+                <li><a href="">Trending Rugs</a></li>
+                <li><a href=""> Area Rugs by Color </a></li>
+                <li><a href=""> Area Rugs by Style </a></li>
+                <li><a href=""> Rugs By Types </a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">Gestion 4</a>
+            <ul>
+                <li><a href="">Mirrros </a></li>
+                <li><a href="">Faux Plants and Flowers </a></li>
+                <li><a href=""> Decorative Accessories  </a></li>
+                <li><a href=""> Window Treatments </a></li>
+                <li><a href=""> Arts </a></li>
+                <li><a href="">Throw Pillow </a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">Gestion 5</a>
+            <ul>
+                <li><a href="">Bedding Sets</a></li>
+                <li><a href="">Bedding Essentials </a></li>
+                <li><a href="">Bed Sheets and Pollowcases</a></li>
+                <li><a href=""> Window Treatments </a></li>
+                <li><a href=""> Mattress Pads and Toppers </a></li>
+                <li><a href="">Mattress</a></li>
+                <li><a href="">Blankets</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<a href="{{ path('app_produit_details' , {'id_client': id_client , 'idC': idC , 'idP': idP}) }}">Back Details </a>
+
+<!-- Display ratings -->
+<div>
+    {% for rating in ratings %}
+
+        {% set filledStars = rating.ratingValue %}
+        {% set emptyStars = 5 - filledStars %}
+        <p>
+            {% for i in 1..filledStars %}
+                <i class="fas fa-star"></i>
+            {% endfor %}
+            {% if filledStars < 5 %}
+                {% for i in 1..emptyStars %}
+                    <i class="far fa-star"></i>
+                {% endfor %}
+            {% endif %}
+        </p>
+    {% endfor %}
+</div>
+
+{% endblock %}

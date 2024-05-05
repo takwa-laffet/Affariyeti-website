@@ -1,0 +1,222 @@
+{% extends 'clientbasee.html.twig' %}
+
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+<div id="navbaritems">
+    <div id="navbaritems">
+        <ul>
+            <li>
+                <a href="#" >Store</a> <!-- Lien modifié avec un placeholder # -->
+                <ul>
+                    <li><a href="{{ path('Client_categorie_index', {'id_client': id_client}) }}">Categories</a></li>
+                    <li><a href="{{ path('shop_Products_index', {'id_client': id_client}) }}">Shop</a></li>
+                    <li><a href="{{ path('Client_Products_index', {'id_client': id_client}) }}">My Products</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gestion 2</a>
+                <ul>
+                    <li><a href="#">Patio Furniture</a></li>
+                    <li><a href="#">Garden </a></li>
+                    <li><a href="#"> Outdoor Decor </a></li>
+                    <li><a href="#"> Grills and Outdoor Cooking </a></li>
+                    <li><a href="#"> Outdoor Shades and Structures </a></li>
+                    <li><a href="#">Sport and Outdoor </a></li>
+                    <li><a href="#"> Bedroom Furniture</a></li>
+                    <li><a href="#"> Office Furniture</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gestion 3</a>
+                <ul>
+                    <li><a href="#">Area Rugs By Size </a></li>
+                    <li><a href="#">Trending Rugs</a></li>
+                    <li><a href="#"> Area Rugs by Color </a></li>
+                    <li><a href="#"> Area Rugs by Style </a></li>
+                    <li><a href="#"> Rugs By Types </a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gestion 4</a>
+                <ul>
+                    <li><a href="#">Mirrros </a></li>
+                    <li><a href="#">Faux Plants and Flowers </a></li>
+                    <li><a href="#"> Decorative Accessories  </a></li>
+                    <li><a href="#"> Window Treatments </a></li>
+                    <li><a href="#"> Arts </a></li>
+                    <li><a href="#">Throw Pillow </a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gestion 5</a>
+                <ul>
+                    <li><a href="#">Bedding Sets</a></li>
+                    <li><a href="#">Bedding Essentials </a></li>
+                    <li><a href="#">Bed Sheets and Pollowcases</a></li>
+                    <li><a href="#"> Window Treatments </a></li>
+                    <li><a href="#"> Mattress Pads and Toppers </a></li>
+                    <li><a href="#">Mattress</a></li>
+                    <li><a href="#">Blankets</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div></div>
+    <br>
+    <br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center">Produit</h1>
+
+            <table class="table table-bordered">
+                <tbody>
+                   
+                    <tr>
+                        <th scope="row">Nom Produit</th>
+                        <td>{{ produit.nomP }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Description Produit</th>
+                        <td>{{ produit.descriptionP }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Prix Produit</th>
+                        <td>{{ produit.prixP }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Image Produit</th>
+                        <td>
+                            {% if produit.imageP %}
+                                <img src="/tn.esprit.affariety.image/{{ produit.imageP }}" alt="Product Image" class="img-fluid">
+                            {% else %}
+                                No image available
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="text-center">Ratings</h2>
+               <p>Average Rating:
+            {% set totalRating = 0 %}
+            {% set count = ratings|length %}
+            {% if count > 0 %}
+                {% for rating in ratings %}
+                    {% set totalRating = totalRating + rating.ratingValue %}
+                {% endfor %}
+                {% set averageRating = totalRating / count %}
+                {% set filledStars = averageRating | round %}
+    
+                {% for i in 1..5 %}
+                    {% if i<= filledStars %}
+                        <i class="fas fa-star"></i>
+                    {% else %}
+    
+                         <i class="far fa-star"></i>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                No ratings yet
+            {% endif %}
+            </p>
+            <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rating</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rating in ratings %}
+                            <tr>
+                                <td>
+                                {% if rating.user.id == id_client %}
+                                    {% set filledStars = rating.ratingValue %}
+                                    {% set emptyStars = 5 - filledStars %}
+                                    {% for i in 1..filledStars %}
+                                        <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                    {% if filledStars < 5 %}
+                                        {% for i in 1..emptyStars %}
+                                            <i class="far fa-star"></i>
+                                        {% endfor %}
+                                    {% endif %}
+                            
+
+                                        <form action="{{ path('delete_rating', {'ratingId': rating.ratingId, 'id_client': id_client, 'idC': produit.idC.idC, 'idP': produit.idP}) }}" method="post">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rating.ratingId) }}">
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                            
+                                        </form>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                          <td>
+    {% set userHasRated = false %}
+    {% for rating in ratings %}
+        {% if rating.user.id == id_client %}
+            {% set userHasRated = true %}
+        {% endif %}
+    {% endfor %}
+
+    {% if not userHasRated %}
+        {# Render the form for adding a new rating #}
+        {{ form_start(form) }}
+        <div class="star-rating">
+            <i class="far fa-star" data-value="1"></i>
+            <i class="far fa-star" data-value="2"></i>
+            <i class="far fa-star" data-value="3"></i>
+            <i class="far fa-star" data-value="4"></i>
+            <i class="far fa-star" data-value="5"></i>
+        </div>
+        {{ form_row(form.ratingValue, { 'attr': {'class': 'form-control', 'style': 'display: none;' } }) }}
+        <button type="submit" class="btn btn-primary">Apply</button>
+        {{ form_end(form) }}
+    {% else %}
+        {# Display a message indicating the user has already rated #}
+        <p>Your rating has already been added.</p>
+    {% endif %}
+</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center">
+                <a href="{{ path('app_produit_index',{'id_client': id_client , 'idC': produit.idC.idC , 'idP': produit.idP}) }}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>  
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const stars = document.querySelectorAll('.star-rating .fa-star');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = parseInt(this.getAttribute('data-value'));
+                const ratingValueInput = document.querySelector('#{{ form.ratingValue.vars.id }}');
+                ratingValueInput.value = value;
+                // Change the style of the selected stars
+                stars.forEach(s => {
+                    const starValue = parseInt(s.getAttribute('data-value'));
+                    if (starValue <= value) {
+                        s.classList.add('fas');
+                        s.classList.remove('far');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

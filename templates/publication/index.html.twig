@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publication index{% endblock %}
+
+{% block body %}
+    <h1>Publication index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdPub</th>
+                <th>Contenu</th>
+                <th>NbLikes</th>
+                <th>NbDislike</th>
+                <th>DatePub</th>
+                <th>Photo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publication in publications %}
+            <tr>
+                <td>{{ publication.idPub }}</td>
+                <td>{{ publication.contenu }}</td>
+                <td>{{ publication.nbLikes }}</td>
+                <td>{{ publication.nbDislike }}</td>
+                <td>{{ publication.datePub ? publication.datePub|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ publication.photo }}</td>
+                <td>
+                    <a href="{{ path('app_publication_show', {'idPub': publication.idPub}) }}">show</a>
+                    <a href="{{ path('app_publication_edit', {'idPub': publication.idPub}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_publication_new') }}">Create new</a>
+{% endblock %}

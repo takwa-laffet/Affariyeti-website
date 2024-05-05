@@ -1,0 +1,159 @@
+{% extends 'ClientBase.html.twig' %}
+
+{% block body %}
+<style>
+ .titre-categorie {
+    font-family: Arial, sans-serif; /* Police de secours */
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase; /* Convertit le texte en majuscules */
+    letter-spacing: 2px; /* Augmente l'espacement entre les lettres */
+}
+.btn-light-gray {
+        background-color: #95a595; 
+        color: #333; /
+    }
+    .btn-light-gray:hover {
+        background-color: beige; /* Couleur beige */
+        color: #333; /* Couleur du texte */
+    }
+    .btn-pastel-blue {
+        background-color: #70726E; /* Couleur bleu pastel */
+        color: #333; /* Couleur du texte */
+    }
+    .btn-pastel-blue:hover {
+        background-color: beige; /* Couleur beige */
+        color: #333; /* Couleur du texte */
+    }
+    #navbaritems {
+    position: relative;
+    z-index: 1;
+}
+
+    /* Content */
+    .card {
+        border: none;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .card-img-top {
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+  
+    
+</style>
+<div id="navbaritems">
+    <div id="navbaritems">
+        <ul>
+            <li>
+                <a href="#" >Store</a> <!-- Lien modifié avec un placeholder # -->
+                <ul>
+                    <li><a href="{{ path('Client_categorie_index', {'id_client': id_client}) }}">Categories</a></li>
+                    <li><a href="{{ path('shop_Products_index', {'id_client': id_client}) }}">Shop</a></li>
+                    <li><a href="{{ path('Client_Products_index', {'id_client': id_client}) }}">My Products</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gestion 2</a>
+                <ul>
+                    <li><a href="#">Patio Furniture</a></li>
+                    <li><a href="#">Garden </a></li>
+                    <li><a href="#"> Outdoor Decor </a></li>
+                    <li><a href="#"> Grills and Outdoor Cooking </a></li>
+                    <li><a href="#"> Outdoor Shades and Structures </a></li>
+                    <li><a href="#">Sport and Outdoor </a></li>
+                    <li><a href="#"> Bedroom Furniture</a></li>
+                    <li><a href="#"> Office Furniture</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gestion 3</a>
+                <ul>
+                    <li><a href="#">Area Rugs By Size </a></li>
+                    <li><a href="#">Trending Rugs</a></li>
+                    <li><a href="#"> Area Rugs by Color </a></li>
+                    <li><a href="#"> Area Rugs by Style </a></li>
+                    <li><a href="#"> Rugs By Types </a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gestion 4</a>
+                <ul>
+                    <li><a href="#">Mirrros </a></li>
+                    <li><a href="#">Faux Plants and Flowers </a></li>
+                    <li><a href="#"> Decorative Accessories  </a></li>
+                    <li><a href="#"> Window Treatments </a></li>
+                    <li><a href="#"> Arts </a></li>
+                    <li><a href="#">Throw Pillow </a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gestion 5</a>
+                <ul>
+                    <li><a href="#">Bedding Sets</a></li>
+                    <li><a href="#">Bedding Essentials </a></li>
+                    <li><a href="#">Bed Sheets and Pollowcases</a></li>
+                    <li><a href="#"> Window Treatments </a></li>
+                    <li><a href="#"> Mattress Pads and Toppers </a></li>
+                    <li><a href="#">Mattress</a></li>
+                    <li><a href="#">Blankets</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+   
+      <br>
+<br>
+<br>
+
+
+
+     <div class="col-md-9">
+            <h1 class="titre-categorie">Nos Categories</h1>
+            <br>
+            <br>
+            <div class="row">
+                {% for categorie in categories %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            {% set image_name = '' %}
+            {% if categorie.nomC == 'Salon' %}
+                {% set image_name = 'salon.jpg' %}
+            {% elseif categorie.nomC == 'Cuisine' %}
+                {% set image_name = 'cuisine.jpg' %}
+            {% elseif categorie.nomC == 'Literie' %}
+                {% set image_name = 'literie.jpg' %}
+            {% elseif categorie.nomC == 'Decoration' %}
+                {% set image_name = 'decoration.png' %}
+            {% endif %}
+            <img class="card-img-top" src="{{ asset('images/' ~ image_name) }}" alt="Image de {{ categorie.nomC }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ categorie.nomC }}</h5>
+                <a href="{{ path('app_produit_index', {'id_client': id_client, 'idC': categorie.idC}) }}" class="btn btn-primary btn-light-gray">Voir les produits</a>
+                <a href="{{ path('app_produit_new', {'id_client': id_client, 'idC': categorie.idC}) }}" class="btn btn-success btn-pastel-blue">Ajouter des produits</a>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <p>Aucun enregistrement trouvé</p>
+{% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

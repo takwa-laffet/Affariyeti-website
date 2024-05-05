@@ -1,0 +1,160 @@
+{% extends 'ClientBase.html.twig' %}
+
+{% block body %}
+<style>
+#navbaritems {
+    position: relative; /* Assurez-vous que le positionnement est relatif pour utiliser z-index */
+    z-index: 1; /* Définissez un z-index supérieur */
+}
+
+.product-card {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    width: 270px; /* Fixed width for each card */
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0; /* Assurez-vous que les cartes ont un z-index inférieur */
+}
+.product-card img {
+    width: 100%; /* Make the image responsive */
+    height: auto;
+    margin-bottom: 10px; /* Reduce margin for image */
+}
+
+.product-card p {
+    margin: 5px 0;
+}
+
+.product-card .button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: auto; /* Push buttons to the bottom */
+}
+
+.product-card button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.product-card button:hover {
+    background-color: #45a049;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 10px;
+    border: 10px ;
+    border-radius: 20px ;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+.bi-search {
+    vertical-align: middle;
+}
+
+/* Style spécifique pour l'icône de bookmark */
+.product-card .bookmark-icon {
+    font-size: 24px; /* Taille plus grande */
+    color: #FFC107; /* Couleur jaune pour l'icône de bookmark */
+    cursor: pointer; /* Curseur pointeur pour indiquer que l'icône est cliquable */
+}
+</style>
+
+<div id="navbaritems">
+    <div id="navbaritems">
+        <ul>
+            <li>
+                <a href="#" >Store</a> <!-- Lien modifié avec un placeholder # -->
+                <ul>
+                    <li><a href="{{ path('Client_categorie_index', {'id_client': id_client}) }}">Categories</a></li>
+                    <li><a href="{{ path('shop_Products_index', {'id_client': id_client}) }}">Shop</a></li>
+                    <li><a href="{{ path('Client_Products_index', {'id_client': id_client}) }}">My Products</a></li>
+                </ul>
+            </li>
+            <!-- Autres éléments de navigation -->
+        </ul>
+    </div>
+</div>
+
+<br>
+<div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search for products...">
+    <button id="navbarSearchBtn" class="search-btn" type="submit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+    </button>
+</div>
+<br>
+
+<div id="OverstockBrand" style="max-height: 500px; overflow-y: auto;">
+    {% for produit in produits %}
+        {% if produit.nomP|lower is not null %}
+            <div class="product-card">
+                <img src="{{ asset('tn.esprit.affariety.image/' ~ produit.imageP) }}" alt="" />
+                <p><b>{{ produit.nomP }}</b></p>
+                <p>{{ produit.descriptionP }}</p>
+                <p>{{ produit.prixP }}</p>
+                <div class="button-container">
+                    <button onclick="window.location.href='{{ path('app_produit_details' , {'id_client': id_client , 'idC': produit.idC.idC , 'idP': produit.idP}) }}'">Details</button>
+                    <button class="add-to-cart-button" data-product-id="{{ produit.idP }}"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                    {% if produit.enregistre %}
+                        <i class="far fa-bookmark fa-lg bookmark-icon"></i> <!-- Icône pour les produits enregistrés -->
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById('searchInput');
+        const productCards = document.querySelectorAll('.product-card');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.trim().toLowerCase();
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('b').innerText.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
