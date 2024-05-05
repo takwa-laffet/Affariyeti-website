@@ -5,12 +5,8 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-
-<<<<<<< HEAD
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 
-=======
->>>>>>> gestion-user
 class Article
 {
     #[ORM\Id]

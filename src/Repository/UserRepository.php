@@ -24,7 +24,6 @@ class UserRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('u');
 
-<<<<<<< HEAD
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
@@ -39,7 +38,7 @@ class UserRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
-=======
+
         if (!empty($search)) {
             $qb->andWhere('u.email LIKE :search')
                ->setParameter('search', '%'.$search.'%');
@@ -87,8 +86,6 @@ class UserRepository extends ServiceEntityRepository
           //  ->getQuery()
           //  ->getResult();
    // }
->>>>>>> gestion-user
-
 //    public function findOneBySomeField($value): ?User
 //    {
 //        return $this->createQueryBuilder('u')

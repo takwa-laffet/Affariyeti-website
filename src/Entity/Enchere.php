@@ -3,13 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-<<<<<<< HEAD
 use App\Repository\EnchereRepository;
 #[ORM\Entity(repositoryClass: EnchereRepository::class)]
-=======
-
->>>>>>> gestion-user
 class Enchere
 {
     

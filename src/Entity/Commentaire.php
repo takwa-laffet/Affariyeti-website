@@ -7,11 +7,9 @@ use App\Entity\Publication;
 
 use Doctrine\ORM\Mapping as ORM;
 
-<<<<<<< HEAD
 use App\Repository\CommentaireRepository;
 #[ORM\Entity(repositoryClass: CommentaireRepository::class)]
-=======
->>>>>>> gestion-user
+
 class Commentaire
 {
     

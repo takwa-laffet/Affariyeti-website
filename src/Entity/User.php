@@ -1,21 +1,15 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-<<<<<<< HEAD
 use App\Repository\UserRepository;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
-=======
-#[ORM\Entity(repositoryClass: \App\Repository\UserRepository::class)]
 #[ORM\Table(name: 'user')]
 #[ORM\UniqueConstraint(name: 'UNIQ_8D93D649E7927C74', columns: ['email'])]
+
 class User implements UserInterface
->>>>>>> gestion-user
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

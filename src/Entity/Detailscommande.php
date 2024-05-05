@@ -3,13 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-<<<<<<< HEAD
 use App\Repository\DetailscommandeRepository;
 #[ORM\Entity(repositoryClass: DetailscommandeRepository::class)]
-=======
 
->>>>>>> gestion-user
 class Detailscommande
 {
     
