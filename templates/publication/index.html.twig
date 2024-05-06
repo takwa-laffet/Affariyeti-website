@@ -36,14 +36,14 @@
                         {% endif %}
                     </td>
                       <td>
-                                <a href="{{ path('app_publication_comments', {'idPub': publication.idPub}) }}">Voir les Commentaires👁‍🗨</a>
+                                <a href="{{ path('app_publication_comments', {'idPub': publication.idPub, 'idClient': publication.idClient.id}) }}">Voir les Commentaires👁‍🗨</a>
                     </td>
                     <td>
                     <button type="button" class="btn btn-info">
-        <a href="{{ path('app_publication_show', {'idPub': publication.idPub}) }}" style="color: white; text-decoration: none;">afficher🔎</a>
+<a href="{{ path('app_publication_show', {'idPub': publication.idPub, 'idClient': publication.idClient.id}) }}" style="color: white; text-decoration: none;">afficher🔎</a>
     </button>
     <button type="button" class="btn btn-success">
-        <a href="{{ path('app_publication_edit', {'idPub': publication.idPub}) }}" style="color: white; text-decoration: none;">éditer🖊</a>
+<a href="{{ path('app_publication_edit', {'idPub': publication.idPub, 'idClient': publication.idClient.id}) }}" style="color: white; text-decoration: none;">éditer🖊</a>
     </button>
                          <span style="color: red;">
                         {{ include('publication/_delete_form.html.twig') }}
@@ -58,7 +58,7 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_publication_new') }}">👉Ajouter une publication👈</a>
+<a href="{{ path('app_publication_new', {'idClient': idClient}) }}">👉Ajouter une publication👈</a>
 
 
 

@@ -237,6 +237,12 @@
             text-decoration: none;
             cursor: pointer;
         }
+        .notification {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
         
     </style>
 </head>
@@ -253,10 +259,6 @@
                 {{ form_widget(form.contenu, {'attr': {'class': 'form-control', 'id': 'publication-contenu'}}) }}
             </div>
             <div class="form-group">
-                {{ form_widget(form.idClient, {'attr': {'id': 'publication-client'}}) }}
-                {{ form_errors(form.idClient) }}
-            </div>
-            <div class="form-group">
                 <label for="publication-photo">
                     <i class="fas fa-upload"></i> Ajouter une photo
                 </label>
@@ -266,6 +268,7 @@
             </div>
             {{ form_end(form) }}
         </div>
+                <div id="notifications-container"></div>
         <!-- Publications -->
        {% for publication in publications %}
     <div class="publication">
@@ -288,23 +291,26 @@
         </div>
         <div class="action-bar">
             <div class="action-buttons">
-                <span class="action-button" onclick="likePost(this)"><i class="far fa-thumbs-up"></i> J'aime</span>
-                <span class="action-button" onclick="dislikePost(this)"><i class="far fa-thumbs-down"></i> Je n'aime pas</span>
+<span class="action-button" onclick="likePost('{{ publication.idPub }}', '{{ publication.idClient.id }}')">
+                            <i class="far fa-thumbs-up"></i> J'aime
+                        </span>        
+<span class="action-button" onclick="dislikePost('{{ publication.idPub }}', '{{ publication.idClient.id }}')"><i class="far fa-thumbs-down"></i> Je n'aime pas</span>
                 <span class="action-button" onclick="toggleComments(this)"><i class="far fa-comment"></i> Commentaires</span>
                 <span class="action-button" onclick="toggleOptions(this)"> Options <i class="fas fa-caret-down"></i>
                     <div class="options">
-                        <a href="{{ path('app_publication_editfront', {'idPub': publication.idPub}) }}" class="edit-link" data-edit-url="{{ path('app_publication_editfront', {'idPub': publication.idPub}) }}">Éditer</a>
-                        <a href="#" onclick="event.preventDefault(); if (confirm('Êtes-vous sûr(e) de vouloir supprimer cet élément ?')) { document.getElementById('form-delete-{{ publication.idPub }}').submit(); }">
-                            Supprimer
-                        </a>
-                        <form id="form-delete-{{ publication.idPub }}" action="{{ path('app_publication_supprimer', {'idPub': publication.idPub}) }}" method="post" style="display: none;">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="{{ csrf_token('supprimer' ~ publication.idPub) }}">
-                        </form>
+<a href="{{ path('app_publication_editfront', {'idPub': publication.idPub, 'idClient': publication.idClient.id}) }}" class="edit-link" data-edit-url="{{ path('app_publication_editfront', {'idPub': publication.idPub, 'idClient': publication.idClient.id}) }}">Éditer</a>
+           <a href="#" onclick="event.preventDefault(); if (confirm('Êtes-vous sûr(e) de vouloir supprimer cet élément ?')) { document.getElementById('form-delete-{{ publication.idPub }}').submit(); }">
+    Supprimer
+</a>
+<form id="form-delete-{{ publication.idPub }}" action="{{ path('app_publication_supprimer', {'idPub': publication.idPub, 'idClient': publication.idClient.id}) }}" method="post" style="display: none;">
+    <input type="hidden" name="_token" value="{{ csrf_token('supprimer' ~ publication.idPub) }}">
+</form>
+
                     </div>
                 </span>
             </div>
         </div>
+
         <div class="comment-section">
             {% if comments[publication.idPub] %}
                 {% for commentaire in comments[publication.idPub] %}
@@ -318,7 +324,7 @@
             {% else %}
                 <p>Pas de commentaires.</p>
             {% endif %}
-            <a href="{{ path('app_publication_commentaire', {'idPub': publication.idPub}) }}">Ajouter un commentaire </a>
+<a href="{{ path('app_publication_commentaire', {'idPub': publication.idPub, 'idClient': publication.idClient.id}) }}">Ajouter un commentaire</a>
         </div>
     </div>
 {% else %}
@@ -338,6 +344,7 @@
         <div id="editModalContent"></div>
     </div>
 </div>
+
 <script>
     // Fonction pour afficher ou masquer les options de publication
     function toggleOptions(element) {
@@ -350,25 +357,25 @@
     }
 
     // Fonction pour afficher ou masquer la section des commentaires
-function toggleComments(button) {
-    var commentSection = button.parentNode.parentNode.nextElementSibling;
-    if (commentSection.style.display === 'none') {
-        commentSection.style.display = 'block'; // Afficher la section
-    } else {
-        commentSection.style.display = 'none'; // Masquer la section
+    function toggleComments(button) {
+        var commentSection = button.parentNode.parentNode.nextElementSibling;
+        if (commentSection.style.display === 'none') {
+            commentSection.style.display = 'block'; // Afficher la section
+        } else {
+            commentSection.style.display = 'none'; // Masquer la section
+        }
     }
-}
 
     // Intercepter le clic sur le lien "Éditer"
     document.addEventListener('click', function(event) {
         if (event.target && event.target.matches('.edit-link')) {
-        event.preventDefault(); // Empêcher le comportement par défaut du lien
-        var editUrl = event.target.getAttribute('data-edit-url'); // Récupérer l'URL de l'édition
-        if (editUrl) {
-            openEditModal(editUrl); // Ouvrir la fenêtre modale avec le formulaire d'édition
+            event.preventDefault(); // Empêcher le comportement par défaut du lien
+            var editUrl = event.target.getAttribute('data-edit-url'); // Récupérer l'URL de l'édition
+            if (editUrl) {
+                openEditModal(editUrl); // Ouvrir la fenêtre modale avec le formulaire d'édition
+            }
         }
-         }
-        });
+    });
 
     // Fonction pour ouvrir la fenêtre modale d'édition
     function openEditModal(editUrl) {
@@ -376,34 +383,101 @@ function toggleComments(button) {
         fetch(editUrl)
         .then(response => response.text())
         .then(html => {
-             document.getElementById('editModalContent').innerHTML = html;
-             document.getElementById('editModal').style.display = 'block'; // Modifier le style pour afficher la fenêtre modale
-             });
-        }
+            document.getElementById('editModalContent').innerHTML = html;
+            document.getElementById('editModal').style.display = 'block'; // Modifier le style pour afficher la fenêtre modale
+        });
+    }
 
     // Fonction pour fermer la fenêtre modale d'édition
     function closeEditModal() {
         document.getElementById('editModal').style.display = 'none';
-            history.back(); // Revenir à l'URL précédente
-
+        history.back(); // Revenir à l'URL précédente
     }
 
-    // Fonction pour gérer le bouton J'aime
-    function likePost(button) {
-        console.log("J'aime");
-    }
+ // Fonction pour gérer le clic sur le bouton J'aime
+    function likePost(idPub, idClient) {
+                 fetch('{{ path('app_publication_like') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ idPub: idPub, idClient: idClient })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Mettre à jour le nombre de likes affichés
+                const likesCountElement = document.querySelector('.likes-count[data-id="' + idPub + '"]');
+                if (likesCountElement) {
+                    likesCountElement.textContent = '(' + data.likesCount + ')';
+                }
+                // Enregistrer dans localStorage pour éviter les clics multiples
+                localStorage.setItem('liked_' + idPub, true);
 
-    // Fonction pour gérer le bouton Je n'aime pas
-    function dislikePost(button) {
-        console.log("Je n'aime pas");
+                // Créer une notification
+                const notification = document.createElement('div');
+                notification.classList.add('notification');
+                notification.textContent = 'Vous avez aimé la publication.';
+                document.getElementById('notifications-container').appendChild(notification);
+
+                // Supprimer la notification après un certain délai
+                setTimeout(() => {
+                    notification.remove();
+                }, 5000); // Supprimez la notification après 5 secondes (5000 millisecondes)
+            } else {
+                alert('Une erreur s\'est produite lors de l\'enregistrement de votre like.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+ // Fonction pour gérer le bouton Je n'aime pas
+function dislikePost(idPub, idClient) {
+        // Mettre à jour la base de données
+         fetch('{{ path('app_publication_dislike') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ idPub: idPub, idClient: idClient })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Mettre à jour le nombre de dislikes affichés
+                const dislikesCountElement = document.querySelector('.dislikes-count[data-id="' + idPub + '"]');
+                if (dislikesCountElement) {
+                    dislikesCountElement.textContent = '(' + data.dislikesCount + ')';
+                }
+                // Enregistrer dans localStorage pour éviter les clics multiples
+                localStorage.setItem('disliked_' + idPub, true);
+
+                // Créer une notification
+                const notification = document.createElement('div');
+                notification.classList.add('notification');
+                notification.textContent = 'Vous n\'avez pas aimé la publication';
+                document.getElementById('notifications-container').appendChild(notification);
+
+                // Supprimer la notification après un certain délai
+                setTimeout(() => {
+                    notification.remove();
+                }, 5000); // Supprimez la notification après 5 secondes (5000 millisecondes)
+            } else {
+                alert('Une erreur s\'est produite lors de l\'enregistrement de votre dislike.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 
     function updatePhotoPath(input) {
         const photoPath = document.getElementById('photo-path');
         photoPath.value = input.files[0].name;
     }
-
-
 </script>
 </body>
 </html>

@@ -20,9 +20,7 @@ class CommentaireType extends AbstractType
                 'placeholder' => 'Écrivez votre commentaire ici'
             ]
         ])
-            ->add('idPub')
-            ->add('idClient')
-        ;
+               ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

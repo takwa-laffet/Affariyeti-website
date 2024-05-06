@@ -8,6 +8,6 @@
 
         {{ include('publication/_form.html.twig', {'button_label': 'Modifier'}) }}
   {{ include('publication/_delete_form.html.twig') }}
-        <a href="{{ path('app_publication_index') }}">🔙Retourner à la liste🔙</a>
+        <a href="{{ path('app_publication_index', {'idClient': idClient}) }}">🔙Retourner à la liste🔙</a>
     {% endblock %}
 {% endblock %}

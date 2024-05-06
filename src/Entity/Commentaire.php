@@ -29,12 +29,10 @@ class Commentaire
 
     #[ORM\ManyToOne(targetEntity: Publication::class, inversedBy: 'commentaires')]
     #[ORM\JoinColumn(name: 'id_pub', referencedColumnName: 'id_pub')]
-    #[Assert\NotNull(message: "La publication ne peut pas être vide.")]
     private ?Publication $idPub = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commentaires')]
     #[ORM\JoinColumn(name: 'id_client', referencedColumnName: 'id')]
-    #[Assert\NotNull(message: "L'utilisateur ne peut pas être vide.")]
     private ?User $idClient = null;
 
 

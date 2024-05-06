@@ -36,7 +36,6 @@ class Publication
 
     #[ORM\ManyToOne(inversedBy: 'publications')]
     #[ORM\JoinColumn(name: 'id_client', nullable: true)]
-    #[Assert\NotNull(message: "La publication doit être associée à un utilisateur.")]
     private ?User $idClient = null;
 
     // Ajoutez cette propriété si vous utilisez Symfony 5.3+

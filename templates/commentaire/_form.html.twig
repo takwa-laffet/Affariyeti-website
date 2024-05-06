@@ -38,17 +38,6 @@ button.btn-submit:hover {
         {{ form_widget(form.contenu) }}
     </div>
 
-    <div class="form-group">
-        {{ form_label(form.idPub) }}
-        {{ form_errors(form.idPub) }}
-        {{ form_widget(form.idPub) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.idClient) }}
-        {{ form_errors(form.idClient) }}
-        {{ form_widget(form.idClient) }}
-    </div>
 
     <button class="btn btn-submit">{{ button_label|default('Enregistrer✅') }}</button>
 {{ form_end(form) }}

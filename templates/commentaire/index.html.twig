@@ -25,12 +25,12 @@
                 <td>{{ commentaire.dateCom ? commentaire.dateCom|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                          <button type="button" class="btn btn-info">
-        <a href="{{ path('app_commentaire_show', {'idCom': commentaire.idCom}) }}" style="color: white; text-decoration: none;">afficher🔎</a>
+        <a href="{{ path('app_commentaire_show', {'idCom': commentaire.idCom,'idClient': commentaire.idClient.id}) }}" style="color: white; text-decoration: none;">afficher🔎</a>
     </button>
     <button type="button" class="btn btn-success">
-        <a href="{{ path('app_commentaire_edit', {'idCom': commentaire.idCom}) }}" style="color: white; text-decoration: none;">éditer🖊</a>
+        <a href="{{ path('app_commentaire_edit', {'idCom': commentaire.idCom,'idClient': commentaire.idClient.id}) }}" style="color: white; text-decoration: none;">éditer🖊</a>
     </button>
-                        {{ include('commentaire/_delete_form.html.twig') }}
+                        {{ include('commentaire/_supprimer_form.html.twig') }}
 
                 </td>
             </tr>
@@ -42,5 +42,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_commentaire_new') }}">👉Ajouter un commentaire👈 </a>
+    <a href="{{ path('app_commentaire_new', {'idPub': publication.idPub, 'idClient': publication.idClient.id}) }}" class="btn btn-primary">Ajouter un commentaire</a>
+    <a href="{{ path('app_publication_index', {'idClient': publication.idClient.id}) }}" >Retourner aux publications</a>
+
 {% endblock %}
