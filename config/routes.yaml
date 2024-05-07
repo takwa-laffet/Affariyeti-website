@@ -1,9 +1,3 @@
 #index:
 #    path: /
-#    controller: App\Controller\DefaultController::index
-app_chatbot:
-    path: /chatbot
-    controller: App\Controller\ChatbotController::chatbot
-api_calendar:
-    path: /api/calendar
-    controller: App\Controller\CalendarController::calendarApi
+#    controller: App\Controller\DefaultController::indexA

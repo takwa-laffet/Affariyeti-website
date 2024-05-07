@@ -13,7 +13,7 @@ use App\Entity\Enchere;
 
 class CalendarController extends AbstractController
 {
-    #[Route('admin/auction/Calendar', name: 'Calendar')]
+    #[Route('admin/auction/Calendar', name: 'appCalendar')]
     public function calendar(EnchereRepository $enchereRepository): Response
     {
 

@@ -12,15 +12,15 @@
 
       height: '100%',
       expandRows: true,
-      slotMinTime: '08:00',
-      slotMaxTime: '20:00',
+      slotMinTime: '00:00',
+      slotMaxTime: '23:00',
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       },
       initialView: 'dayGridMonth',
-      initialDate: '2024-01-12',
+      initialDate: '2024-05-05',
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       selectable: true,
@@ -30,8 +30,8 @@
       {% for enchereEvent in enchereEvents %}
       {
           title: '{{ enchereEvent.getNomEnchere() }}',
-          start: '{{ enchereEvent.getDateDebut()|date('Y-m-d') }}T{{ enchereEvent.getHeured() }}',
-          end: '{{ enchereEvent.getDateFin()|date('Y-m-d') }}T{{ enchereEvent.getHeuref() }}'
+          start: '{{ enchereEvent.getDateDebut()}}',
+          end: '{{ enchereEvent.getDateFin()}}'
       },
       {% endfor %}
       ]

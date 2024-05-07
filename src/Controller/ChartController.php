@@ -7,11 +7,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 use App\Entity\Enchere;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ChartController extends AbstractController
 {
-    #[Route('admin/auction/charts', name: 'chart')]
+    #[Route('/admin/auction/charts', name: 'chart')]
     public function index(ChartBuilderInterface $chartBuilder): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -25,7 +24,8 @@ class ChartController extends AbstractController
         $data = [];
 
         foreach ($enchereData as $enchere) {
-            $labels[] = $enchere->getDateDebut(); // Use date début as labels
+            // Assuming getDateDebut() and getMontantInitial() return valid values
+            $labels[] = $enchere->getDateDebut()->format('Y-m-d'); // Use date début as labels
             $data[] = $enchere->getMontantInitial(); // Use montant initial as data
         }
 
@@ -43,6 +43,7 @@ class ChartController extends AbstractController
             ],
         ]);
 
+        // Convert chart data to JSON for passing to the template
         $chartData = [
             'labels' => $chart->getData()['labels'],
             'datasets' => $chart->getData()['datasets'],

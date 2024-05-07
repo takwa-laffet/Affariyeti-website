@@ -89,7 +89,7 @@
            <li>
             <a href="">More</a>
             <ul> 
-              <li><a href="">chatboot</a></li>
+              <li><a href="{{path('chat')}}">chatboot</a></li>
               
             </ul>
           </li>
@@ -376,3 +376,16 @@
 </html>
 <script src="{{ asset('./js/navbarscripting.js') }}"> </script>
 <script src="{{ asset('./js/home.js') }}"></script>
+
+<script>
+  window.embeddedChatbotConfig = {
+  chatbotId: "-Jj_peuKPRbW3WYCOyaDt",
+  domain: "www.chatbase.co"
+  }
+  </script>
+  <script
+  src="https://www.chatbase.co/embed.min.js"
+  chatbotId="-Jj_peuKPRbW3WYCOyaDt"
+  domain="www.chatbase.co"
+  defer>
+  </script>
