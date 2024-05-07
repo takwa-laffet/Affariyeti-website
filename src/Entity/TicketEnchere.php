@@ -2,11 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\DecimalType;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 use App\Repository\TicketEnchereRepository;
+use App\Entity\Enchere; // Import Enchere entity
 
 #[ORM\Entity(repositoryClass: TicketEnchereRepository::class)]
 class TicketEnchere
@@ -20,8 +19,10 @@ class TicketEnchere
     
     private ?int $ticketId = null;
     
-    #[ORM\Column  ] private ?int $enchereId = null;   
-    #[ORM\Column(type: "decimal")  ] private ?string $prix = null;   
+    #[ORM\ManyToOne(targetEntity: Enchere::class)] 
+    #[ORM\JoinColumn(nullable: false)] private ?Enchere $enchereId = null; 
+
+    #[ORM\Column (length: 255)] private ?string $prix = null;
 
     public function getTicketId(): ?int 
     {
@@ -33,7 +34,7 @@ class TicketEnchere
         return $this->enchereId;
     }
 
-    public function setEnchereId(?Enchere $enchereId): static
+    public function setEnchereId(?Enchere $enchereId): static 
     {
         $this->enchereId = $enchereId;
 
@@ -51,6 +52,4 @@ class TicketEnchere
 
         return $this;
     }
-
-
 }

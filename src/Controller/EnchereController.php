@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Enchere;
 use App\Form\EnchereType;
+use App\Entity\TicketEnchere;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,37 +42,48 @@ class EnchereController extends AbstractController
     #[Route('/new', name: 'app_enchere_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-            $enchere = new Enchere();
-            $form = $this->createForm(EnchereType::class, $enchere);
-            $form->handleRequest($request);
+        $enchere = new Enchere();
+        $form = $this->createForm(EnchereType::class, $enchere);
+        
+        $form->handleRequest($request);
     
-            if ($form->isSubmitted() && $form->isValid()) {
-                // Handle image upload
-                $imageFile = $form->get('imageFile')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Handle image upload
+            $imageFile = $form->get('imageFile')->getData();
     
-                if ($imageFile) {
-                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                    $safeFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
     
-                    try {
-                        $imageFile->move(
-                            $this->getParameter('images_directory'), // Specify the directory where images should be uploaded
-                            $safeFilename
-                        );
-                    } catch (FileException $e) {
-                    }
-    
-                    $enchere->setImage($safeFilename);
+                try {
+                    $imageFile->move(
+                        $this->getParameter('public_images_auctions'), // Specify the directory where images should be uploaded
+                        $safeFilename
+                    );
+                } catch (FileException $e) {
+                    // Handle the file exception, if necessary
+                $error = $e->getMessage();
                 }
     
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($enchere);
-                $entityManager->flush();
-    
-                return $this->redirectToRoute('app_enchere_index');
+                $enchere->setImage($safeFilename);
             }
     
-            
+            // Persist the enchere first
+            $entityManager->persist($enchere);
+            $entityManager->flush();
+    
+            // Create 10 tickets for the enchere
+            for ($i = 1; $i <= 10; $i++) {
+                $ticketEnchere = new TicketEnchere();
+                $ticketEnchere->setEnchereId($enchere);
+                $ticketEnchere->setPrix(strval($i)); // Prices range from 1 to 10
+                $entityManager->persist($ticketEnchere);
+            }
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('app_enchere_index');
+        }
+    
         return $this->renderForm('enchere/new.html.twig', [
             'enchere' => $enchere,
             'form' => $form,

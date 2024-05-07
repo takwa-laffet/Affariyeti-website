@@ -10,12 +10,10 @@ class Enchere
 {
     
     #[ORM\Id]
-
-    #[ORM\GeneratedValue]
-    
-    #[ORM\Column]
-    
+    #[ORM\GeneratedValue(strategy: "AUTO")]
+    #[ORM\Column(name: "enchere_id", type: "integer")]
     private ?int $enchereId = null;
+    
     #[ORM\Column (length: 255) ] private ?string $idclcreree = null;   
     #[ORM\Column (length: 255) ] private ?string $idclenchere = null;   
 
