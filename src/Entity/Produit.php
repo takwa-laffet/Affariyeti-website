@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use App\Repository\ProduitRepository;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit

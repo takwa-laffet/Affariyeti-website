@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use App\Repository\DepotRepository;
 #[ORM\Entity(repositoryClass: DepotRepository::class)]
+
 class Depot
 {
     

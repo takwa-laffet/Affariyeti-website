@@ -43,8 +43,7 @@
         "symfony/yaml": "5.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "openai/openai": "1.*"
-
+        "victor-prdh/recaptcha-bundle": "^1.9"
     },
     "config": {
         "allow-plugins": {

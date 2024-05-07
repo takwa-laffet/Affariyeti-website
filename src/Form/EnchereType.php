@@ -24,7 +24,6 @@ class EnchereType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('idclcreree')
             ->add('dateDebut', TextType::class, [
                 'label' => 'Date de début',
                 'required' => true,

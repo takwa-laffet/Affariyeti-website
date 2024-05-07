@@ -7,6 +7,7 @@ use phpDocumentor\Reflection\Types\Integer;
 
 use App\Repository\CategoriecodepromoRepository;
 #[ORM\Entity(repositoryClass: CategoriecodepromoRepository::class)]
+
 class Categoriecodepromo
 {
     #[ORM\Id]

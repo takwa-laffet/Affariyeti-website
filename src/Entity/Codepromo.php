@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use App\Repository\CodepromoRepository;
 #[ORM\Entity(repositoryClass: CodepromoRepository::class)]
+
 class Codepromo
 {
     

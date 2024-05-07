@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use App\Repository\PanierRepository;
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 class Panier

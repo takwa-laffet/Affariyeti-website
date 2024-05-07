@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use App\Repository\DetailscommandeRepository;
 #[ORM\Entity(repositoryClass: DetailscommandeRepository::class)]
+
 class Detailscommande
 {
     

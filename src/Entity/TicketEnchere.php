@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use App\Repository\TicketEnchereRepository;
 use App\Entity\Enchere; // Import Enchere entity
 
