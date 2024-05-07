@@ -130,8 +130,13 @@
 
 
                 <div id="addToCartProductDetail">
-                    <button onclick="addtocartproduct()">Join to Bid </button>
-                </div>
+                  <form action="{{ path('app_enchere_show', {'enchereId': enchere.enchereId}) }}" method="post">
+                    <button type="submit" name="join_bid">Join to Bid</button>
+                </form>
+                             </div>
+                             <form action="{{ path('app_enchere_bid', {'enchereId': enchere.enchereId}) }}" method="GET">
+                              <button type="submit" name="join_bid">let's go</button>
+                          </form>
              </div>
              <div>             
               

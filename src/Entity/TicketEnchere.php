@@ -18,10 +18,7 @@ class TicketEnchere
     #[ORM\Column]
     
     private ?int $ticketId = null;
-    
-    #[ORM\ManyToOne(targetEntity: Enchere::class)] 
-    #[ORM\JoinColumn(nullable: false)] private ?Enchere $enchereId = null; 
-
+    #[ORM\Column(name: "enchere_id", type: "integer")]private ?int $enchereId = null;
     #[ORM\Column (length: 255)] private ?string $prix = null;
 
     public function getTicketId(): ?int 
@@ -29,12 +26,12 @@ class TicketEnchere
         return $this->ticketId;
     }
 
-    public function getEnchereId(): ?Enchere
+    public function getEnchereId(): ?int 
     {
         return $this->enchereId;
     }
 
-    public function setEnchereId(?Enchere $enchereId): static 
+    public function setEnchereId(?int $enchereId): static 
     {
         $this->enchereId = $enchereId;
 
