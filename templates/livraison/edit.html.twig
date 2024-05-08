@@ -3,104 +3,82 @@
 {% block title %}Edit Livraison{% endblock %}
 
 {% block body %}
-      <style>
-        /* Wrapper style */
-        .content-wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh; /* Utilise toute la hauteur de la vue */
-        }
+<style>
+    /* CSS styles for the form container */
+    .livraison-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Form container style */
-        .livraison-form {
-          background-color: #fff;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          max-width: 400px; /* Limite la largeur maximale du formulaire */
-          width: 100%; /* Assure que le formulaire prend toute la largeur disponible */
-          margin:auto;
-        }
+    /* CSS styles for form fields and labels */
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+    }
 
-        /* Form field label style */
-        label {
-          display: block;
-          font-size: 15px;
-          color: #333;
-          margin-bottom: 8px;
-        }
+    input[type="text"],
+    input[type="date"],
+    select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
 
-        /* Form field style */
-        input[type="text"],
-        input[type="date"],
-        select {
-          width: 100%;
-          padding: 12px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          box-sizing: border-box;
-          font-size: 16px;
-          transition: border-color 0.3s;
-          margin-bottom: 15px;
-          margin:auto;
-        }
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    select:focus {
+        outline: none;
+        border-color: #007bff;
+    }
 
-        /* Form field focus style */
-        input[type="text"]:focus,
-        input[type="date"]:focus,
-        select:focus {
-          border-color: #007bff;
-          outline: none;
-        }
+    /* CSS styles for submit button */
+    button[type="submit"] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
 
-        /* Submit button style */
-        button[type="submit"] {
-          background-color: #4CAF50;
-          color: white;
-          padding: 12px 20px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 16px;
-          transition: background-color 0.3s;
-          width: 100%;
-        }
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
 
-        /* Submit button hover style */
-        button[type="submit"]:hover {
-          background-color: #45a049;
-        }
+    /* CSS styles for back to list link */
+    a {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
 
-        /* Back to list link style */
-        a {
-          display: block;
-          margin-top: 20px;
-          text-align: center;
-          color: #007bff;
-          text-decoration: none;
-          font-size: 16px;
-          transition: color 0.3s;
-        }
+    a:hover {
+        color: #0056b3;
+    }
+</style>
 
-        /* Back to list link hover style */
-        a:hover {
-          color: #0056b3;
-        }
-      </style>
-
-
-    
-
-    <div class="livraison-form">
-        <form method="post" action="{{ path('app_livraison_edit', {'id': livraison.id}) }}">
+<div class="livraison-form">
+    <form method="post" action="{{ livraison.id is not null ? path('app_livraison_edit', {'id': livraison.id}) : '#' }}">
         <h1>Edit Livraison</h1>
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-           
-            {{ form_end(form) }}
-        </form>
-    </div>
-
-    <a href="{{ path('app_livraison_index') }}">Back to List</a>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </form>
+</div>
 {% endblock %}

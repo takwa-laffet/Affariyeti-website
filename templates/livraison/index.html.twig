@@ -3,13 +3,11 @@
 {% block content %}
 
 {% block stylesheets %}
-    {# {{ parent() }} #}
     <style>
-        /* Custom styles for the table */
+        /* Custom styles for the table and chart */
         .table-container {
             margin: 20px auto;
             width: 80%;
-            border-collapse: collapse;
         }
 
         .table-container table {
@@ -19,7 +17,7 @@
 
         .table-container th,
         .table-container td {
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ddd;
             text-align: left;
         }
@@ -63,21 +61,72 @@
         .table-container .actions a.delete:hover {
             color: #bd2130;
         }
+
+        .chart-container {
+            margin: 20px auto;
+            width: 80%;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
     <div class="table-container">
-      
-        <a href="{{ path('app_livraison_new') }}">Create New</a>
+        <a href="{{ path('app_livraison_new') }}" class="btn btn-primary">Create New</a>
     </div>
-     {# Render line chart for delivery statistics by address #}
-    <h2>Delivery Statistics by Address</h2>
+
+    <h2>statistics</h2>
     <div class="chart-container">
         <canvas id="deliveryStatisticsChart" width="800" height="400"></canvas>
     </div>
 
-    {# JavaScript for rendering the line chart #}
+    <h2>List of Deliveries</h2>
+    <table class="table">
+        <!-- Table Header -->
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Address Livraison</th>
+                <th>Date Commande</th>
+                <th>Date Livraison</th>
+                <th>Status Livraison</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Depot</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <!-- Table Body -->
+        <tbody>
+            {% for livraison in livraisons %}
+            <tr>
+                <td>{{ livraison.id }}</td>
+                <td>{{ livraison.adresselivraison }}</td>
+                <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livraison.statuslivraison }}</td>
+                <td>{{ livraison.latitude }}</td>
+                <td>{{ livraison.longitude }}</td>
+                <td>{{ livraison.iddepot}}</td>
+                <td>
+                    <a href="{{ path('app_livraison_show', {'id': livraison.id}) }}" class="btn btn-info">Show</a>
+                    <a href="{{ path('app_livraison_pdf', {'id': livraison.id}) }}" class="btn btn-success">Generate PDF</a>
+                    <a href="{{ path('app_livraison_edit', {'id': livraison.id}) }}" class="btn btn-warning">Edit</a>
+                       {{ include('livraison/_delete_form.html.twig') }}
+
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="9" class="no-records">No records found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+   <!-- Pagination -->
+  
+
+    <!-- JavaScript for rendering the line chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -103,55 +152,11 @@
                 }
             });
         });
+        
     </script>
-     <h2>List of Deliveries</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Address Livraison</th>
-                <th>Date Commande</th>
-                <th>Date Livraison</th>
-                <th>Status Livraison</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Depot</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for livraison in livraisons %}
-            <tr>
-                <td>{{ livraison.id }}</td>
-                <td>{{ livraison.adresselivraison }}</td>
-                <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livraison.statuslivraison }}</td>
-                <td>{{ livraison.latitude }}</td>
-                <td>{{ livraison.longitude }}</td>
-                <td>{{ livraison.iddepot}}</td>
-                <td>
-                    <a href="{{ path('app_livraison_show', {'id': livraison.id}) }}">show</a>
-                    <a href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">edit</a>
-                </td>
-            </tr>
-       <div id="qrcode_{{ livraison.id}}"></div>
- 
- <script>
-    var qrcode_{{ livraison.id }} = new QRCode(document.getElementById("qrcode_{{ livraison.id }}"), {
-        text: "{{ livraison.adresselivraison }}", // Utiliser le nom du cours directement
-        width: 90,
-        height: 90
-    });
-</script>
+      <nav aria-label="Page navigation" class="pagination">
+        {{ knp_pagination_render(livraisons) }}
+    </nav>
 
-            {% else %}
-            <tr>
-                <td colspan="9" class="no-records">No records found</td>
-            </tr>
-            {% endfor %}
-            {{ knp_pagination_render(livraisons) }}
-        </tbody>
-    </table>
 {% endblock %}
 {% endblock %}

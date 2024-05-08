@@ -22,6 +22,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
+use Twilio\Rest\Client;
 
 
 #[Route('/livraison')]
@@ -34,12 +35,14 @@ class LivraisonController extends AbstractController
         $this->livraisonRepository = $livraisonRepository;
     }
 
+
     #[Route('/', name: 'app_livraison_index', methods: ['GET'])]
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
         $statistics = $this->livraisonRepository->getAddressStatistics();
 
         $query = $this->livraisonRepository->createQueryBuilder('f')->getQuery();
+        $this->sendSMS();
 
         $livraisons = $paginator->paginate(
             $query,
@@ -95,10 +98,11 @@ class LivraisonController extends AbstractController
     
     
     #[Route('/{id}', name: 'livraison_show', methods: ['GET'])]
-    public function show(Livraison $livraison): Response
+    public function show(Livraison $livraison,int $id,LivraisonRepository $livraisonRepository): Response
     {
-        $livraisons = $this->livraisonRepository->findBy(['iddepot' => $livraison->getIddepot()]);
 
+        //$livraisons = $this->livraisonRepository->findBy(['iddepot' => $livraison->getIddepot()]);
+        $livraisons = $livraisonRepository->find($id);
         return $this->render('livraison/show.html.twig', [
             'livraison' => $livraison,
             'livraisons' => $livraisons,
@@ -122,7 +126,6 @@ class LivraisonController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     #[Route('/{id}', name: 'app_livraison_delete', methods: ['POST'])]
     public function delete(Request $request, Livraison $livraison): Response
     {
@@ -195,6 +198,35 @@ function sendEmail($subject, $message)
     
         $mailer->send($email);
     }
-}
+    public function sendSMS(): Response
+{
+    $message = "Votre demande a été effectuée avec succès";
+    $recipient = "+21625377666"; // Replace with recipient phone number
+    try {
+        $twilio = new Client($accountSid, $authToken);
+        $sms = $twilio->messages->create(
+            $recipient,
+            [
+                'from' => '+18284820135',
+                'body' => $message,
+            ]
+        );
 
+        if ($sms->status === 'sent') {
+            $this->addFlash('success', 'SMS sent successfully!');
+        } else {
+            $this->addFlash('error', 'Error sending SMS: ' . $sms->status);
+        }
+    } catch (\Exception $e) {
+        // Log the exception details for debugging
+        $this->addFlash('error', 'An error occurred: ' . $e->getMessage());
+        // Log full exception details
+        error_log($e->getMessage());
+        // Optionally, you can log the stack trace as well
+        error_log($e->getTraceAsString());
+    }
+
+    return $this->redirectToRoute('app_livraison_index');
+}
+}
 
