@@ -35,4 +35,9 @@ class Controller extends AbstractController
  public  function prodetail() :Response {
     return $this -> render('product/productdetails.html.twig');
  }
+ #[Route('/affiche1', name: "affiche1")]
+    public function index0(): Response
+    {
+        return $this->render('test1.html.twig');
+    }
 }

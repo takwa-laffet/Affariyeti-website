@@ -1,16 +1,131 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Livraison{% endblock %}
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}My Website{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ asset('styles/cart.css') }}">
+  <link rel="stylesheet" href="{{ asset('styles/navbarstyle.css') }}">
+  <link rel="stylesheet" href="{{ asset('styles/footer.css') }}">
+  {% block stylesheets %}{% endblock %}
+</head>
 
-{% block stylesheets %}
+<body>
+  <!-- Navbar start -->
+  <div id="nav-placeholder">
+    <div id="ship"></div>
+    <div id="navbarstart">
+      <a href="{{ path('cart') }}">
+        <img src="images\logo.png" alt="logo">
+      </a>
+      <div>
+        <input placeholder="Search... ">
+        <button id="navbarSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+      <div>
+        <svg class="iconsvg" width="52" height="22" viewBox="0 0 24 24" stroke="#2F3337" fill="#2F3337">
+          <title>User</title>
+          <path d="M1 23c0-5.523 4.477-10 10-10h2c5.523 0 10 4.477 10 10M12 13a6 6 0 100-12 6 6 0 000 12z"
+            stroke="inherit" fill="none" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <br><a href="{{ path('login') }}">Account</a>
+      </div>
+      <div>
+        <svg class="iconsvg" width="22" height="22" viewBox="0 0 24 24" stroke="#2F3337" fill="#2F3337">
+          <title>Heart</title>
+          <path d="M21.241 3.757A6 6 0 0012 4.684a6 6 0 10-9.242 7.558l9.241 9.243 9.243-9.243a6 6 0 000-8.485z"
+            fill="none" stroke="inherit" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <br><a href="{{ path('home') }}">List</a>
+      </div>
+      <div>
+        <div id="cartCount"></div>
+        <svg class="iconsvg" width="30" height="21" viewBox="0 0 24 24" stroke="#2F3337" fill="#2F3337">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M7.174 14.4L5.208.833C5.14.356 4.697 0 4.174 0h-3.13C.466 0 0 .43 0 .96s.467.96 1.043.96H3.26l1.966 13.567c.07.477.512.833 1.035.833h14.608c.498 0 .926-.323 1.024-.772l2.087-9.6c.113-.52-.254-1.025-.819-1.13-.565-.103-1.115.234-1.228.754L20.014 14.4H7.174zm.13 9.6a2.087 2.087 0 100-4.174 2.087 2.087 0 000 4.174zm14.61-2.087a2.087 2.087 0 11-4.175 0 2.087 2.087 0 014.174 0z"
+            stroke="none" fill="inherit"></path>
+        </svg>
+        <br><a href="{{ path('cart') }}"> Cart </a>
+      </div>
+    </div>
+  </div>
+  <!-- Navbar end -->
+
+  <div class="hero">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-lg-5">
+          <div class="intro-excerpt">
+            <h1>Checkout</h1>
+          </div>
+        </div>
+        <div class="col-lg-7">
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+  .hero {
+    background-color: #3b5d50
+; /* Green color */
+    padding: 4rem 0; /* Adjust padding as needed */
+}
+
+.hero h1 {
+    color: #ffffff; /* White text color */
+    font-size: 2.5rem; /* Adjust font size as needed */
+}
+
+          </style>
+
+  <div class="content-wrapper">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  
+
+ <div class="content-wrapper">
+
+
+
+    {% block body %}
+
+
+
+
+
+
+
     <style>
+        /* Cart Styles */
+        .cart-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
         /* Table Styles */
         .table {
             width: 100%;
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .table th,
@@ -25,101 +140,83 @@
             border-bottom: 2px solid #ddd;
         }
 
-        /* Links Styles */
-        .content-wrapper a {
-            display: inline-block;
-            margin-top: 20px;
-            margin-right: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
+      /* Button Styles */
+.btn {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
 
-        .content-wrapper a:hover {
-            background-color: #0056b3;
-        }
+.btn:hover {
+    background-color: #0056b3;
+}
 
-        /* Create New Link Styles */
-        .create-new-link {
-            background-color: #4CAF50;
-        }
+/* Edit and Back Button Styles */
+.btn-edit {
+    background-color: #28a745; /* Green color for Edit button */
+}
 
-        .create-new-link:hover {
-            background-color: #45a049;
-        }
+.btn-back {
+    background-color: #dc3545; /* Red color for Back button */
+}
 
-        /* Heading Styles */
-        .content-wrapper h1 {
-            font-size: 36px;
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
-        }
+/* Hover styles for Edit and Back buttons */
+.btn-edit:hover {
+    background-color: #218838; /* Darker green on hover */
+}
 
-        /* Button Styles */
-        .content-wrapper button {
-            padding: 12px 24px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .content-wrapper button:hover {
-            background-color: #0056b3;
-        }
+.btn-back:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
     </style>
 {% endblock %}
 
-{% block body %}
     <div class="content-wrapper">
-        <h1>Livraison</h1>
+        <div class="card">
+            <h1>Livraison</h1>
 
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ livraison.id }}</td>
-                </tr>
-                <tr>
-                    <th>Adresselivraison</th>
-                    <td>{{ livraison.adresselivraison }}</td>
-                </tr>
-                <tr>
-                    <th>Datecommande</th>
-                    <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Datelivraison</th>
-                    <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Statuslivraison</th>
-                    <td>{{ livraison.statuslivraison }}</td>
-                </tr>
-                <tr>
-                    <th>Latitude</th>
-                    <td>{{ livraison.latitude }}</td>
-                </tr>
-                <tr>
-                    <th>Longitude</th>
-                    <td>{{ livraison.longitude }}</td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ livraison.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresselivraison</th>
+                        <td>{{ livraison.adresselivraison }}</td>
+                    </tr>
+                    <tr>
+                        <th>Datecommande</th>
+                        <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Datelivraison</th>
+                        <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Statuslivraison</th>
+                        <td>{{ livraison.statuslivraison }}</td>
+                    </tr>
+                    <tr>
+                        <th>Latitude</th>
+                        <td>{{ livraison.latitude }}</td>
+                    </tr>
+                    <tr>
+                        <th>Longitude</th>
+                        <td>{{ livraison.longitude }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <a href="{{ path('app_livraison_index') }}">Back to List</a>
-        <a href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">Edit</a>
-        <a href="{{ path('app_livraison_pdf', {'id': livraison.id}) }}" class="btn">Generate PDF</a>
+         <a href="{{ path('app_livraison_new') }}" class="btn btn-back">Back</a>
 
-        {{ include('livraison/_delete_form.html.twig') }}
+
+        </div>
     </div>
-{% endblock %}
+

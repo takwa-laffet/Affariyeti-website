@@ -3,24 +3,96 @@
 <head>
     <meta charset="utf-8">
     <title>Contrat Print</title>
-    <link rel="stylesheet" href="/style.css" media="all" />
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+
+        /* Personalization for Livraison */
+        h1 {
+            color: #009688; /* Teal color */
+        }
+
+        table th, table td {
+            text-align: center;
+        }
+
+        /* Social Media Icons */
+        .social-links a {
+            color: #333;
+            font-size: 24px;
+            margin: 0 5px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #009688; /* Teal color */
+        }
+    </style>
 </head>
 <body>
 <header class="clearfix">
-    <h1 class="logo me-auto" style="color:green">Affariyeti</h1>
-    <h1 align="center"> Livraison Details</h1>
-    <hr></hr>
+    <h1 class="logo me-auto">Affariyeti</h1>
+    <h1 align="center">Livraison Details</h1>
+    <hr>
    
     <table class="table table-bordered" style="border-color:black;width:70%;margin-left:15%">
         <thead>
             <tr>
                 <th style="background-color:green;color :white">Address Livraison</th>
                 <th style="background-color:green;color :white">Date Commande</th>
-                <th style="background-color:green;color :white">Date Livraison</th>
-                <th style="background-color:green;color :white">Status Livraison</th>
-                <th style="background-color:green;color :white">Latitude</th>
-                <th style="background-color:green;color :white">Longitude</th>
-                <th style="background-color:green;color :white">ID Depot</th>
+                 <th style="background-color:green;color :white">Date Livraison</th>
+                 <th style="background-color:green;color :white">Depot</th>
             </tr>
         </thead>
         <tbody>
@@ -28,14 +100,22 @@
                 <td>{{ livraison.adresselivraison }}</td>
                 <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livraison.statuslivraison }}</td>
-                <td>{{ livraison.latitude }}</td>
-                <td>{{ livraison.longitude }}</td>
                 <td>{{ livraison.iddepot }}</td>
             </tr>
         </tbody>
     </table>
 </header>
+
+
+
+
+
+
+
+
+
+
+
 <footer id="footer">
     <div class="footer-top">
         <div class="container">
@@ -45,7 +125,7 @@
                     <p>
                         Ghazela, Ariana, Tunisia <br>
                         <strong>Phone:</strong> +216 12587954<br>
-                        <strong>Email:</strong> affariyeti@esprit.tn<br>
+                        <strong>Email:</strong> affariyeti@gmail.com<br>
                     </p>
                 </div>
                 <div class="col-lg-2 col-md-6 footer-links">

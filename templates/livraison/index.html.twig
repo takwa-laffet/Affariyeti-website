@@ -42,10 +42,13 @@
             margin-right: 5px;
             text-decoration: none;
             color: #007bff;
+            padding: 5px 10px;
+            border-radius: 3px;
         }
 
         .table-container .actions a:hover {
             color: #0056b3;
+            background-color: #f2f2f2;
         }
 
         .table-container .actions a.edit {
@@ -54,6 +57,7 @@
 
         .table-container .actions a.edit:hover {
             color: #d39e00;
+            background-color: #f2f2f2;
         }
 
         .table-container .actions a.delete {
@@ -62,19 +66,44 @@
 
         .table-container .actions a.delete:hover {
             color: #bd2130;
+            background-color: #f2f2f2;
+        }
+
+        /* Card-like styling for table */
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        .no-records {
+            text-align: center;
+            padding: 10px;
+            color: #999;
         }
     </style>
 {% endblock %}
 
 {% block body %}
-    <div class="table-container">
-      
-        <a href="{{ path('app_livraison_new') }}">Create New</a>
-    </div>
-     {# Render line chart for delivery statistics by address #}
-    <h2>Delivery Statistics by Address</h2>
-    <div class="chart-container">
-        <canvas id="deliveryStatisticsChart" width="800" height="400"></canvas>
+    <div class="card">
+        <div class="card-header">
+            Delivery Statistics by Address
+        </div>
+        <div class="card-body">
+            <canvas id="deliveryStatisticsChart" width="800" height="400"></canvas>
+        </div>
     </div>
 
     {# JavaScript for rendering the line chart #}
@@ -104,54 +133,65 @@
             });
         });
     </script>
-     <h2>List of Deliveries</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Address Livraison</th>
-                <th>Date Commande</th>
-                <th>Date Livraison</th>
-                <th>Status Livraison</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Depot</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for livraison in livraisons %}
-            <tr>
-                <td>{{ livraison.id }}</td>
-                <td>{{ livraison.adresselivraison }}</td>
-                <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livraison.statuslivraison }}</td>
-                <td>{{ livraison.latitude }}</td>
-                <td>{{ livraison.longitude }}</td>
-                <td>{{ livraison.iddepot}}</td>
-                <td>
-                    <a href="{{ path('app_livraison_show', {'id': livraison.id}) }}">show</a>
-                    <a href="{{ path('app_livraison_edit', {'id': livraison.id}) }}">edit</a>
-                </td>
-            </tr>
-       <div id="qrcode_{{ livraison.id}}"></div>
- 
- <script>
-    var qrcode_{{ livraison.id }} = new QRCode(document.getElementById("qrcode_{{ livraison.id }}"), {
-        text: "{{ livraison.adresselivraison }}", // Utiliser le nom du cours directement
-        width: 90,
-        height: 90
-    });
-</script>
 
-            {% else %}
-            <tr>
-                <td colspan="9" class="no-records">No records found</td>
-            </tr>
-            {% endfor %}
+    <div class="card">
+        <div class="card-header">
+            List of Deliveries
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Address Livraison</th>
+                        <th>Date Commande</th>
+                        <th>Date Livraison</th>
+                        <th>Status Livraison</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Depot</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for livraison in livraisons %}
+                    <tr>
+                        <td>{{ livraison.id }}</td>
+                        <td>{{ livraison.adresselivraison }}</td>
+                        <td>{{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ livraison.statuslivraison }}</td>
+                        <td>{{ livraison.latitude }}</td>
+                        <td>{{ livraison.longitude }}</td>
+                        <td>{{ livraison.iddepot}}</td>
+                        <td>
+                            <a href="{{ path('app_livraison_show', {'id': livraison.id}) }}" class="btn btn-info">show</a>
+                            <a href="{{ path('app_livraison_edit', {'id': livraison.id}) }}" class="btn btn-warning">edit</a>
+                            <a href="{{ path('app_livraison_pdf', {'id': livraison.id}) }}" class="btn btn-success">Generate PDF</a>
+                          {{ include('livraison/_delete_form.html.twig') }}
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9">
+                            <div id="qrcode_{{ livraison.id }}"></div>
+                        </td>
+                    </tr>
+                    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            new QRCode(document.getElementById("qrcode_{{ livraison.id }}"), {
+                                text: "ID: {{ livraison.id }}\nAddress: {{ livraison.adresselivraison }}\nDate Commande: {{ livraison.datecommande ? livraison.datecommande|date('Y-m-d H:i:s') : '' }}\nDate Livraison: {{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d H:i:s') : '' }}\nStatus: {{ livraison.statuslivraison }}\nLatitude: {{ livraison.latitude }}\nLongitude: {{ livraison.longitude }}\nDepot: {{ livraison.iddepot }}",
+                                width: 128,
+                                height: 128
+                            });
+                        });
+                    </script>
+                    {% endfor %}
+                </tbody>
+            </table>
             {{ knp_pagination_render(livraisons) }}
-        </tbody>
-    </table>
+        </div>
+    </div>
 {% endblock %}
 {% endblock %}

@@ -24,6 +24,8 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 
 
+
+
 #[Route('/livraison')]
 class LivraisonController extends AbstractController
 {
@@ -52,6 +54,17 @@ class LivraisonController extends AbstractController
             'livraisons' => $livraisons,
         ]);
     }
+
+
+
+
+   
+
+
+
+
+
+
 
     #[Route('/livraison/new', name: 'app_livraison_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, DepotRepository $depotRepository, MailerController $mailerController): Response
@@ -83,7 +96,7 @@ class LivraisonController extends AbstractController
     
             // Call the printPdf method to generate the PDF with client information
             $this->printPdf($livraison, $mailerController);
-            $this->sendEmail("Equipement Notif","Equipement Ajouter");
+            $this->sendEmail("livraison Notif","livraison Ajouter");
             return $this->redirectToRoute('app_livraison_show', ['id' => $livraison->getId()]);
         }
     
@@ -195,6 +208,7 @@ function sendEmail($subject, $message)
     
         $mailer->send($email);
     }
+   
 }
 
 

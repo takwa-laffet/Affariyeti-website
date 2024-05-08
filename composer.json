@@ -12,7 +12,7 @@
     "doctrine/doctrine-migrations-bundle": "*",
     "doctrine/orm": "^2.18.0",
     "dompdf/dompdf": "*",
-    "endroid/qr-code": "*",
+    "endroid/qr-code": "^5.0",
     "endroid/qr-code-bundle": "^5.0",
     "knplabs/knp-paginator-bundle": "^5.9",
     "php-flasher/flasher": "*",
