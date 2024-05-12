@@ -110,36 +110,68 @@
     </div>
   </div>
   <br><br>
-  <div id="productpagehead">
-    <div id="maindivproductpage">
-    <div id="topcontainerofproductpage">
-        <div id="tablesectionofproductpage">      
+  <div id="productpagehead"> <style>
+        .card {
+            border: 1px solid #ccc; /* Border for the card */
+            border-radius: 5px; /* Rounded corners for the card */
+            padding: 10px; /* Padding inside the card */
+            margin: 10px; /* Margin around each card */
+            width: 200px; /* Adjust width as needed */
+            display: inline-block; /* Display cards inline */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        }
 
+        .card img {
+            width: 100%; /* Make image fill the card width */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove any default inline spacing */
+            border-radius: 5px; /* Rounded corners for the image */
+        }
+
+        .card h2 {
+            margin-top: 10px; /* Margin for the title */
+            font-size: 18px; /* Adjust font size */
+        }
+
+        .card p {
+            margin: 5px 0; /* Margin for the paragraphs */
+            font-size: 14px; /* Adjust font size */
+        }
+
+        /* Styles for "luxe" auctions */
+        .luxe .card {
+            background-color: #FFD700; /* Gold background */
+        }
+
+        /* Styles for "chere" auctions */
+        .chere .card {
+            background-color: #FF6347; /* Tomato background */
+        }
+    </style>
+</head>
+<body>
+    <div id="productpagehead">
+        <div id="maindivproductpage">
+            <div id="topcontainerofproductpage">
+                <div id="tablesectionofproductpage">      
+                </div>
+            </div>
+
+            <div id="furData">
+                {% for enchere in encheres %}
+                <div class="card">
+                    <a href="{{ path('app_enchere_show', {'enchereId': enchere.enchereId}) }}"> 
+                        <img src="{{ asset('images_auctions/' ~ enchere.image) }}" alt="{{ enchere.nomEnchere }}">
+                        <h2>{{ enchere.nomEnchere }}</h2>
+                        <p>Bid start in: {{ enchere.dateDebut }}</p>
+                        <p>Initial Bid: {{ enchere.montantInitial }}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        
-      </div>
-
-      
-      <div id="furData">
-
-      
-      {% for enchere in encheres %}
-      <div id="divofproducticon">
-
-        <a href="{{ path('app_enchere_show', {'enchereId': enchere.enchereId}) }}"> 
-        <img src="{{ asset('images_auctions/' ~ enchere.image) }}" alt="{{ enchere.nomEnchere }}" style="{{"border :1px solid rgba(0, 0, 0, 0.1);"}}"  >
-        <h2>{{ enchere.nomEnchere }}</h2>
-        <p>Bid start in : {{ enchere.dateDebut }}</p>
-
-        <p>Initial Bid: {{ enchere.montantInitial }}</p>
-        </a>
-      </div>
-      
-      {% endfor %}
     </div>
-
-    </div>
-    </div>
+<br>
     <br>
 <div id="footer">
   <div>

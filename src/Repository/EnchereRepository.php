@@ -63,6 +63,15 @@ public function searchByName(string $name)
         ->getQuery()
         ->getResult();
 }
+public function searchById(string $idclcreree ){
+    return $this->createQueryBuilder('e')
+    ->andWhere('e.idclcreree LIKE :idclcreree')
+    ->setParameter('idclcreree', '%'.$idclcreree.'%')
+    ->getQuery()
+    ->getResult();
+}
+
+
 public function sortData()
     {
         $select = $_GET['sort-data']; // Assuming you are using GET method to send the sorting option

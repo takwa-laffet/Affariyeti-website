@@ -103,45 +103,104 @@
     </ul>
 </div>
   </div>
+     <!-- CSS styles -->
+     <style>
+        /* Container for the auction section */
+        #imagesectionstarted {
+            display: flex;
+            flex-direction: center;
+            align-items: center;
+            justify-content: space-between;
+            border: 3px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the image */
+        #imagediv img {
+            max-width: 300px; /* Smaller image size */
+            height: center;
+            border-radius: 12px;
+        }
+
+        /* Style for the name and rate section */
+        #namewithrate {
+            flex: 2;
+            margin-left: 30px;
+        }
+
+        #namediv p {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #pricetag {
+            font-size: 40px;
+            color: #1a472a; /* Blue color for the price */
+        }
+
+        /* Style for the selector and add to cart section */
+        #selectorAndAddcart {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #quantityselector {
+            margin-right: 20px;
+        }
+
+        /* Style for the add to cart button */
+        .green-button {
+            background-color: #2a5734; /* Green color for the button */
+            color: #fff; /* White text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
     <div id="imagesectionstarted">
-        <div id="container">
-                <!-- Full-width images with number and caption text -->
-                <div id="imagediv">
-        <img src="{{ asset('images_auctions/' ~ enchere.image) }}" alt="{{ enchere.nomEnchere }}">
-                </div>
-              </div>
+        <!-- Image section -->
+        <div id="imagediv">
+            <img src="{{ asset('images_auctions/' ~ enchere.image) }}" alt="{{ enchere.nomEnchere }}">
+        </div>
+
+        <!-- Name and rate section -->
         <div id="namewithrate">
-            <div id="namediv" >
-              <p> {{ enchere.nomEnchere }} </p>
+            <div id="namediv">
+                <p>{{ enchere.nomEnchere }}</p>
             </div>
-              <div id="reviewadd">
-                
-                <h2 >Initial Bid: <span id="pricetag"> {{ enchere.montantInitial }} </span> </h2>
-              </div>
-              <br></br>
-              
-             <div id="selectorAndAddcart">
+            <div id="reviewadd">
+                <h2>Initial Bid: <span id="pricetag">{{ enchere.montantInitial }}</span></h2>
+            </div>
+
+            {% if app.user.id ==enchere.idclcreree %}
+            <!-- Selector and add to cart section -->
+            <div id="selectorAndAddcart">
                 <div id="quantityselector"> 
-                    <a href="{{ path('app_enchere_edit', {'enchereId': enchere.enchereId}) }}">edit</a>
-                
+                    <a href="{{ path('app_enchere_edit', {'enchereId': enchere.enchereId}) }}">Edit</a>
                     {{ include('enchere/_delete_form.html.twig') }}
                 </div>
-            </div>
 
-
+                {% endif %}
+                {% if app.user.id !=enchere.idclcreree %}
                 <div id="addToCartProductDetail">
-                  <form action="{{ path('app_enchere_show', {'enchereId': enchere.enchereId}) }}" method="post">
-                    <button type="submit" name="join_bid">Join to Bid</button>
-                </form>
-                             </div>
-                             <form action="{{ path('app_enchere_bid', {'enchereId': enchere.enchereId}) }}" method="GET">
-                              <button type="submit" name="join_bid">let's go</button>
-                          </form>
-             </div>
-             <div>             
-              
-             </div>
-             <br>
+                    <form action="{{ path('app_enchere_show', {'enchereId': enchere.enchereId}) }}" method="post">
+                        <button class="green-button" type="submit" name="join_bid">Join to Bid</button>
+                    </form>
+                {% endif %}
+
+                    <br>
+                    <form action="{{ path('app_enchere_bid', {'enchereId': enchere.enchereId}) }}" method="GET">
+                        <button class="green-button" type="submit" name="join_bid">Let's go</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <div id="sharediv">
